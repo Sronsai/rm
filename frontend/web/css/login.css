@@ -1,0 +1,91 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+@font-face {
+    font-family: 'EDBazaar';
+    src: url('../fonts/EDBazaar.ttf');
+    src: url('../fonts/EDBazaar.ttf?#iefix') format('embedded-opentype'),
+        url('../fonts/EDBazaar.ttf') format('woff2'),
+        url('../fonts/EDBazaar.ttf') format('woff'),
+        url('../fonts/EDBazaar.ttf') format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'thsarabunnew_bold-webfont';
+    src: url('../fonts/thsarabunnew_bold-webfont.woff');   /* IE9  */
+    src: url('../fonts/thsarabunnew_bold-webfont.woff?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+@face {
+    font-family: 'Waffle Regular';
+    src: url('../fonts/Waffle Regular.otf');
+    src: url('../fonts/Waffle Regular.otf?#iefix') format('embedded-opentype'),
+        url('../fonts/Waffle Regular.otf') format('woff2'),
+        url('../fonts/Waffle Regular.otf') format('woff'),
+        url('../fonts/Waffle Regular.otf') format('truetype');
+    font-weight: bold;
+}
+@font-face {
+    font-family: 'CSPraJad-bold';
+    src: url('../fonts/CSPraJad-bold.otf');   /* IE9  */
+    src: url('../fonts/CSPraJad-bold.otf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+section.intro h1 {
+    font-family: 'CSPraJad-bold';
+    color: whitesmoke;
+    font-size: 55px;
+    height: 0%;
+    text-shadow: 0.2em 0.2em 0.2em white
+}
+
+section.intro h4 {
+    font-family: 'CSPraJad-bold';
+    font-size: 20px;
+    text-align: center;
+    color: whitesmoke;
+    height: 0%;
+    text-shadow: 0.2em 0.2em 0.2em white
+}
+
+.col-xs-12 {
+    font-family: 'CSPraJad-bold';
+    font-size: 30px;
+    height: 0%;
+}
+
+section.intro {
+    padding-top:  1px;       
+    padding-bottom: 120px;
+    height: 100%;
+    min-height: 100%;
+    background: url('../../images/00.jpg') center center;
+    background-size: cover;
+    -moz-background-size: cover;
+    -webkit-background-size: cover;
+}
+
+.login-box-body {
+    border-radius: 15px 15px 15px 15px;
+    -moz-border-radius: 15px 15px 15px 15px;
+    -webkit-border-radius: 15px 15px 15px 15px;
+    border: 0px dashed #000000;
+}
+
+.intro h1 {
+    //padding-top:  10px;       
+    font-family: 'PGVMI';
+    font-size: 50px;
+    font-weight: 200;
+    text-align: center;
+    color: #006400; 
+}

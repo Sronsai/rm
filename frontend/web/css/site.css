@@ -1,0 +1,321 @@
+
+@font-face {
+    font-family: 'THSarabunNew Bold';
+    src: url('../fonts/THSarabunNew Bold.ttf');   /* IE9  */
+    src: url('../fonts/THSarabunNew Bold.ttf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/THSarabunNew Bold.ttf') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/THSarabunNew Bold.ttf') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/THSarabunNew Bold.ttf') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'ThaiSansNeue-SemiBold';
+    src: url('../fonts/ThaiSansNeue-SemiBold.otf');   /* IE9  */
+    src: url('../fonts/ThaiSansNeue-SemiBold.otf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/ThaiSansNeue-SemiBold.otf') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'CSPraJad-bold';
+    src: url('../fonts/CSPraJad-bold.otf');   /* IE9  */
+    src: url('../fonts/CSPraJad-bold.otf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/CSPraJad-bold.otf') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'CircularBold';
+    src: url('../fonts/CircularBold.ttf');   /* IE9  */
+    src: url('../fonts/CircularBold.ttf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/CircularBold.ttf') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/CircularBold.ttf') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/CircularBold.ttf') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'thsarabunnew-webfont';
+    src: url('../fonts/thsarabunnew-webfont.woff');   /* IE9  */
+    src: url('../fonts/thsarabunnew-webfont.woff?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'thsarabunnew_bold-webfont';
+    src: url('../fonts/thsarabunnew_bold-webfont.woff');   /* IE9  */
+    src: url('../fonts/thsarabunnew_bold-webfont.woff?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
+        url('../fonts/thsarabunnew_bold-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
+    font-weight: bold;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.info-box-text {
+    font-family: 'CSPraJad-bold';
+    size: 30px;
+}
+
+.info-box-content span {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+
+.risk-index {
+    font-family: 'CSPraJad-bold';
+    font-size: 15px; 
+}
+.risk-form {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+.risk-update {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+.risk-view {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+.risk-create {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+
+
+.report{
+    font-family: 'thsarabunnew_bold-webfont';
+    font-size: 13px;
+}
+.report > header {
+    font-family: 'thsarabunnew_bold-webfont';
+    font-size: 10px;
+}
+.report h1 {
+    font-family: 'thsarabunnew_bold-webfont';
+    font-size: 40px;
+}
+
+/* FLIP CARD */
+.flip {
+    -webkit-perspective: 800;
+    -ms-perspective: 800;
+    -moz-perspective: 800;
+    -o-perspective: 800;
+    width: 400px;
+    height: 200px;
+    position: relative;
+    margin: 50px auto;
+}
+.flip .card.flipped {
+    transform:rotatey(-180deg);
+    -ms-transform:rotatey(-180deg); /* IE 9 */
+    -moz-transform:rotatey(-180deg); /* Firefox */
+    -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+    -o-transform:rotatey(-180deg); /* Opera */
+}
+.flip .card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition: 0.5s;
+    -moz-transform-style: preserve-3d;
+    -moz-transition: 0.5s;
+    -ms-transform-style: preserve-3d;
+    -ms-transition: 0.5s;
+    -o-transform-style: preserve-3d;
+    -o-transition: 0.5s;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+.flip .card .face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    text-align: center;
+    line-height: 200px;
+    backface-visibility: hidden;  /* W3C */
+    -webkit-backface-visibility: hidden; /* Safari & Chrome */
+    -moz-backface-visibility: hidden; /* Firefox */
+    -ms-backface-visibility: hidden; /* Internet Explorer */
+    -o-backface-visibility: hidden; /* Opera */
+
+}
+.flip .card .front {
+    position: absolute;
+    z-index: 1;
+    cursor: pointer;
+}
+.flip .card .back {
+    cursor: pointer; 
+    transform:rotatey(-180deg);
+    -ms-transform:rotatey(-180deg); /* IE 9 */
+    -moz-transform:rotatey(-180deg); /* Firefox */
+    -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
+    -o-transform:rotatey(-180deg); /* Opera */
+
+}
+
+/* END FLIP CARD */
+
+
+#div1 {
+    float: left;
+    width: 140px;
+    height: 100px;
+    //border: solid 2px red;
+}
+
+#div2 {
+    float: left;
+    width: 140px;
+    height: 100px;
+    //border: solid 2px red;
+}
+#div3 {
+    float: left;
+    width: 55px;
+    height: 100px;
+    //border: solid 2px red;
+}
+
+#div4 {
+    float: left;
+    width: 25px;
+    height: 100px;
+    //border: solid 2px red;
+}
+
+/*#div5 {
+    float: left;
+    width: 80px;
+    height: 100px;
+    //border: solid 2px red;
+}*/
+
+#div6 {
+    float: left;
+    width: 175px;
+    height: 100px;
+    //border: solid 2px red;
+}
+
+#global1 {
+    float: left;
+    width: 270px;
+    height: 50px;
+    //border: solid 2px red;
+}
+
+#global2 {
+    top: 100px;
+    float: right;
+    width: 100px;
+    height: 50px;
+    //border: solid 2px red;
+}
+
+.wrap {
+    min-height: 100%;
+    height: auto;
+    margin: 0 auto -60px;
+    padding: 0 0 60px;
+}
+
+.wrap > .container {
+    padding: 70px 15px 20px;
+}
+
+.footer {
+    height: 60px;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.jumbotron {
+    text-align: center;
+    background-color: transparent;
+}
+
+.jumbotron .btn {
+    font-size: 21px;
+    padding: 14px 24px;
+}
+
+.not-set {
+    color: #c55;
+    font-style: italic;
+}
+
+/* add sorting icons to gridview sort links */
+a.asc:after, a.desc:after {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    padding-left: 5px;
+}
+
+a.asc:after {
+    content: /*"\e113"*/ "\e151";
+}
+
+a.desc:after {
+    content: /*"\e114"*/ "\e152";
+}
+
+.sort-numerical a.asc:after {
+    content: "\e153";
+}
+
+.sort-numerical a.desc:after {
+    content: "\e154";
+}
+
+.sort-ordinal a.asc:after {
+    content: "\e155";
+}
+
+.sort-ordinal a.desc:after {
+    content: "\e156";
+}
+
+.grid-view th {
+    white-space: nowrap;
+}
+
+.hint-block {
+    display: block;
+    margin-top: 5px;
+    color: #999;
+}
+
+.error-summary {
+    color: #a94442;
+    background: #fdf7f7;
+    border-left: 3px solid #eed3d7;
+    padding: 10px 20px;
+    margin: 0 0 15px 0;
+}
+
+
+
+
