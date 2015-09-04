@@ -41,6 +41,10 @@ class RiskSearch extends Risk {
      */
     public function search($params) {
         $query = Risk::find();
+        
+        if(Yii::$app->user->identity->location_id){
+            $query->byLocationId();
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

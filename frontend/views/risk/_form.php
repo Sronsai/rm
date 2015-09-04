@@ -8,6 +8,7 @@ use yii\helpers\ArrayHelper;
 use frontend\models\Type;
 use frontend\models\SubType;
 use yii\bootstrap\Tabs;
+use yii\web\JsExpression;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */

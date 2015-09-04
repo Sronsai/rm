@@ -20,13 +20,14 @@ use yii\bootstrap\Tabs;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 
+
 <div class="tabon">
     <?php
     echo Tabs::widget([
         'items' => [
             [
                 'label' => 'ภาพรวม',
-                //'content' => 'Anim pariatur cliche...', 
+                //'content' => 'Anim pariatur cliche...',
                 'url' => 'index.php?r=site/index',
             ],
             /* [
@@ -73,7 +74,7 @@ use yii\bootstrap\Tabs;
 
 
     <div class="panel panel-primary">
-        <div class="panel-heading"><center><H2>บริหารจัดการความเสี่ยง</H2></center></div>     
+        <div class="panel-heading"><center><H2>บริหารจัดการความเสี่ยง</H2></center></div>
         <div class="panel-body">
 
             <div class="row">

@@ -166,5 +166,9 @@ class Risk extends ActiveRecord {
     public function getRiskHasReview1s() {
         return $this->hasMany(RiskHasReview1::className(), ['risk_id' => 'id']);
     }
+    
+    public static function find() {
+        return new RiskQuery(get_called_class());
+    }
 
 }

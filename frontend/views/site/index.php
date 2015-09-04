@@ -68,19 +68,19 @@ $time = time();
                 'label' => 'บริหารจัดการความเสี่ยง',
                 'url' => 'index.php?r=risk/index',
             ],
-            /*[
-                'label' => 'Dropdown',
-                'items' => [
-                    [
-                        'label' => 'DropdownA',
-                        'content' => 'DropdownA, Anim pariatur cliche...',
-                    ],
-                    [
-                        'label' => 'DropdownB',
-                        'content' => 'DropdownB, Anim pariatur cliche...',
-                    ],
-                ],
-            ],*/
+        /* [
+          'label' => 'Dropdown',
+          'items' => [
+          [
+          'label' => 'DropdownA',
+          'content' => 'DropdownA, Anim pariatur cliche...',
+          ],
+          [
+          'label' => 'DropdownB',
+          'content' => 'DropdownB, Anim pariatur cliche...',
+          ],
+          ],
+          ], */
         ],
     ]);
     ?>
@@ -227,7 +227,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'หน่วยงานที่เกิดความเสี่ยง (ตั้งแต่ ตุลาคม 2558)'
+                                text: 'หน่วยงานที่เกิดความเสี่ยง (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {
@@ -301,7 +301,7 @@ $time = time();
                         <div id="pie">
                         </div>
                         <?php
-                        $title = "แยกตามประเภทความเสียง (ตั้งแต่ ตุลาคม 2558)";
+                        $title = "แยกตามประเภทความเสียง (ตั้งแต่ ตุลาคม 2557)";
                         $type1 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='1'")->queryScalar();
                         $type2 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='2'")->queryScalar();
                         $type3 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='3'")->queryScalar();
@@ -394,7 +394,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'ระดับความรุนแรง (ตั้งแต่ ตุลาคม 2558)'
+                                text: 'ระดับความรุนแรง (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {
@@ -465,7 +465,7 @@ $time = time();
                         <div id="pie-donut">
                         </div>
                         <?php
-                        $title = "การทบทวน (ตั้งแต่ ตุลาคม 2558)";
+                        $title = "การทบทวน (ตั้งแต่ ตุลาคม 2557)";
                         $type11 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='1'")->queryScalar();
                         $type12 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='2'")->queryScalar();
 
@@ -560,7 +560,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'เหตุการณ์เกิดกับ (ตั้งแต่ ตุลาคม 2558)'
+                                text: 'เหตุการณ์เกิดกับ (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {
@@ -630,7 +630,7 @@ $time = time();
                         <div id="pie-donut2">
                         </div>
                         <?php
-                        $title = "ระดับความรุนแรง (ตั้งแต่ ตุลาคม 2558)";
+                        $title = "ระดับความรุนแรง (ตั้งแต่ ตุลาคม 2557)";
                         $level1 = Yii::$app->db->createCommand("SELECT count(r.level_id) as A from risk r where r.level_id ='1'")->queryScalar();
                         $level2 = Yii::$app->db->createCommand("SELECT count(r.level_id) as B from risk r where r.level_id ='2'")->queryScalar();
                         $level3 = Yii::$app->db->createCommand("SELECT count(r.level_id) as C from risk r where r.level_id ='3'")->queryScalar();
