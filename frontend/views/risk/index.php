@@ -172,7 +172,7 @@ use yii\bootstrap\Tabs;
                     //'headerOptions' => ['width' => '80']
                     ],
                     //'location_connection_id',
-                    [
+                    /*[
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
                         'options' => ['width' => '50'],
@@ -180,8 +180,17 @@ use yii\bootstrap\Tabs;
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                     //'headerOptions' => ['width' => '80']
-                    ],
+                    ],*/
                     //'location_report_id',
+                    [
+                        'attribute' => 'location_report_id',
+                        'value' => 'locationReport.location_name',
+                        'options' => ['width' => '50'],
+                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
+                        'headerOptions' => ['class' => 'text-center'],
+                        'contentOptions' => ['class' => 'text-center'],
+                    //'headerOptions' => ['width' => '80']
+                    ],
                     /* [
                       'attribute' => 'location_report_id',
                       'value' => 'locationReport.location_name',
