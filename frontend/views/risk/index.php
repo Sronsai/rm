@@ -77,11 +77,11 @@ use yii\bootstrap\Tabs;
         <div class="panel-heading"><center><H2>บริหารจัดการความเสี่ยง</H2></center></div>
         <div class="panel-body">
 
-            <div class="row">
+            <!--div class="row">
                 <div class="col-md-4">
-                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                    <!--?php echo $this->render('_search', ['model' => $searchModel]); ?>
                 </div>
-            </div>
+            </div-->
 
             <?php Pjax::begin(); ?>
             <?=
