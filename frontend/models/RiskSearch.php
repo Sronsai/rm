@@ -20,7 +20,7 @@ class RiskSearch extends Risk {
     public function rules() {
         return [
             [['id', 'person_id', 'clear_id', 'system_id',], 'integer'],
-            [['hn', 'globalSearch', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review'], 'safe'],
+            [['hn', 'globalSearch', 'location_riks_id', 'location_connection_id','location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review'], 'safe'],
         ];
     }
 
@@ -40,9 +40,13 @@ class RiskSearch extends Risk {
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Risk::find();
-        
-        if(Yii::$app->user->identity->location_id){
+
+        $query = Risk::find()
+                ->orderBy([
+            'id' => SORT_DESC,
+        ]);
+
+        if (Yii::$app->user->identity->location_id) {
             $query->byLocationId();
         }
 
@@ -68,6 +72,7 @@ class RiskSearch extends Risk {
         //$query->andWhere('status_name' . $this->status);
 
         $query->joinWith('locationRiks');
+        $query->joinWith('locationConnection');
         $query->joinWith('locationReport');
         $query->joinWith('type');
         $query->joinWith('subType');
@@ -97,6 +102,7 @@ class RiskSearch extends Risk {
                 ->orFilterWhere(['like', 'risk_summary', $this->globalSearch])
                 ->orFilterWhere(['like', 'risk_review', $this->globalSearch])
                 ->orFilterWhere(['like', 'location_riks.location_name', $this->globalSearch])
+                ->orFilterWhere(['like', 'location_connection.location_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'location_report.location_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'type.type_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'sub_type.sub_type_name', $this->globalSearch])
@@ -109,6 +115,7 @@ class RiskSearch extends Risk {
                 ->andFilterWhere(['like', 'lname', $this->lname])
                 ->andFilterWhere(['like', 'risk_summary', $this->risk_summary])
                 ->andFilterWhere(['like', 'location_riks.location_name', $this->location_riks_id])
+                ->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
                 ->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
                 ->andFilterWhere(['like', 'type.type_name', $this->type_id])
                 ->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])

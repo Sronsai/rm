@@ -65,7 +65,7 @@ class Risk extends ActiveRecord {
             'pname' => 'คำนำหน้า',
             'fname' => 'ชื่อ',
             'lname' => 'นามสกุล',
-            'location_riks_id' => 'หน่วยงานที่เกิดเหตุ',
+            'location_riks_id' => 'หน่วยงานต้นเหตุ',
             'location_report_id' => 'หน่วยงานที่รายงาน',
             'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
             'risk_date' => 'วันที่เกิดเหตุ',

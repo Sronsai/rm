@@ -125,14 +125,17 @@ use yii\bootstrap\Tabs;
                     [
                         'header' => 'ลำดับ',
                         'class' => 'yii\grid\SerialColumn',
+                        'options' => ['width' => '5'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center']
                     ],
                     [
                         'attribute' => 'risk_date',
+                        'options' => ['width' => '50'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'value' => function($model) {
-                            return Yii::$app->formatter->asDate($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                        }
+                    return Yii::$app->formatter->asDate($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                }
                     ],
                     //'id',
                     //'person_id',
@@ -149,7 +152,12 @@ use yii\bootstrap\Tabs;
                       'headerOptions' => ['width' => '100', 'class' => 'text-center'],
                       'contentOptions' => ['class' => 'text-center'],
                       ], */
-                    'hn:text:HN', //เขียนแบบย่อ
+                    //'hn:text:HN', //เขียนแบบย่อ
+                    [
+                        'attribute' => 'hn',
+                        'options' => ['width' => '50'],
+                        'headerOptions' => ['class' => 'text-center'],
+                    ],
                     //'pname',
                     //'fname',
                     //'lname',
@@ -157,11 +165,22 @@ use yii\bootstrap\Tabs;
                     [
                         'attribute' => 'location_riks_id',
                         'value' => 'locationRiks.location_name',
+                        'options' => ['width' => '50'],
+                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                     //'headerOptions' => ['width' => '80']
                     ],
                     //'location_connection_id',
+                    [
+                        'attribute' => 'location_connection_id',
+                        'value' => 'locationConnection.location_name',
+                        'options' => ['width' => '50'],
+                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
+                        'headerOptions' => ['class' => 'text-center'],
+                        'contentOptions' => ['class' => 'text-center'],
+                    //'headerOptions' => ['width' => '80']
+                    ],
                     //'location_report_id',
                     /* [
                       'attribute' => 'location_report_id',
@@ -171,13 +190,14 @@ use yii\bootstrap\Tabs;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
+                        'options' => ['width' => '1500'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
-                        'options' => ['width' => '100'],
+                        'options' => ['width' => '30'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                     ],

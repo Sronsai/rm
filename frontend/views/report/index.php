@@ -89,11 +89,6 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 //'after' => 'โดย ' . $dev
                 //],
                 'columns' => [
-                    /* [
-                      'attribute' => 'risk_date',
-                      'header' => 'วันที่เกิดเหตุ',
-                      'headerOptions' => ['width' => '80']
-                      ], */
                     [
                         'attribute' => 'hn',
                         'header' => 'HN',
@@ -105,9 +100,14 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                         'headerOptions' => ['width' => '100']
                     ],
                     [
+                        'attribute' => 'risk_date',
+                        'header' => 'วันที่เกิดเหตุ',
+                        'headerOptions' => ['width' => '150']
+                    ],
+                    [
                         'attribute' => 'location_name',
                         'header' => 'หน่วยงานที่เกิดเหตุ',
-                        'headerOptions' => ['width' => '100']
+                        'headerOptions' => ['width' => '150']
                     ],
                     /* [
                       'attribute' => 'connection',

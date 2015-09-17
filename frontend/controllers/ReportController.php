@@ -19,7 +19,7 @@ class ReportController extends \yii\web\Controller {
             $date2 = $_POST['date2'];
         }
 
-        $sql = "select r.hn,concat(r.pname,r.fname,'  ',r.lname) as fullname
+        $sql = "select r.hn,r.risk_date,concat(r.pname,r.fname,'  ',r.lname) as fullname
             ,lr.location_name
             ,r.risk_summary
             ,le.level_e
