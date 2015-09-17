@@ -41,7 +41,7 @@ use yii\bootstrap\Tabs;
                 'url' => 'index.php?r=risk/create',
             ],
             [
-                'label' => 'บริหารจัดการความเสี่ยง',
+                'label' => 'จัดการความเสี่ยง',
                 'url' => 'index.php?r=risk/index',
                 'active' => true
             ],
@@ -74,14 +74,14 @@ use yii\bootstrap\Tabs;
 
 
     <div class="panel panel-primary">
-        <div class="panel-heading"><center><H2>บริหารจัดการความเสี่ยง</H2></center></div>
+        <div class="panel-heading"><center><H2>จัดการความเสี่ยง</H2></center></div>
         <div class="panel-body">
 
             <!--div class="row">
                 <div class="col-md-4">
-                    <!--?php echo $this->render('_search', ['model' => $searchModel]); ?>
-                </div>
-            </div-->
+            <!--?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        </div>
+    </div-->
 
             <?php Pjax::begin(); ?>
             <?=
@@ -172,7 +172,7 @@ use yii\bootstrap\Tabs;
                     //'headerOptions' => ['width' => '80']
                     ],
                     //'location_connection_id',
-                    /*[
+                    [
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
                         'options' => ['width' => '50'],
@@ -180,17 +180,8 @@ use yii\bootstrap\Tabs;
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                     //'headerOptions' => ['width' => '80']
-                    ],*/
-                    //'location_report_id',
-                    [
-                        'attribute' => 'location_report_id',
-                        'value' => 'locationReport.location_name',
-                        'options' => ['width' => '50'],
-                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
-                    //'headerOptions' => ['width' => '80']
                     ],
+                    //'location_report_id',
                     /* [
                       'attribute' => 'location_report_id',
                       'value' => 'locationReport.location_name',
