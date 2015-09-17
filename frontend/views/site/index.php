@@ -140,7 +140,7 @@ $time = time();
                         <a href="?r=report/report3">
                             <span class="info-box-icon bg-orange"><i class="fa fa-spinner fa-pulse"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">ความเสี่ยงที่ต้องทบทวน </br></br></span>
+                                <span class="info-box-text">ยังไม่ได้ทบทวน </br></br></span>
                                 <span class="info-box-number">
                                     <u>
                                         <?php
