@@ -118,7 +118,7 @@ $time = time();
                         <a href="?r=report/report5">
                             <span class="info-box-icon bg-green-gradient"><i class="fa fa-heartbeat"></i></span>
                             <div class="info-box-content">
-                                <span class="info-box-text">ความเสี่ยงประจำเดือน </br>(<?php echo Yii::$app->formatter->asDateTime(time(), 'php:F'); ?>)<br /><!--?php echo $date_my; ?--></span>
+                                <span class="info-box-text">ความเสี่ยงเดือน </br>(<?php echo Yii::$app->formatter->asDateTime(time(), 'php:F'); ?>)<br /><!--?php echo $date_my; ?--></span>
                                 <span class="info-box-number">
                                     <u>
                                         <?php
