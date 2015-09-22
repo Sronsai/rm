@@ -17,16 +17,20 @@ return [
                 ],
             ],
         ],
-        /*'urlManager' => [
-            'class' => 'yii\web\urlManager',
-            'baseUrl' => $baseUrl,
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
-            //'rules' => [],
-            //'class' => 'yii\web\urlManager',
-            //'enablePrettyUrl' => false,
-            //'showScriptName' => true,
-        ],*/
+        'image' => [
+            'class' => 'yii\image\ImageDriver',
+            'driver' => 'GD', //GD or Imagick
+        ],
+        /* 'urlManager' => [
+          'class' => 'yii\web\urlManager',
+          'baseUrl' => $baseUrl,
+          'enablePrettyUrl' => true,
+          'showScriptName' => false,
+          //'rules' => [],
+          //'class' => 'yii\web\urlManager',
+          //'enablePrettyUrl' => false,
+          //'showScriptName' => true,
+          ], */
         'urlManagerBackend' => [
             'class' => 'yii\web\urlManager',
             'baseUrl' => '/rm/backend/web',

@@ -6,6 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\Url;
 
 class Risk extends ActiveRecord {
 
@@ -28,6 +29,22 @@ class Risk extends ActiveRecord {
         return self::itemsAlias('status_id');
     }
 
+    public static function itemsAlias2($key) {
+
+        $items = [
+            'type_clinic_id' => [
+                self::STATUS_YES_ACTIVE => 'Clinic',
+                self::STATUS_NOT_ACTIVE => 'Non Clinic'
+            ]
+        ];
+        return ArrayHelper::getValue($items, $key, []);
+        //return array_key_exists($key, $items) ? $items[$key] : [];
+    }
+
+    public function getItemTypeClinic() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
+        return self::itemsAlias2('type_clinic_id');
+    }
+
     public function getStatusName() {        //ดึงค่า label ออกมาแสดงเป็นข้อความให้เรา
         return ArrayHelper::getValue($this->getItemStatus(), $this->status_id);
     }
@@ -44,13 +61,13 @@ class Risk extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'risk_summary', 'type_id', 'sub_type_id', 'level_id', 'status_id'], 'required'],
-            [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id'], 'integer'],
-            [['pname', 'risk_summary', 'risk_review',], 'string'],
+            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'risk_summary', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
+            [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id'], 'integer'],
+            [['pname', 'risk_summary', 'risk_review'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
             [['hn'], 'string', 'max' => 45],
             [['status_id'], 'string', 'max' => 150],
-            [['fname', 'lname'], 'string', 'max' => 100]
+            [['fname', 'lname'], 'string', 'max' => 100],
         ];
     }
 
@@ -68,18 +85,19 @@ class Risk extends ActiveRecord {
             'location_riks_id' => 'หน่วยงานต้นเหตุ',
             'location_report_id' => 'หน่วยงานที่รายงาน',
             'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
-            'risk_date' => 'วันที่เกิดเหตุ',
-            'risk_report' => 'วันที่รายงาน',
-            'risk_summary' => 'สรุปเหตุการณ์ / การแก้ไขเบื้องต้น',
+            'risk_date' => 'วันที่เกิดเหตุ/เวลา',
+            'risk_report' => 'วันที่รายงาน/เวลา',
+            'risk_summary' => 'สรุปเหตุการณ์/การแก้ไขเบื้องต้น',
             'type_id' => 'ประเภทความเสี่ยง',
+            'type_clinic_id' => 'ประเภทคลินิค',
             'sub_type_id' => 'ประเภทความเสี่ยงย่อย',
-            'level_id' => 'ระดับความรุนแรง',
+            'level_id' => 'ระดับ',
             'clear_id' => 'สาเหตุที่ชัดเจน',
             'system_id' => 'สาเหตุเชิงระบบ',
             'status_id' => Yii::t('app', 'การทบทวน'),
             //'status_id' => 'การทบทวน',
             'risk_review' => 'สรุปการทบทวน',
-            'globalSearch' => '',
+                //'globalSearch' => '',
         ];
     }
 
@@ -156,6 +174,13 @@ class Risk extends ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getTypeClinic() {
+        return $this->hasOne(TypeClinic::className(), ['id' => 'type_clinic_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getRiskHasReviews() {
         return $this->hasMany(RiskHasReview::className(), ['risk' => 'id']);
     }
@@ -165,10 +190,6 @@ class Risk extends ActiveRecord {
      */
     public function getRiskHasReview1s() {
         return $this->hasMany(RiskHasReview1::className(), ['risk_id' => 'id']);
-    }
-    
-    public static function find() {
-        return new RiskQuery(get_called_class());
     }
 
 }

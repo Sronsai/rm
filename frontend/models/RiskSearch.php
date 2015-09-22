@@ -20,7 +20,7 @@ class RiskSearch extends Risk {
     public function rules() {
         return [
             [['id', 'person_id', 'clear_id', 'system_id',], 'integer'],
-            [['hn', 'globalSearch', 'location_riks_id', 'location_connection_id','location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review'], 'safe'],
+            [['hn', 'globalSearch', 'location_riks_id', 'location_connection_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review', 'type_clinic_id'], 'safe'],
         ];
     }
 
@@ -75,25 +75,26 @@ class RiskSearch extends Risk {
         $query->joinWith('locationConnection');
         $query->joinWith('locationReport');
         $query->joinWith('type');
+        $query->joinWith('typeClinic');
         $query->joinWith('subType');
         $query->joinWith('level');
         $query->joinWith('status');
 
-        //$query->andFilterWhere([
-        //'id' => $this->id,
-        //'person_id' => $this->person_id,
-        //'location_riks_id' => $this->location_riks_id,
-        //'location_report_id' => $this->location_report_id,
-        //'location_connection_id' => $this->location_connection_id,
-        //'risk_date' => $this->risk_date,
-        //'risk_report' => $this->risk_report,
-        //'type_id' => $this->type_id,
-        //'sub_type_id' => $this->sub_type_id,
-        //'level_id' => $this->level_id,
-        //'clear_id' => $this->clear_id,
-        //'system_id' => $this->system_id,
-        //'status_id' => $this->status_id,
-        //]); 
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'person_id' => $this->person_id,
+            'location_riks_id' => $this->location_riks_id,
+            'location_report_id' => $this->location_report_id,
+            'location_connection_id' => $this->location_connection_id,
+            'risk_date' => $this->risk_date,
+            'risk_report' => $this->risk_report,
+            'type_id' => $this->type_id,
+            'sub_type_id' => $this->sub_type_id,
+            'level_id' => $this->level_id,
+            'clear_id' => $this->clear_id,
+            'system_id' => $this->system_id,
+            'status_id' => $this->status_id,
+        ]);
 
         $query->orFilterWhere(['like', 'hn', $this->globalSearch])
                 ->orFilterWhere(['like', 'pname', $this->globalSearch])
@@ -105,11 +106,14 @@ class RiskSearch extends Risk {
                 ->orFilterWhere(['like', 'location_connection.location_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'location_report.location_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'type.type_name', $this->globalSearch])
+                ->orFilterWhere(['like', 'typeClinic.clinic_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'sub_type.sub_type_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'level.level_name', $this->globalSearch])
                 ->orFilterWhere(['like', 'status.status_name', $this->globalSearch]);
 
-        $query->andFilterWhere(['like', 'hn', $this->hn])
+        
+        // search แบบกรอกข้อมความในช่อง
+        /*$query->andFilterWhere(['like', 'hn', $this->hn])
                 ->andFilterWhere(['like', 'pname', $this->pname])
                 ->andFilterWhere(['like', 'fname', $this->fname])
                 ->andFilterWhere(['like', 'lname', $this->lname])
@@ -118,10 +122,11 @@ class RiskSearch extends Risk {
                 ->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
                 ->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
                 ->andFilterWhere(['like', 'type.type_name', $this->type_id])
+                ->andFilterWhere(['like', 'typeClinic.clinic_name', $this->type_clinic_id])
                 ->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])
                 ->andFilterWhere(['like', 'level.level_name', $this->level_id])
-        //->andFilterWhere(['like', 'status.status_name', $this->status_id])
-        ;
+                ->andFilterWhere(['like', 'status.status_name', $this->status_id])
+        ;*/
 
 
         return $dataProvider;

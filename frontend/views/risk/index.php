@@ -135,6 +135,7 @@ use yii\bootstrap\Tabs;
                         'headerOptions' => ['class' => 'text-center'],
                         'value' => function($model) {
                     return Yii::$app->formatter->asDate($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                    //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                 }
                     ],
                     //'id',
@@ -165,21 +166,28 @@ use yii\bootstrap\Tabs;
                     [
                         'attribute' => 'location_riks_id',
                         'value' => 'locationRiks.location_name',
-                        'options' => ['width' => '50'],
-                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
-                    //'headerOptions' => ['width' => '80']
+                        'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(frontend\models\LocationRiks::find()->asArray()->all(), 'id', 'location_name'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
                     ],
                     //'location_connection_id',
+                    /*
+                     * search แบบกรอกข้อมความในช่อง แล้วไปแก้ riskSearch
+                     * [
+                      'attribute' => 'location_connection_id',
+                      'value' => 'locationConnection.location_name',
+                      'options' => ['width' => '50'],
+                      //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
+                      'headerOptions' => ['class' => 'text-center'],
+                      'contentOptions' => ['class' => 'text-center'],
+                      //'headerOptions' => ['width' => '80']
+                      ], */
                     [
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
-                        'options' => ['width' => '50'],
-                        //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
-                    //'headerOptions' => ['width' => '80']
+                        'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
                     ],
                     //'location_report_id',
                     /* [
@@ -197,6 +205,13 @@ use yii\bootstrap\Tabs;
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
+                        'options' => ['width' => '30'],
+                        'headerOptions' => ['class' => 'text-center'],
+                        'contentOptions' => ['class' => 'text-center'],
+                    ],
+                    [
+                        'attribute' => 'type_clinic_id',
+                        'value' => 'typeClinic.clinic_name',
                         'options' => ['width' => '30'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
@@ -260,7 +275,7 @@ use yii\bootstrap\Tabs;
                                     'delete' => function($url, $model, $key) {
                                 return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
                                             'title' => Yii::t('yii', 'Delete'),
-                                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                            'data-confirm' => Yii::t('yii', 'ยืนยันการลบข้อมูล'),
                                             'data-method' => 'post',
                                             'data-pjax' => '0',
                                             'class' => 'btn btn-default'

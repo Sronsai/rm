@@ -7,13 +7,16 @@ use yii\helpers\ArrayHelper;
 //use yii\bootstrap\ActiveForm;
 use frontend\models\Type;
 use frontend\models\SubType;
+use frontend\models\TypeClinic;
 use yii\bootstrap\Tabs;
 use yii\web\JsExpression;
+use kartik\widgets\DateTimePicker;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */
 /* @var $form yii\widgets\ActiveForm */
 ?>
+
 
 <div class="tabon">
     <?php
@@ -38,19 +41,19 @@ use yii\web\JsExpression;
                 'label' => 'บริหารจัดการความเสี่ยง',
                 'url' => 'index.php?r=risk/index',
             ],
-            /*[
-                'label' => 'Dropdown',
-                'items' => [
-                    [
-                        'label' => 'DropdownA',
-                        'content' => 'DropdownA, Anim pariatur cliche...',
-                    ],
-                    [
-                        'label' => 'DropdownB',
-                        'content' => 'DropdownB, Anim pariatur cliche...',
-                    ],
-                ],
-            ],*/
+        /* [
+          'label' => 'Dropdown',
+          'items' => [
+          [
+          'label' => 'DropdownA',
+          'content' => 'DropdownA, Anim pariatur cliche...',
+          ],
+          [
+          'label' => 'DropdownB',
+          'content' => 'DropdownB, Anim pariatur cliche...',
+          ],
+          ],
+          ], */
         ],
     ]);
     ?>
@@ -109,8 +112,27 @@ use yii\web\JsExpression;
                                     <div class="col-md-4">
                                         <div class="panel panel-success">
                                             <div class="panel-heading"></div>
-                                            <div class="panel-body"></br>                             
+                                            <div class="panel-body"> 
                                                 <?=
+                                                $form->field($model, 'risk_date')->widget(DateTimePicker::classname(), [
+                                                    'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
+                                                    'language' => 'th',
+                                                    'pluginOptions' => [
+                                                        'autoclose' => true,
+                                                        'dateFormat' => 'yyyy-MM-dd',
+                                                        'class' => 'form-control',
+                                                        'changeMonth' => true,
+                                                        'changeYear' => true,
+                                                        'yearRange' => '1996:2099',
+                                                        'showOn' => 'button',
+                                                        'buttonImage' => 'images/calendar.gif',
+                                                        'buttonImageOnly' => true,
+                                                        'buttonText' => 'Select date'
+                                                    ]
+                                                ]);
+                                                ?>
+
+                                                <!--?=
                                                 $form->field($model, 'risk_date')->widget(yii\jui\DatePicker::className(), [
                                                     'name' => 'risk_date',
                                                     'language' => 'th',
@@ -128,16 +150,15 @@ use yii\web\JsExpression;
                                                         'buttonText' => 'Select date'
                                                     ],
                                                 ])
-                                                ?>
+                                                ?-->
 
                                                 <?=
-                                                $form->field($model, 'risk_report')->widget(yii\jui\DatePicker::className(), [
-                                                    'name' => 'risk_report',
+                                                $form->field($model, 'risk_report')->widget(DateTimePicker::classname(), [
+                                                    'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
                                                     'language' => 'th',
-                                                    'dateFormat' => 'yyyy-MM-dd',
-                                                    'options' => [
-                                                        'placeholder' => '',
-                                                        //'style' => 'width:250px;',
+                                                    'pluginOptions' => [
+                                                        'autoclose' => true,
+                                                        'dateFormat' => 'yyyy-MM-dd',
                                                         'class' => 'form-control',
                                                         'changeMonth' => true,
                                                         'changeYear' => true,
@@ -146,9 +167,17 @@ use yii\web\JsExpression;
                                                         'buttonImage' => 'images/calendar.gif',
                                                         'buttonImageOnly' => true,
                                                         'buttonText' => 'Select date'
-                                                    ],
-                                                ])
-                                                ?></br> </br> 
+                                                    ]
+                                                ]);
+                                                ?>
+
+                                                <?= $form->field($model, 'type_clinic_id')->radioList($model->getItemTypeClinic())->label('ประเภทคลินิค', ['class' => 'label-class']) ?>
+                                                <!--?=
+                                                //$form->field($model, 'type_clinic_id')->dropDownList(
+                                                //        ArrayHelper::map(\frontend\models\TypeClinic::find()->all(), 'id', 'clinic_name'), ['prompt' => ''])
+                                                ?-->        
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -265,7 +294,9 @@ use yii\web\JsExpression;
                                             <?=
                                             $form->field($model, 'risk_review')->textarea(['rows' => 3])
                                             ?>
-                                        </div> 
+                                        </div>
+
+
                                         <?php
                                     } else {
                                         ?>
@@ -282,14 +313,9 @@ use yii\web\JsExpression;
     </div>
 
 
-
-
-    <center>
-
-        <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'บันทึก' : 'บันทึก', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-        </div> 
-    </center>
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'บันทึก' : 'บันทึก', ['class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-success') . ' btn-lg btn-block']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?> 
 </div>
