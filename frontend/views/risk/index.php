@@ -62,7 +62,7 @@ use yii\bootstrap\Tabs;
     ]);
     ?>
 </div>
-</br></br></br>
+</br>
 
 <div class="risk-index">
 
