@@ -5,13 +5,19 @@ namespace frontend\controllers;
 use Yii;
 use frontend\models\Risk;
 use frontend\models\RiskSearch;
+use frontend\models\Uploads;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\Html;
 use common\models\User;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
 use common\components\AccessRule;
+use yii\web\UploadedFile;
+use yii\helpers\BaseFileHelper;
+use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
 
 /**
  * RiskController implements the CRUD actions for Risk model.
@@ -100,35 +106,55 @@ class RiskController extends Controller {
     public function actionCreate() {
         $model = new Risk();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-            //Popup แสดงการบันทึกข้อมูลสำเร็จ
-            Yii::$app->getSession()->setFlash('alert1', [
-                'type' => 'success',
-                'duration' => 3000,
-                'icon' => 'fa fa-pencil',
-                'title' => Yii::t('app', Html::encode('SAVE')),
-                'message' => Yii::t('app', Html::encode(' บันทึกข้อมูลเสร็จเรียบร้อย')),
-                'positonY' => 'top',
-                'positonX' => 'right'
-            ]);
+        if ($model->load(Yii::$app->request->post())) {
 
-            Yii::$app->getSession()->setFlash('alert2', [
-                'type' => 'info',
-                'duration' => 5000,
-                'icon' => 'fa fa-thumbs-o-up',
-                'title' => Yii::t('app', Html::encode('Thank You')),
-                'message' => Yii::t('app', Html::encode(' ขอบคุณมากค่ะ..')),
-                'positonY' => 'top',
-                'positonX' => 'right'
-            ]);
+            $this->Uploads(false);
+            $this->CreateDir($model->ref);
 
-            return $this->redirect(['/site/index']);
+            //$model->covenant = $this->uploadSingleFile($model);
+            $model->docs = $this->uploadMultipleFile($model);
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
-            return $this->render('create', [
-                        'model' => $model,
-            ]);
+            $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
         }
+
+        return $this->render('create', [
+                    'model' => $model,
+        ]);
+
+
+        /* if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          //return $this->redirect(['view', 'id' => $model->id]);
+          //Popup แสดงการบันทึกข้อมูลสำเร็จ
+          Yii::$app->getSession()->setFlash('alert1', [
+          'type' => 'success',
+          'duration' => 3000,
+          'icon' => 'fa fa-pencil',
+          'title' => Yii::t('app', Html::encode('SAVE')),
+          'message' => Yii::t('app', Html::encode(' บันทึกข้อมูลเสร็จเรียบร้อย')),
+          'positonY' => 'top',
+          'positonX' => 'right'
+          ]);
+
+          Yii::$app->getSession()->setFlash('alert2', [
+          'type' => 'info',
+          'duration' => 5000,
+          'icon' => 'fa fa-thumbs-o-up',
+          'title' => Yii::t('app', Html::encode('Thank You')),
+          'message' => Yii::t('app', Html::encode(' ขอบคุณมากค่ะ..')),
+          'positonY' => 'top',
+          'positonX' => 'right'
+          ]);
+
+          return $this->redirect(['/site/index']);
+          } else {
+          return $this->render('create', [
+          'model' => $model,
+          ]);
+          } */
     }
 
     /**
@@ -139,15 +165,32 @@ class RiskController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            //return $this->redirect(['view', 'id' => $model->id]);
-            return $this->redirect(['/risk/index']);
-        } else {
-            return $this->render('update', [
-                        'model' => $model,
-            ]);
+        list($initialPreview, $initialPreviewConfig) = $this->getInitialPreview($model->ref);
+        //$tempCovenant = $model->covenant;
+        $tempDocs = $model->docs;
+        if ($model->load(Yii::$app->request->post())) {
+            $this->Uploads(false);
+            //$model->covenant = $this->uploadSingleFile($model, $tempCovenant);
+            $model->docs = $this->uploadMultipleFile($model, $tempDocs);
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
+
+        return $this->render('update', [
+                    'model' => $model,
+                    'initialPreview' => $initialPreview,
+                    'initialPreviewConfig' => $initialPreviewConfig
+        ]);
+
+        /* if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          //return $this->redirect(['view', 'id' => $model->id]);
+          return $this->redirect(['/risk/index']);
+          } else {
+          return $this->render('update', [
+          'model' => $model,
+          ]);
+          } */
     }
 
     /**
@@ -157,7 +200,12 @@ class RiskController extends Controller {
      * @return mixed
      */
     public function actionDelete($id) {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        //remove upload file & data
+        $this->removeUploadDir($model->ref);
+        Uploads::deleteAll(['ref' => $model->ref]);
+
+        $model->delete();
 
         return $this->redirect(['index']);
     }
@@ -175,6 +223,154 @@ class RiskController extends Controller {
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    private function uploadMultipleFile($model, $tempFile = null) {
+        $files = [];
+        $json = '';
+        $tempFile = Json::decode($tempFile);
+        $UploadedFiles = UploadedFile::getInstances($model, 'docs');
+        if ($UploadedFiles !== null) {
+            foreach ($UploadedFiles as $file) {
+                try {
+                    $oldFileName = $file->basename . '.' . $file->extension;
+                    $newFileName = md5($file->basename . time()) . '.' . $file->extension;
+                    $file->saveAs(Risk::UPLOAD_FOLDER . '/' . $model->ref . '/' . $newFileName);
+                    $files[$newFileName] = $oldFileName;
+                } catch (Exception $e) {
+                    
+                }
+            }
+            $json = json::encode(ArrayHelper::merge($tempFile, $files));
+        } else {
+            $json = $tempFile;
+        }
+        return $json;
+    }
+
+    private function CreateDir($folderName) {
+        if ($folderName != NULL) {
+            $basePath = Risk::getUploadPath();
+            if (BaseFileHelper::createDirectory($basePath . $folderName, 0777)) {
+                BaseFileHelper::createDirectory($basePath . $folderName . '/thumbnail', 0777);
+            }
+        }
+        return;
+    }
+
+    public function actionDownload($id, $file, $file_name) {
+        $model = $this->findModel($id);
+        if (!empty($model->ref)) {
+            Yii::$app->response->sendFile($model->getUploadPath() . '/' . $model->ref . '/' . $file, $file_name);
+        } else {
+            $this->redirect(['/risk/view', 'id' => $id]);
+        }
+    }
+
+    private function Uploads($isAjax = false) {
+        if (Yii::$app->request->isPost) {
+            $images = UploadedFile::getInstancesByName('upload_ajax');
+            if ($images) {
+
+                if ($isAjax === true) {
+                    $ref = Yii::$app->request->post('ref');
+                } else {
+                    $Risk = Yii::$app->request->post('Risk');
+                    $ref = $Risk['ref'];
+                }
+
+                $this->CreateDir($ref);
+
+                foreach ($images as $file) {
+                    $fileName = $file->baseName . '.' . $file->extension;
+                    $realFileName = md5($file->baseName . time()) . '.' . $file->extension;
+                    $savePath = Risk::UPLOAD_FOLDER . '/' . $ref . '/' . $realFileName;
+                    if ($file->saveAs($savePath)) {
+
+                        if ($this->isImage(Url::base(true) . '/' . $savePath)) {
+                            $this->createThumbnail($ref, $realFileName);
+                        }
+
+                        $model = new Uploads;
+                        $model->ref = $ref;
+                        $model->file_name = $fileName;
+                        $model->real_filename = $realFileName;
+                        $model->save();
+
+                        if ($isAjax === true) {
+                            echo json_encode(['success' => 'true']);
+                        }
+                    } else {
+                        if ($isAjax === true) {
+                            echo json_encode(['success' => 'false', 'eror' => $file->error]);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private function getInitialPreview($ref) {
+        $datas = Uploads::find()->where(['ref' => $ref])->all();
+        $initialPreview = [];
+        $initialPreviewConfig = [];
+        foreach ($datas as $key => $value) {
+            array_push($initialPreview, $this->getTemplatePreview($value));
+            array_push($initialPreviewConfig, [
+                'caption' => $value->file_name,
+                'width' => '120px',
+                'url' => Url::to(['/risk/deletefile-ajax']),
+                'key' => $value->upload_id
+            ]);
+        }
+        return [$initialPreview, $initialPreviewConfig];
+    }
+
+    public function isImage($filePath) {
+        return @is_array(getimagesize($filePath)) ? true : false;
+    }
+
+    private function getTemplatePreview(Uploads $model) {
+        $filePath = Risk::getUploadUrl() . $model->ref . '/thumbnail/' . $model->real_filename;
+        $isImage = $this->isImage($filePath);
+        if ($isImage) {
+            $file = Html::img($filePath, ['class' => 'file-preview-image', 'alt' => $model->file_name, 'title' => $model->file_name]);
+        } else {
+            $file = "<div class='file-preview-other'> " .
+                    "<h2><i class='glyphicon glyphicon-file'></i></h2>" .
+                    "</div>";
+        }
+        return $file;
+    }
+
+    private function createThumbnail($folderName, $fileName, $width = 250) {
+        $uploadPath = risk::getUploadPath() . '/' . $folderName . '/';
+        $file = $uploadPath . $fileName;
+        $image = Yii::$app->image->load($file);
+        $image->resize($width);
+        $image->save($uploadPath . 'thumbnail/' . $fileName);
+        return;
+    }
+
+    public function actionDeletefileAjax() {
+        $model = Uploads::findOne(Yii::$app->request->post('key'));
+        if ($model !== NULL) {
+            $filename = Risk::getUploadPath() . $model->ref . '/' . $model->real_filename;
+            $thumbnail = Risk::getUploadPath() . $model->ref . '/thumbnail/' . $model->real_filename;
+            if ($model->delete()) {
+                @unlink($filename);
+                @unlink($thumbnail);
+                echo json_encode(['success' => true]);
+            } else {
+                echo json_encode(['success' => false]);
+            }
+        } else {
+            echo json_encode(['success' => false]);
+        }
+    }
+
+    private function removeUploadDir($dir) {
+        BaseFileHelper::removeDirectory(Risk::getUploadPath() . $dir);
     }
 
 }

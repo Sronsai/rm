@@ -11,6 +11,7 @@ use frontend\models\TypeClinic;
 use yii\bootstrap\Tabs;
 use yii\web\JsExpression;
 use kartik\widgets\DateTimePicker;
+use kartik\widgets\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */
@@ -62,19 +63,23 @@ use kartik\widgets\DateTimePicker;
 
 <div class="risk-form">   
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
     <div class="risk-form">   
         <div class="panel panel-primary">
             <div class="panel-heading"><center><H2>เขียนใบความเสี่ยง</H2></center></div>
             <div class="panel-body">
                 <div class="row">
+
+                    <?= $form->field($model, 'ref')->hiddenInput()->label(false); ?>
+
                     <div class="col-md-12 col-sm-12">
                         <div class="panel panel-info">
                             <div class="panel-heading"></div>
                             <div class="panel-body">
                                 <div class="row">
                                     <div class="col-xs-2">
+
                                         <?=
                                         $form->field($model, 'person_id')->dropDownList(
                                                 ArrayHelper::map(\frontend\models\Person::find()->all(), 'id', 'person_type'), ['prompt' => ''])
@@ -294,6 +299,52 @@ use kartik\widgets\DateTimePicker;
                                             <?=
                                             $form->field($model, 'risk_review')->textarea(['rows' => 3])
                                             ?>
+                                        </div>
+
+                                        <div class = "col-md-12">
+                                            <?=
+                                            $form->field($model, 'docs[]')->widget(FileInput::classname(), [
+                                                'options' => [
+                                                    //'accept' => 'image/*',
+                                                    'multiple' => true
+                                                ],
+                                                'pluginOptions' => [
+                                                    'initialPreview' => $model->initialPreview($model->docs, 'docs', 'file'),
+                                                    'initialPreviewConfig' => $model->initialPreview($model->docs, 'docs', 'config'),
+                                                    'allowedFileExtensions' => ['rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx'],
+                                                    'showPreview' => false,
+                                                    //'showPreview' => true,
+                                                    'showCaption' => true,
+                                                    'showRemove' => true,
+                                                    'showUpload' => false
+                                                ]
+                                            ]);
+                                            ?>
+
+                                            <div class="form-group field-upload_files">
+                                                <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่ายที่ทบทวน </label>
+                                                <div>
+                                                    <?=
+                                                    FileInput::widget([
+                                                        'name' => 'upload_ajax[]',
+                                                        'options' => ['multiple' => true, 'accept' => 'image/*'], //'accept' => 'image/*' หากต้องเฉพาะ image
+                                                        'pluginOptions' => [
+                                                            'overwriteInitial' => false,
+                                                            'initialPreviewShowDelete' => true,
+                                                            'initialPreview' => $initialPreview,
+                                                            'initialPreviewConfig' => $initialPreviewConfig,
+                                                            'uploadUrl' => Url::to(['/risk-library/upload-ajax']),
+                                                            'uploadExtraData' => [
+                                                                'ref' => $model->ref,
+                                                            ],
+                                                            'maxFileCount' => 100
+                                                        ]
+                                                    ]);
+                                                    ?>
+                                                </div>
+                                            </div>
+
+
                                         </div>
 
 

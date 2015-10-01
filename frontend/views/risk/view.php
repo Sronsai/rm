@@ -6,26 +6,31 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */
 
+
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'บันทึกความเสี่ยง', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+
 <div class="risk-view">
 
     <!--h1><?= Html::encode($this->title) ?></h1-->
-
-    <p>
-        <?= Html::a('แก้ไข', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?=
-        Html::a('ลบ', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'ยืนยันการลบข้อมูล',
-                'method' => 'post',
-            ],
-        ])
-        ?>
-    </p>
+    <center>
+        <p>
+            <?= Html::a('ภาพรวม', ['site/index'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('ทบทวน', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?=
+            Html::a('ลบ', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'ยืนยันการลบข้อมูล',
+                    'method' => 'post',
+                ],
+            ])
+            ?>
+        </p>
+    </center>
 
     <?=
     DetailView::widget([
@@ -80,8 +85,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status_id',
                 'value' => $model->status->status_name,
             ],
+            [
+                'attribute' => 'docs',
+                'value' => $model->listDownloadFiles('docs'),
+                'format' => 'html'
+            ],
         ],
     ])
     ?>
 
 </div>
+
+<center>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <?= dosamigos\gallery\Gallery::widget(['items' => $model->getThumbnails($model->ref, $model->risk_review)]); ?>
+        </div>
+    </div>
+</center>

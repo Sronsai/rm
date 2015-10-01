@@ -26,6 +26,7 @@ class ReportController extends \yii\web\Controller {
             ,ty.type_name as type
             ,s.system_name as system
             ,st.status_name as status
+            ,r.risk_review
             from risk r
 left outer join person p on p.id = r.person_id
 left outer join type ty on ty.id = r.type_id

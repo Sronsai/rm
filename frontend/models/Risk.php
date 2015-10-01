@@ -7,9 +7,12 @@ use yii\helpers\ArrayHelper;
 use yii\behaviors\AttributeBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
+use yii\helpers\Json;
+use yii\helpers\Html;
 
 class Risk extends ActiveRecord {
 
+    const UPLOAD_FOLDER = 'risks';
     const STATUS_YES_ACTIVE = 1;
     const STATUS_NOT_ACTIVE = 2;
 
@@ -65,9 +68,11 @@ class Risk extends ActiveRecord {
             [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id'], 'integer'],
             [['pname', 'risk_summary', 'risk_review'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
+            [['ref'], 'string', 'max' => 50],
             [['hn'], 'string', 'max' => 45],
             [['status_id'], 'string', 'max' => 150],
             [['fname', 'lname'], 'string', 'max' => 100],
+            [['docs'], 'file', 'maxFiles' => 5, /* 'skipOnEmpty' => true, 'extensions' => 'rar,pdf,doc,docx,xls,xlsx' */]
         ];
     }
 
@@ -97,6 +102,7 @@ class Risk extends ActiveRecord {
             'status_id' => Yii::t('app', 'การทบทวน'),
             //'status_id' => 'การทบทวน',
             'risk_review' => 'สรุปการทบทวน',
+            'docs' => 'ไฟล์เอกสารที่ทบทวน'
                 //'globalSearch' => '',
         ];
     }
@@ -190,6 +196,67 @@ class Risk extends ActiveRecord {
      */
     public function getRiskHasReview1s() {
         return $this->hasMany(RiskHasReview1::className(), ['risk_id' => 'id']);
+    }
+
+    public static function getUploadPath() {
+        return Yii::getAlias('@webroot') . '/' . self::UPLOAD_FOLDER . '/';
+    }
+
+    public static function getUploadUrl() {
+        return Url::base(true) . '/' . self::UPLOAD_FOLDER . '/';
+    }
+
+    public function getThumbnails($ref, $risk_review) {
+        $uploadFiles = Uploads::find()->where(['ref' => $ref])->all();
+        $preview = [];
+        foreach ($uploadFiles as $file) {
+            $preview[] = [
+                'url' => self::getUploadUrl(true) . $ref . '/' . $file->real_filename,
+                'src' => self::getUploadUrl(true) . $ref . '/thumbnail/' . $file->real_filename,
+                'options' => ['title' => $risk_review]
+            ];
+        }
+        return $preview;
+    }
+
+    public function initialPreview($data, $field, $type = 'file') {
+        $initial = [];
+        $files = Json::decode($data);
+        if (is_array($files)) {
+            foreach ($files as $key => $value) {
+                if ($type == 'file') {
+                    $initial[] = "<div class='file-preview-other'><h2><i class='glyphicon glyphicon-file'></i></h2></div>";
+                } elseif ($type == 'config') {
+                    $initial[] = [
+                        'caption' => $value,
+                        'width' => '120px',
+                        'url' => Url::to(['/risk/deletefile', 'id' => $this->id, 'fileName' => $key, 'field' => $field]),
+                        'key' => $key
+                    ];
+                } else {
+                    $initial[] = Html::img(self::getUploadUrl() . $this->ref . '/' . $value, ['class' => 'file-preview-image', 'alt' => $model->file_name, 'title' => $model->file_name]);
+                }
+            }
+        }
+        return $initial;
+    }
+
+    public function listDownloadFiles($type) {
+        $docs_file = '';
+        if (in_array($type, ['docs'])) {
+
+            $data = $type === 'docs' ? $this->docs : $this->covenant;
+            $files = Json::decode($data);
+            if (is_array($files)) {
+                $docs_file = '<ul>';
+                foreach ($files as $key => $value) {
+                    $docs_file .= '<li>' . Html::a($value, ['/risk/download', 'id' => $this->id, 'file' => $key, 'file_name' => $value]) . '</li>';
+                }
+                $docs_file .='</ul>';
+            }
+        }
+
+        return $docs_file;
     }
 
 }

@@ -20,7 +20,6 @@ use yii\bootstrap\Tabs;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
 <div class="tabon">
     <?php
     echo Tabs::widget([
@@ -205,31 +204,30 @@ use yii\bootstrap\Tabs;
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
-                        'options' => ['width' => '30'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
+                        'filter' => Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(frontend\models\Type::find()->asArray()->all(), 'id', 'type_name'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
                     ],
+                    //'sub_type_id',
+                    /* [
+                      'attribute' => 'sub_type_id',
+                      'value' => 'subType.sub_type_name',
+                      'filter' => Html::activeDropDownList($searchModel, 'sub_type_id', ArrayHelper::map(frontend\models\SubType::find()->asArray()->all(), 'id', 'sub_type_name'), [
+                      'class' => 'form-control', 'prompt' => ''
+                      ]),
+                      ], */
                     [
                         'attribute' => 'type_clinic_id',
                         'value' => 'typeClinic.clinic_name',
-                        'options' => ['width' => '30'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
+                        'filter' => Risk::itemsAlias2('type_clinic_id'),
                     ],
-                    /* 'sub_type_id',
-                      [
-                      'attribute' => 'sub_type_id',
-                      'value' => 'subType.sub_type_name',
-                      'headerOptions' => ['class' => 'text-center'],
-                      'contentOptions' => ['class' => 'text-center'],
-                      ], */
                     //'level_id',
                     [
                         'attribute' => 'level_id',
                         'value' => 'level.level_e',
-                        'options' => ['width' => '20'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
+                        'filter' => Html::activeDropDownList($searchModel, 'level_id', ArrayHelper::map(frontend\models\Level::find()->asArray()->all(), 'id', 'level_e'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
                     ],
                     //'clear_id',
                     //'system_id',
@@ -260,16 +258,16 @@ use yii\bootstrap\Tabs;
                       ], */
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'header' => 'ทบทวน / ลบ',
+                        'header' => 'ทบทวน / เอกสาร / ลบ',
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                         //'options' => ['style' => 'width:200px;'],
-                        'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{delete}</div>',
+                        'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}{delete}</div>',
                         'buttons' => [
-                            /* 'view' => function($url, $model, $key) {
-                              return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', $url, ['class' => 'btn btn-default']);
-                              }, */
-                            'update' => function($url, $model, $key) {
+                            'view' => function($url, $model, $key) {
+                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', $url, ['class' => 'btn btn-default']);
+                            },
+                                    'update' => function($url, $model, $key) {
                                 return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
                             },
                                     'delete' => function($url, $model, $key) {
@@ -291,4 +289,3 @@ use yii\bootstrap\Tabs;
         </div>
     </div>
 </div>
-
