@@ -20,48 +20,6 @@ use yii\bootstrap\Tabs;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-<div class="tabon">
-    <?php
-    echo Tabs::widget([
-        'items' => [
-            [
-                'label' => 'ภาพรวม',
-                //'content' => 'Anim pariatur cliche...',
-                'url' => 'index.php?r=site/index',
-            ],
-            /* [
-              'label' => 'เขียนใขความเสี่ยง',
-              'content' => 'Anim pariatur cliche...',
-              'headerOptions' => [],
-              'options' => ['id' => 'myveryownID'],
-              ], */
-            [
-                'label' => 'เขียนใบความเสี่ยง',
-                'url' => 'index.php?r=risk/create',
-            ],
-            [
-                'label' => 'จัดการความเสี่ยง',
-                'url' => 'index.php?r=risk/index',
-                'active' => true
-            ],
-        /* [
-          'label' => 'Dropdown',
-          'items' => [
-          [
-          'label' => 'DropdownA',
-          'content' => 'DropdownA, Anim pariatur cliche...',
-          ],
-          [
-          'label' => 'DropdownB',
-          'content' => 'DropdownB, Anim pariatur cliche...',
-          ],
-          ],
-          ], */
-        ],
-    ]);
-    ?>
-</div>
-</br>
 
 <div class="risk-index">
 
@@ -95,7 +53,18 @@ use yii\bootstrap\Tabs;
                 'pjaxSettings' => [
                     'neverTimeout' => true,
                     'enablePushState' => false,
+                //'beforeGrid' => 'My fancy content before.',
+                //'afterGrid' => 'My fancy content after.',
                 //'options' => ['id' => 'CustomerGrid'],
+                ],
+                'panel' => [
+                    'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
+                    //'type' => 'success',
+                    'before' => '',
+                    'after' => '',
+                //'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
+                //'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                //'footer' => false
                 ],
                 'rowOptions' => function($model) {     //adding row gridview
             if ($model->level_id == '3') {
@@ -153,11 +122,11 @@ use yii\bootstrap\Tabs;
                       'contentOptions' => ['class' => 'text-center'],
                       ], */
                     //'hn:text:HN', //เขียนแบบย่อ
-                    [
-                        'attribute' => 'hn',
-                        'options' => ['width' => '50'],
-                        'headerOptions' => ['class' => 'text-center'],
-                    ],
+                    /* [
+                      'attribute' => 'hn',
+                      'options' => ['width' => '50'],
+                      'headerOptions' => ['class' => 'text-center'],
+                      ], */
                     //'pname',
                     //'fname',
                     //'lname',

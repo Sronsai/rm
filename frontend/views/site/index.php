@@ -45,47 +45,6 @@ $time = time();
     ?>
 <?php endforeach; ?>
 
-<div class="tabon">
-    <?php
-    echo Tabs::widget([
-        'items' => [
-            [
-                'label' => 'ภาพรวม',
-                //'content' => 'Anim pariatur cliche...',
-                'active' => true
-            ],
-            /* [
-              'label' => 'เขียนใขความเสี่ยง',
-              'content' => 'Anim pariatur cliche...',
-              'headerOptions' => [],
-              'options' => ['id' => 'myveryownID'],
-              ], */
-            [
-                'label' => 'เขียนใบความเสี่ยง',
-                'url' => 'index.php?r=risk/create',
-            ],
-            [
-                'label' => 'บริหารจัดการความเสี่ยง',
-                'url' => 'index.php?r=risk/index',
-            ],
-        /* [
-          'label' => 'Dropdown',
-          'items' => [
-          [
-          'label' => 'DropdownA',
-          'content' => 'DropdownA, Anim pariatur cliche...',
-          ],
-          [
-          'label' => 'DropdownB',
-          'content' => 'DropdownB, Anim pariatur cliche...',
-          ],
-          ],
-          ], */
-        ],
-    ]);
-    ?>
-</div>
-
 <center>
     <div class="site-index">
         <div class="body-content">

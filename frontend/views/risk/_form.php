@@ -19,48 +19,6 @@ use kartik\widgets\FileInput;
 ?>
 
 
-<div class="tabon">
-    <?php
-    echo Tabs::widget([
-        'items' => [
-            [
-                'label' => 'ภาพรวม',
-                'url' => 'index.php?r=site/index',
-            ],
-            /* [
-              'label' => 'เขียนใขความเสี่ยง',
-              'content' => 'Anim pariatur cliche...',
-              'headerOptions' => [],
-              'options' => ['id' => 'myveryownID'],
-              ], */
-            [
-                'label' => 'เขียนใบความเสี่ยง',
-                'url' => 'index.php?r=risk/create',
-                'active' => true
-            ],
-            [
-                'label' => 'บริหารจัดการความเสี่ยง',
-                'url' => 'index.php?r=risk/index',
-            ],
-        /* [
-          'label' => 'Dropdown',
-          'items' => [
-          [
-          'label' => 'DropdownA',
-          'content' => 'DropdownA, Anim pariatur cliche...',
-          ],
-          [
-          'label' => 'DropdownB',
-          'content' => 'DropdownB, Anim pariatur cliche...',
-          ],
-          ],
-          ], */
-        ],
-    ]);
-    ?>
-</div>
-</br>
-
 <div class="risk-form">   
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -311,7 +269,7 @@ use kartik\widgets\FileInput;
                                                 'pluginOptions' => [
                                                     'initialPreview' => $model->initialPreview($model->docs, 'docs', 'file'),
                                                     'initialPreviewConfig' => $model->initialPreview($model->docs, 'docs', 'config'),
-                                                    'allowedFileExtensions' => ['rar', 'pdf', 'doc', 'docx', 'xls', 'xlsx'],
+                                                    'allowedFileExtensions' => ['rar', 'zip', 'pdf', 'doc', 'docx', 'xls', 'xlsx'],
                                                     'showPreview' => false,
                                                     //'showPreview' => true,
                                                     'showCaption' => true,

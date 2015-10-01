@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use dosamigos\gallery\Gallery;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */
@@ -99,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <center>
     <div class="panel panel-default">
         <div class="panel-body">
-            <?= dosamigos\gallery\Gallery::widget(['items' => $model->getThumbnails($model->ref, $model->risk_review)]); ?>
+            <?= Gallery::widget(['items' => $model->getThumbnails($model->ref, $model->risk_review)]); ?>
         </div>
     </div>
 </center>
