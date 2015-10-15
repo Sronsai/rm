@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                     'panel' => [
                         //'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
                         //'type' => 'info',
-                        'before' => '<CENTER><H4><U>แยกหน่วยงาน,ประเภท,ประเภทย่อย ตั้งแต่ ต.ค 57</U></H4></CENTER>',
+                        'before' => '<CENTER><H4><U>ประเภทความเสี่ยงที่เกิดซ้ำ (ตั้งแต่ ต.ค 57)</U></H4></CENTER>',
                     //'after' => '',
                     //'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
                     //'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
