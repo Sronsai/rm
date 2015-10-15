@@ -25,7 +25,7 @@ use kartik\widgets\FileInput;
 
     <div class="risk-form">   
         <div class="panel panel-primary">
-            <div class="panel-heading"><center><H2>เขียนใบความเสี่ยง</H2></center></div>
+            <div class="panel-heading"><center><H3>เขียนใบความเสี่ยง</H3></center></div>
             <div class="panel-body">
                 <div class="row">
 

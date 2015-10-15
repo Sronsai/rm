@@ -50,6 +50,96 @@ $time = time();
         <div class="body-content">
             <div class="row">
 
+
+                <div class="col-lg-3">
+                    <div class="info-box">
+                        <a href="?r=report/report">
+                            <span class="info-box-icon bg-blue-active"><i class="fa fa-exclamation-triangle"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">ใบความเสี่ยง </br></br></span>
+                                <span class="info-box-number">
+                                    <u>
+                                        <?php
+                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk");
+                                        $target = $command->queryScalar();
+
+                                        echo $target;
+                                        ?>
+                                        ใบ
+                                    </u>
+
+                                </span>
+                            </div><!-- /.info-box-content -->
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="info-box">
+                        <a href="?r=report/report5">
+                            <span class="info-box-icon bg-green-gradient"><i class="fa fa-heartbeat"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">ความเสี่ยงเดือน </br>(<?php echo Yii::$app->formatter->asDateTime(time(), 'php:F'); ?>)<br /><!--?php echo $date_my; ?--></span>
+                                <span class="info-box-number">
+                                    <u>
+                                        <?php
+                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk WHERE risk_date BETWEEN  '$date_D' and  '$date_M'");
+                                        $target = $command->queryScalar();
+
+                                        echo $target;
+                                        ?>
+                                        ใบ
+                                    </u>
+
+                                </span>
+                            </div><!-- /.info-box-content -->
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="info-box">
+                        <a href="?r=report/report3">
+                            <span class="info-box-icon bg-orange"><i class="fa fa-spinner fa-pulse"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">ยังไม่ได้ทบทวน </br></br></span>
+                                <span class="info-box-number">
+                                    <u>
+                                        <?php
+                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk WHERE status_id ='1'");
+                                        $target = $command->queryScalar();
+
+                                        echo $target;
+                                        ?>
+                                        ใบ
+                                    </u>
+
+                                </span>
+                            </div><!-- /.info-box-content -->
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="info-box">
+                        <a href="?r=report/report4">
+                            <span class="info-box-icon bg-red-gradient"><i class="fa fa-ambulance"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">ความเสี่ยงที่ถึงชีวิต </br></br></span>
+                                <span class="info-box-number">
+                                    <u>
+                                        <?php
+                                        $command = Yii::$app->db->createCommand("SELECT count(level_id) as total FROM risk WHERE level_id = '9'");
+                                        $target = $command->queryScalar();
+
+                                        echo $target;
+                                        ?>
+                                        ใบ
+                                    </u>
+
+                                </span>
+                            </div><!-- /.info-box-content -->
+                        </a>
+                    </div>
+                </div>
+
                 <!-- drilldown chart -->
                 <div class="panel-body">
 
@@ -151,94 +241,6 @@ $time = time();
                 </div>
                 <!-- end drilldown chart -->
 
-                <div class="col-lg-3">
-                    <div class="info-box">
-                        <a href="?r=report/report">
-                            <span class="info-box-icon bg-blue-active"><i class="fa fa-exclamation-triangle"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">ใบความเสี่ยง </br></br></span>
-                                <span class="info-box-number">
-                                    <u>
-                                        <?php
-                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk");
-                                        $target = $command->queryScalar();
-
-                                        echo $target;
-                                        ?>
-                                        ใบ
-                                    </u>
-
-                                </span>
-                            </div><!-- /.info-box-content -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="info-box">
-                        <a href="?r=report/report5">
-                            <span class="info-box-icon bg-green-gradient"><i class="fa fa-heartbeat"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">ความเสี่ยงเดือน </br>(<?php echo Yii::$app->formatter->asDateTime(time(), 'php:F'); ?>)<br /><!--?php echo $date_my; ?--></span>
-                                <span class="info-box-number">
-                                    <u>
-                                        <?php
-                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk WHERE risk_date BETWEEN  '$date_D' and  '$date_M'");
-                                        $target = $command->queryScalar();
-
-                                        echo $target;
-                                        ?>
-                                        ใบ
-                                    </u>
-
-                                </span>
-                            </div><!-- /.info-box-content -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="info-box">
-                        <a href="?r=report/report3">
-                            <span class="info-box-icon bg-orange"><i class="fa fa-spinner fa-pulse"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">ยังไม่ได้ทบทวน </br></br></span>
-                                <span class="info-box-number">
-                                    <u>
-                                        <?php
-                                        $command = Yii::$app->db->createCommand("SELECT count(id) as total FROM risk WHERE status_id ='1'");
-                                        $target = $command->queryScalar();
-
-                                        echo $target;
-                                        ?>
-                                        ใบ
-                                    </u>
-
-                                </span>
-                            </div><!-- /.info-box-content -->
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="info-box">
-                        <a href="?r=report/report4">
-                            <span class="info-box-icon bg-red-gradient"><i class="fa fa-ambulance"></i></span>
-                            <div class="info-box-content">
-                                <span class="info-box-text">ความเสี่ยงที่ถึงชีวิต </br></br></span>
-                                <span class="info-box-number">
-                                    <u>
-                                        <?php
-                                        $command = Yii::$app->db->createCommand("SELECT count(level_id) as total FROM risk WHERE level_id = '9'");
-                                        $target = $command->queryScalar();
-
-                                        echo $target;
-                                        ?>
-                                        ใบ
-                                    </u>
-
-                                </span>
-                            </div><!-- /.info-box-content -->
-                        </a>
-                    </div>
-                </div>
 
 
                 <!-- pie chart -->

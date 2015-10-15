@@ -11,6 +11,7 @@ use yii\helpers\Url;
 use kartik\grid\BooleanColumn;
 use frontend\models\Risk;
 use yii\bootstrap\Tabs;
+use kartik\export\ExportMenu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\RiskSearch */
@@ -31,7 +32,7 @@ use yii\bootstrap\Tabs;
 
 
     <div class="panel panel-primary">
-        <div class="panel-heading"><center><H2>จัดการความเสี่ยง</H2></center></div>
+        <div class="panel-heading"><center><H3>จัดการความเสี่ยง</H3></center></div>
         <div class="panel-body">
 
             <!--div class="row">
@@ -59,7 +60,7 @@ use yii\bootstrap\Tabs;
                 ],
                 'panel' => [
                     'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
-                    //'type' => 'success',
+                    //'type' => 'info',
                     'before' => '',
                     'after' => '',
                 //'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
@@ -200,7 +201,7 @@ use yii\bootstrap\Tabs;
                     ],
                     //'clear_id',
                     //'system_id',
-                    [   // แสดงข้อมูลออกเป็น icon
+                    [// แสดงข้อมูลออกเป็น icon
                         'attribute' => 'status_id',
                         'format' => 'html',
                         'contentOptions' => ['class' => 'text-center'],
@@ -234,7 +235,7 @@ use yii\bootstrap\Tabs;
                         'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}{delete}</div>',
                         'buttons' => [
                             'view' => function($url, $model, $key) {
-                                return Html::a('<i class="glyphicon glyphicon-eye-open"></i>', $url, ['class' => 'btn btn-default']);
+                                return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
                             },
                                     'update' => function($url, $model, $key) {
                                 return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
