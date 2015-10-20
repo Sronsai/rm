@@ -83,7 +83,7 @@ class RiskController extends Controller {
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
-                    'model' => $model,
+                    'model' => $model
         ]);
     }
 
@@ -371,6 +371,21 @@ class RiskController extends Controller {
 
     private function removeUploadDir($dir) {
         BaseFileHelper::removeDirectory(Risk::getUploadPath() . $dir);
+    }
+    
+    
+    public function actionMpdfprint() {
+        
+        $order = \frontend\models\Risk::find()
+                ->where("risk_date between '".$model->start_date." ' and ' ".$model->end_date."'")
+                ->all();
+        
+        $pdf = '_report1'; // file name
+        
+        return $this->renderPartial($pdf,[
+            'order' => $order
+        ]);
+        
     }
 
 }

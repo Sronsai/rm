@@ -25,21 +25,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '1'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '1'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -154,21 +140,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '2'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '2'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -283,21 +255,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '3'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '3'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -412,21 +370,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '4'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '4'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -541,21 +485,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '5'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '5'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -670,21 +600,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '6'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '6'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -799,21 +715,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '7'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '7'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -928,21 +830,7 @@ class TypesController extends controller {
                 FROM rm.risk r
                 INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
                 WHERE type_id = '8'
-                GROUP BY r.location_riks_id
-                UNION ALL
-                SELECT 'รวม' AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                WHERE type_id = '8'";
+                GROUP BY r.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();

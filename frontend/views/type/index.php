@@ -10,6 +10,7 @@ use yii\grid\GridView;
 $this->title = 'Types';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="type-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -25,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+            //'id',
             'type_name',
 
             ['class' => 'yii\grid\ActionColumn'],

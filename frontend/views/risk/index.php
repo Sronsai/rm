@@ -21,7 +21,6 @@ use kartik\export\ExportMenu;
 //$this->params['breadcrumbs'][] = $this->title;
 ?>
 
-
 <div class="risk-index">
 
     <!--h1><!--?= Html::encode($this->title) ?></h1-->
@@ -35,11 +34,11 @@ use kartik\export\ExportMenu;
         <div class="panel-heading"><center><H3>จัดการความเสี่ยง</H3></center></div>
         <div class="panel-body">
 
-            <!--div class="row">
+            <div class="row">
                 <div class="col-md-4">
-            <!--?php echo $this->render('_search', ['model' => $searchModel]); ?>
-        </div>
-    </div-->
+                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                </div>
+            </div>
 
             <?php Pjax::begin(); ?>
             <?=

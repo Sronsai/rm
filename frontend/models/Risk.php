@@ -102,8 +102,8 @@ class Risk extends ActiveRecord {
             'status_id' => Yii::t('app', 'การทบทวน'),
             //'status_id' => 'การทบทวน',
             'risk_review' => 'สรุปการทบทวน',
-            'docs' => 'ไฟล์เอกสารที่ทบทวน'
-                //'globalSearch' => '',
+            'docs' => 'ไฟล์เอกสารที่ทบทวน',
+            //'globalSearch' => 'ค้นหาแบบระเอียด',
         ];
     }
 

@@ -13,7 +13,6 @@ class ReportController extends \yii\web\Controller {
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
 
-
         if (Yii::$app->request->isPost) {
             $date1 = $_POST['date1'];
             $date2 = $_POST['date2'];
@@ -57,7 +56,7 @@ where risk_date between '$date1' and '$date2'";
                     'rawData' => $rawData,
                     'sql' => $sql,
                     'date1' => $date1,
-                    'date2' => $date2
+                    'date2' => $date2,
         ]);
     }
 

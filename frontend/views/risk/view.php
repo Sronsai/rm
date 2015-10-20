@@ -104,6 +104,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->status->status_name,
             ],
             [
+                'attribute' => 'risk_review',
+            ],
+            [
                 'attribute' => 'docs',
                 'value' => $model->listDownloadFiles('docs'),
                 'format' => 'html'

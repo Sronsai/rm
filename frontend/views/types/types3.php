@@ -17,7 +17,6 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
     <center><h1>รายการความเสี่ยงแยกตามประเภทระบบยา / สารน้ำ / เลือด</h1></center>
 
 
-
     <div class="row">       
         <div class="col-md-12">
             <div class="col-md-6">
@@ -33,6 +32,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 echo GridView::widget([
                     'dataProvider' => $dataProvider3,
                     //'filterModel' => $searchModel,
+                    'showPageSummary' => true, //show แถบสีเหลือง summary
                     'responsive' => true,
                     'hover' => true,
                     'floatHeader' => false,
@@ -46,10 +46,11 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                     //'footer' => false
                     ],
                     'columns' => [
+
                         [
                             'attribute' => 'location_name',
                             'header' => 'หน่วยงานต้นเหตุ',
-                            'headerOptions' => ['width' => '50'],
+                            'headerOptions' => ['width' => '30'],
                         //'location' => ['location' => SORT_DESC],
                         ],
                         [
@@ -60,13 +61,22 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                         [
                             'attribute' => 'sub_type_name',
                             'header' => 'ประเภทย่อย',
-                            'headerOptions' => ['width' => '50'],
+                            'headerOptions' => ['width' => '80'],
                         //'location' => ['location' => SORT_DESC],
                         ],
+                        /* [
+                          'attribute' => 'total',
+                          'header' => 'จำนวน',
+                          'headerOptions' => ['width' => '30']
+                          ], */
                         [
                             'attribute' => 'total',
                             'header' => 'จำนวน',
-                            'headerOptions' => ['width' => '30']
+                            'width' => '10px',
+                            'hAlign' => 'center',
+                            'format' => ['decimal', 0],
+                            'pageSummary' => true,
+                            'pageSummaryOptions' => ['class' => 'text-right text-info'],
                         ],
                     ]
                 ]);
@@ -80,6 +90,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 echo GridView::widget([
                     'dataProvider' => $dataProvider,
                     //'filterModel' => $searchModel,
+                    'showPageSummary' => true,
                     'responsive' => true,
                     'hover' => true,
                     'floatHeader' => false,
@@ -144,10 +155,30 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                             'header' => 'I',
                             'headerOptions' => ['width' => '30']
                         ],
+                        /* [
+                          'attribute' => 'TOTAL',
+                          'header' => 'รวม',
+                          'headerOptions' => ['width' => '30'],
+                          'pageSummary' => 'รวม',
+                          'pageSummaryOptions' => ['class' => 'text-left text-info'],
+                          ],
+                          [
+                          'attribute' => 'TOTAL',
+                          'header' => 'รวม',
+                          'width' => '30px',
+                          'hAlign' => 'right',
+                          'format' => ['decimal', 0],
+                          'pageSummary' => true,
+                          'pageSummaryFunc' => GridView::F_AVG
+                          ], */
                         [
                             'attribute' => 'TOTAL',
                             'header' => 'รวม',
-                            'headerOptions' => ['width' => '30']
+                            'width' => '30px',
+                            'hAlign' => 'center',
+                            'format' => ['decimal', 0],
+                            'pageSummary' => true,
+                            'pageSummaryOptions' => ['class' => 'text-right text-info'],
                         ],
                     ],
                 ]);
@@ -167,6 +198,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 echo GridView::widget([
                     'dataProvider' => $dataProvider1,
                     //'filterModel' => $searchModel,
+                    'showPageSummary' => true,
                     'responsive' => true,
                     'hover' => true,
                     'floatHeader' => false,
@@ -184,12 +216,20 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                             'attribute' => 'status_name',
                             'header' => 'สถานะ',
                             'headerOptions' => ['width' => '50'],
-                        //'location' => ['location' => SORT_DESC],
                         ],
+                        /* [
+                          'attribute' => 'status_id',
+                          'header' => 'จำนวน',
+                          'headerOptions' => ['width' => '30']
+                          ], */
                         [
                             'attribute' => 'status_id',
-                            'header' => 'จำนวน',
-                            'headerOptions' => ['width' => '30']
+                            'header' => 'รวม',
+                            'width' => '30px',
+                            'hAlign' => 'center',
+                            'format' => ['decimal', 0],
+                            'pageSummary' => true,
+                            'pageSummaryOptions' => ['class' => 'text-right text-info'],
                         ],
                     ]
                 ]);

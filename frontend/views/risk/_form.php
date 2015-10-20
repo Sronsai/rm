@@ -210,7 +210,7 @@ use kartik\widgets\FileInput;
                                         <!--div class="panel panel-success">
                                         <!--div class="panel-heading"></div-->
                                         <div class="panel-body">
-                                            <?= $form->field($model, 'risk_summary')->textarea(['rows' => 3]) ?>
+                                            <?= $form->field($model, 'risk_summary')->textarea(['rows' => 4]) ?>
                                             <!--/div-->
                                         </div>
                                     </div>
@@ -255,7 +255,7 @@ use kartik\widgets\FileInput;
                                         ?>
                                         <div class = "col-md-12">
                                             <?=
-                                            $form->field($model, 'risk_review')->textarea(['rows' => 3])
+                                            $form->field($model, 'risk_review')->textarea(['rows' => 4])
                                             ?>
                                         </div>
 

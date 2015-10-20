@@ -17,19 +17,25 @@ use yii\widgets\ActiveForm;
     ]);
     ?>
 
-    <div class="form-group">
-        <div id="global1">
-            <?= $form->field($model, 'globalSearch') ?>  
-        </div>
-        </br>
-        <div id="global2">
-            <!--?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn btn-success']) ?-->
-            <?= Html::submitButton('ค้นหาแบบละเอียด', ['class' => 'btn btn-success']) ?>
-            <!--?= Html::resetButton('คืนค่า', ['class' => 'btn btn-default']) ?-->
-        </div>
-    </div>
+    <!--?=
+    $form->field($model, 'globalSearch')->textInput(['style' => 'color:red']);
+    ?-->
 
+    <?=
+    $form->field($model, 'globalSearch', [
+        'template' => "{input}\n{error}",
+        'inputOptions' => [
+            'placeholder' => 'ค้นหาแบบระเอียด',
+            'class' => 'form-control'
+        ]
+            ]
+    )->textInput(['style' => 'color:red']);
+    ?>
 
+    <!--div class="form-group">
+    <!--?= Html::submitButton('Search',['class' => 'btn btn-primary']) ?>
+    <!--?= Html::resetButton('Reset',['class' => 'btn btn-default']) ?>
+</div-->
 
     <?php ActiveForm::end(); ?>
 
