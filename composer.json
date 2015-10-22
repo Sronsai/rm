@@ -34,7 +34,8 @@
         "kartik-v/yii2-detail-view": "@dev",
         "kartik-v/yii2-export": "@dev",
         "kartik-v/yii2-widget-sidenav": "*",
-        "kartik-v/yii2-social": "@dev"
+        "kartik-v/yii2-social": "@dev",
+        "kartik-v/yii2-tabs-x": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

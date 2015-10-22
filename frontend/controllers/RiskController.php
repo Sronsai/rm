@@ -18,6 +18,7 @@ use yii\web\UploadedFile;
 use yii\helpers\BaseFileHelper;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
+use kartik\mpdf\Pdf;
 
 /**
  * RiskController implements the CRUD actions for Risk model.
@@ -93,9 +94,86 @@ class RiskController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
+
         return $this->render('view', [
                     'model' => $this->findModel($id),
         ]);
+    }
+
+    public function actionPdf($id) {
+        
+        $time = time();
+
+        $content = $this->renderPartial('pdf', [
+            'time' => $time,
+            'model' => $this->findModel($id),
+        ]);
+
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_UTF8,
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4,
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER,
+            // your html content input
+            'content' => $content,
+            'marginTop' => 10,
+            'marginLeft' => 15,
+            'marginRight' => 15,
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css',
+            // any css to be embedded if required
+            'cssInline' => '
+              body{
+                font-family:"garuda", "sans-serif";
+                font-size:14px;
+              }
+                    p{
+                    font-size:10px;
+                    line-height: 4px;
+                    }
+                    #wrapper{
+
+                    width: 210.5mm;
+                    height: 150mm;
+                    margin: 0px;
+                }
+                #header{
+                height: 25mm;
+                }
+                #header p{
+                    margin-bottom: 0px;
+                }
+                .row1{
+                height: 50%
+                margin: 0px;
+                }
+                .row2{
+                height: 50%
+                margin: 0px;
+                background-color: yellow;
+                }
+
+
+            ',
+            // set mPDF properties on the fly
+            'options' => [
+                'title' => '',
+            ],
+            // call mPDF methods on the fly
+            'methods' => [
+            //'SetHeader' => ['รายละเอียดการประเมินปัญหาแรกรับ'],
+            //'SetFooter' => ['{PAGENO}'],
+            ]
+        ]);
+
+        // return the pdf output as per the destination setting
+        return $pdf->render();
     }
 
     /**
@@ -116,6 +194,7 @@ class RiskController extends Controller {
 
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['index']);
             }
         } else {
             $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
@@ -174,6 +253,7 @@ class RiskController extends Controller {
             $model->docs = $this->uploadMultipleFile($model, $tempDocs);
             if ($model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['index']);
             }
         }
 
@@ -372,20 +452,18 @@ class RiskController extends Controller {
     private function removeUploadDir($dir) {
         BaseFileHelper::removeDirectory(Risk::getUploadPath() . $dir);
     }
-    
-    
+
     public function actionMpdfprint() {
-        
+
         $order = \frontend\models\Risk::find()
-                ->where("risk_date between '".$model->start_date." ' and ' ".$model->end_date."'")
+                ->where("risk_date between '" . $model->start_date . " ' and ' " . $model->end_date . "'")
                 ->all();
-        
+
         $pdf = '_report1'; // file name
-        
-        return $this->renderPartial($pdf,[
-            'order' => $order
+
+        return $this->renderPartial($pdf, [
+                    'order' => $order
         ]);
-        
     }
 
 }

@@ -74,6 +74,11 @@ html, body {
     font-size: 17px;
 }
 
+.risk-pdf container {
+    font-family: 'CSPraJad-bold';
+    font-size: 15px;
+}
+
 .risk-index {
     font-family: 'CSPraJad-bold';
     font-size: 15px; 

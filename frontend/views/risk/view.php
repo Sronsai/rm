@@ -1,10 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 //use yii\widgets\DetailView;
 use dosamigos\gallery\Gallery;
 use kartik\detail\DetailView;
 use kartik\export\ExportMenu;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
 
 //use kartik\social\FacebookPlugin;
 
@@ -16,6 +17,20 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'บันทึกความเสี่ยง', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php $id = Yii::$app->request->get('id'); ?>
+
+<div align=right>
+    <?= Html::a('', ['risk/pdf', 'id' => $id], ['class' => 'glyphicon glyphicon-print btn btn-success btn-lg']); ?>
+    <?= Html::a('', ['risk/update', 'id' => $id], ['class' => 'glyphicon glyphicon-pencil btn btn-info btn-lg']); ?>
+    <?= Html::a('', ['risk/delete', 'id' => $id], ['class' => 'glyphicon glyphicon-trash btn btn-danger btn-lg']); ?>
+    <?= '<br /><br />' ?>
+</div>
+
+<!--center>
+    <h2><u>แบบฟอร์มใบรายงานความเสี่ยง รพ.เชียงคาน</u></h2>
+    <small>ใบรายงานความเสี่ยงที่ : <?= $model->id; ?></small>
+</center-->
 
 
 <div class="risk-view">
@@ -36,6 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ?-->
     <!--/p>
 </center-->
+
 
     <?=
     DetailView::widget([

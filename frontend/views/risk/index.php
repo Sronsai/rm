@@ -235,6 +235,7 @@ use kartik\export\ExportMenu;
                         'buttons' => [
                             'view' => function($url, $model, $key) {
                                 return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
+                                //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
                             },
                                     'update' => function($url, $model, $key) {
                                 return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
