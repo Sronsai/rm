@@ -12,6 +12,7 @@ use kartik\grid\BooleanColumn;
 use frontend\models\Risk;
 use yii\bootstrap\Tabs;
 use kartik\export\ExportMenu;
+use dosamigos\datepicker\DatePicker;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\RiskSearch */
@@ -58,7 +59,7 @@ use kartik\export\ExportMenu;
                 //'options' => ['id' => 'CustomerGrid'],
                 ],
                 'panel' => [
-                    'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
+                    //'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
                     //'type' => 'info',
                     'before' => '',
                     'after' => '',
@@ -100,12 +101,28 @@ use kartik\export\ExportMenu;
                     [
                         'attribute' => 'risk_date',
                         'options' => ['width' => '50'],
+                        'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'value' => function($model) {
                     return Yii::$app->formatter->asDate($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                     //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                 }
                     ],
+                    /*     [
+                      'attribute' => 'risk_date',
+                      'options' => ['width' => '100'],
+                      'value' => 'risk_date',
+                      'format' => 'raw',
+                      'filter' => DatePicker::widget([
+                      'model' => $searchModel,
+                      'language' => 'th',
+                      'attribute' => 'risk_date',
+                      'clientOptions' => [
+                      'autoclose' => true,
+                      'format' => 'yyyy-mm-dd'
+                      ]
+                      ]),
+                      ], */
                     //'id',
                     //'person_id',
                     //'risk_date',
@@ -134,6 +151,8 @@ use kartik\export\ExportMenu;
                     [
                         'attribute' => 'location_riks_id',
                         'value' => 'locationRiks.location_name',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(frontend\models\LocationRiks::find()->asArray()->all(), 'id', 'location_name'), [
                             'class' => 'form-control', 'prompt' => ''
                         ]),
@@ -153,6 +172,8 @@ use kartik\export\ExportMenu;
                     [
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
                             'class' => 'form-control', 'prompt' => ''
                         ]),
@@ -173,6 +194,8 @@ use kartik\export\ExportMenu;
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(frontend\models\Type::find()->asArray()->all(), 'id', 'type_name'), [
                             'class' => 'form-control', 'prompt' => ''
                         ]),
@@ -188,12 +211,16 @@ use kartik\export\ExportMenu;
                     [
                         'attribute' => 'type_clinic_id',
                         'value' => 'typeClinic.clinic_name',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Risk::itemsAlias2('type_clinic_id'),
                     ],
                     //'level_id',
                     [
                         'attribute' => 'level_id',
                         'value' => 'level.level_e',
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'level_id', ArrayHelper::map(frontend\models\Level::find()->asArray()->all(), 'id', 'level_e'), [
                             'class' => 'form-control', 'prompt' => ''
                         ]),

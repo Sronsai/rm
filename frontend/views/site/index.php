@@ -187,7 +187,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'หน่วยงานที่เกิดความเสี่ยง (ตั้งแต่ ตุลาคม 2557)'
+                                text: 'หน่วยงานต้นเหตุ (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {
@@ -262,7 +262,7 @@ $time = time();
                         <div id="pie">
                         </div>
                         <?php
-                        $title = "แยกตามประเภทความเสียง (ตั้งแต่ ตุลาคม 2557)";
+                        $title = "ประเภทความเสียง (ตั้งแต่ ตุลาคม 2557)";
                         $type1 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='1'")->queryScalar();
                         $type2 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='2'")->queryScalar();
                         $type3 = Yii::$app->db->createCommand("SELECT count(r.type_id) as total from risk r where r.type_id ='3'")->queryScalar();
@@ -426,7 +426,7 @@ $time = time();
                         <div id="pie-donut">
                         </div>
                         <?php
-                        $title = "การทบทวน (ตั้งแต่ ตุลาคม 2557)";
+                        $title = "ทบทวน (ตั้งแต่ ตุลาคม 2557)";
                         $type11 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='1'")->queryScalar();
                         $type12 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='2'")->queryScalar();
 
@@ -521,7 +521,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'เหตุการณ์เกิดกับ (ตั้งแต่ ตุลาคม 2557)'
+                                text: 'เกิดกับ (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {

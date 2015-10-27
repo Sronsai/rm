@@ -102,10 +102,10 @@ class RiskController extends Controller {
 
     public function actionPdf($id) {
         
-        $time = time();
+        $date = date('Y-m-d');
 
         $content = $this->renderPartial('pdf', [
-            'time' => $time,
+            'date' => $date,
             'model' => $this->findModel($id),
         ]);
 

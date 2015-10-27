@@ -10,6 +10,9 @@ return [
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
         ],
+        /*'thaiFormatter' => [
+            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
+        ],*/
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
