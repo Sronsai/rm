@@ -45,11 +45,11 @@ $time = time();
     ?>
 <?php endforeach; ?>
 
+
 <center>
     <div class="site-index">
         <div class="body-content">
             <div class="row">
-
 
                 <div class="col-lg-3">
                     <div class="info-box">
@@ -187,7 +187,7 @@ $time = time();
                             }
                             },
                             title: {
-                                text: 'หน่วยงานต้นเหตุ (ตั้งแต่ ตุลาคม 2557)'
+                                text: 'หน่วยงานต้นเหตุ 20 อันดับ (ตั้งแต่ ตุลาคม 2557)'
                             },
                             plotOptions: {
                                 pie: {

@@ -48,7 +48,7 @@ class Risk extends ActiveRecord {
         return self::itemsAlias2('type_clinic_id');
     }
 
-    public function getStatusName() {        //ดึงค่า label ออกมาแสดงเป็นข้อความให้เรา
+    public function getStatusName() {        // Virtual Attribute เอาไว้แสดงข้อมูลใน Gridview 
         return ArrayHelper::getValue($this->getItemStatus(), $this->status_id);
     }
 
@@ -64,12 +64,13 @@ class Risk extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'risk_summary', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
+            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report',  'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
             [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id'], 'integer'],
             [['pname', 'risk_summary', 'risk_review'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
             [['ref'], 'string', 'max' => 50],
             [['hn'], 'string', 'max' => 45],
+            [['risk_summary'], 'string', 'max' => 4500],
             [['status_id'], 'string', 'max' => 150],
             [['fname', 'lname'], 'string', 'max' => 100],
             [['docs'], 'file', 'maxFiles' => 5, /* 'skipOnEmpty' => true, 'extensions' => 'rar,pdf,doc,docx,xls,xlsx' */]
@@ -92,7 +93,7 @@ class Risk extends ActiveRecord {
             'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
             'risk_date' => 'วันที่เกิดเหตุ/เวลา',
             'risk_report' => 'วันที่รายงาน/เวลา',
-            'risk_summary' => 'สรุปเหตุการณ์/การแก้ไขเบื้องต้น',
+            'risk_summary' => 'สรุปเหตุการณ์',
             'type_id' => 'ประเภทความเสี่ยง',
             'type_clinic_id' => 'ประเภทคลินิค',
             'sub_type_id' => 'ประเภทความเสี่ยงย่อย',
@@ -101,9 +102,9 @@ class Risk extends ActiveRecord {
             'system_id' => 'สาเหตุเชิงระบบ',
             'status_id' => Yii::t('app', 'การทบทวน'),
             //'status_id' => 'การทบทวน',
-            'risk_review' => 'สรุปการทบทวน',
+            'risk_review' => 'สรุปการทบทวน / แนวทาง',
             'docs' => 'ไฟล์เอกสารที่ทบทวน',
-            //'globalSearch' => 'ค้นหาแบบระเอียด',
+                //'globalSearch' => 'ค้นหาแบบระเอียด',
         ];
     }
 

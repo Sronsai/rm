@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     $form->field($model, 'globalSearch')->textInput(['style' => 'color:red']);
     ?-->
 
-    <?=
+    <!--?=
     $form->field($model, 'globalSearch', [
         'template' => "{input}\n{error}",
         'inputOptions' => [
@@ -30,7 +30,7 @@ use yii\widgets\ActiveForm;
         ]
             ]
     )->textInput(['style' => 'color:red']);
-    ?>
+    ?-->
 
     <!--div class="form-group">
     <!--?= Html::submitButton('Search',['class' => 'btn btn-primary']) ?>

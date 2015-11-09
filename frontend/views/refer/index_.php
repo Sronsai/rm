@@ -8,7 +8,15 @@ use yii\widgets\ActiveForm;
 use frontend\assets\AppAsset;   // ใช้งาน AssetBundle
 use yii\bootstrap\Tabs;
 
+AppAsset::register($this);   // ใช้งาน AssetBundle
+
 ?>
+
+
+
+
+
+
 
 
 <!--br /><br /><br /><br /><br /><br /><br /><br /-->
@@ -739,3 +747,60 @@ use yii\bootstrap\Tabs;
     </center>
 
 </div>
+
+
+
+
+
+
+
+
+<div class="wrapper">
+    <div class="fresh-table full-color-orange full-screen-table">
+    <!--    Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange                  
+            Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+    -->
+        
+        <div class="toolbar">
+            <button id="alertBtn" class="btn btn-default">Alert</button>
+        </div>
+        
+        <table id="fresh-table" class="table">
+            <thead>
+                <th data-field="id">ID</th>
+            	<th data-field="name" data-sortable="true">Name</th>
+            	<th data-field="salary" data-sortable="true">Salary</th>
+            	<th data-field="country" data-sortable="true">Country</th>
+            	<th data-field="city">City</th>
+            	<th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+            </thead>
+            <tbody>
+                <tr>
+                	<td>1</td>
+                	<td>Dakota Rice</td>
+                	<td>$36,738</td>
+                	<td>Niger</td>
+                	<td>Oud-Turnhout</td>
+                	<td></td>
+                </tr>
+                <tr>
+                	<td>2</td>
+                	<td>Minerva Hooper</td>
+                	<td>$23,789</td>
+                	<td>Curaçao</td>
+                	<td>Sinaai-Waas</td>
+                	<td></td>
+                </tr>
+                <tr>
+                	<td>3</td>
+                	<td>Sage Rodriguez</td>
+                	<td>$56,142</td>
+                	<td>Netherlands</td>
+                	<td>Baileux</td>
+                	<td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

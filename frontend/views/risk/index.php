@@ -13,6 +13,9 @@ use frontend\models\Risk;
 use yii\bootstrap\Tabs;
 use kartik\export\ExportMenu;
 use dosamigos\datepicker\DatePicker;
+use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
+
+//use yii\helpers\VarDumper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel frontend\models\RiskSearch */
@@ -23,7 +26,7 @@ use dosamigos\datepicker\DatePicker;
 ?>
 
 <div class="risk-index">
-
+    <!--?= VarDumper::dump($model,10,true); ?-->
     <!--h1><!--?= Html::encode($this->title) ?></h1-->
 
     <!--p>
@@ -35,11 +38,14 @@ use dosamigos\datepicker\DatePicker;
         <div class="panel-heading"><center><H3>จัดการความเสี่ยง</H3></center></div>
         <div class="panel-body">
 
-            <div class="row">
-                <div class="col-md-4">
-                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-                </div>
-            </div>
+                <center>
+                        <!--?php echo $this->render('_search', ['model' => $searchModel]); ?-->               
+                        <?php echo yii\helpers\Html::img('../images/risk_level.jpg'); ?>          
+                </center>
+
+            <p>
+                <!--?= Html::a('Create Referout', ['create'], ['class' => 'btn btn-success']) ?-->
+            </p>
 
             <?php Pjax::begin(); ?>
             <?=
@@ -68,43 +74,69 @@ use dosamigos\datepicker\DatePicker;
                 //'footer' => false
                 ],
                 'rowOptions' => function($model) {     //adding row gridview
+            if ($model->level_id == '1') {
+                return ['style' => 'background-color:#F5F5F0'];
+            }
+            if ($model->level_id == '2') {
+                return ['style' => 'background-color:#F5F5F0'];
+            }
             if ($model->level_id == '3') {
-                return ['class' => 'success'];
+                return ['style' => 'background-color:#C2F0C2'];
             }
             if ($model->level_id == '4') {
-                return ['class' => 'success'];
+                return ['style' => 'background-color:#C2F0C2'];
             }
             if ($model->level_id == '5') {
-                return ['class' => 'warning'];
+                return ['style' => 'background-color:#FFFFCC'];
             }
             if ($model->level_id == '6') {
-                return ['class' => 'warning'];
+                return ['style' => 'background-color:#FFFFCC'];
             }
             if ($model->level_id == '7') {
-                return ['class' => 'danger'];
+                return ['style' => 'background-color:#FFBDA7'];
             }
             if ($model->level_id == '8') {
-                return ['class' => 'danger'];
+                return ['style' => 'background-color:#FFBDA7'];
             }
             if ($model->level_id == '9') {
-                return ['class' => 'danger'];
+                return ['style' => 'background-color:#FFBDA7'];
             }
         },
                 'columns' => [
                     [
                         'header' => 'ลำดับ',
                         'class' => 'yii\grid\SerialColumn',
-                        'options' => ['width' => '5'],
+                        'options' => ['width' => '20'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center']
+                    ],
+                    [
+                        'attribute' => 'id',
+                        'header' => 'เลขที่',
+                        'options' => ['width' => '20'],
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
                     ],
                     [
                         'attribute' => 'risk_date',
                         'options' => ['width' => '50'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
+                        'format' => 'raw',
+                        'value' => 'risk_date',
+                        'filter' => DatePicker::widget([
+                            'model' => $searchModel,
+                            'language' => 'th',
+                            'attribute' => 'risk_date',
+                            'clientOptions' => [
+                                'autoclose' => true,
+                                'format' => 'yyyy-mm-dd'
+                            ]
+                        ]),
                         'value' => function($model) {
-                    return Yii::$app->formatter->asDate($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                    return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                    // Yii::$app->formatter->asDateTime(time(), 'php:F'
+                    // Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
                     //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                 }
                     ],
@@ -123,7 +155,6 @@ use dosamigos\datepicker\DatePicker;
                       ]
                       ]),
                       ], */
-                    //'id',
                     //'person_id',
                     //'risk_date',
                     /* [
@@ -151,6 +182,7 @@ use dosamigos\datepicker\DatePicker;
                     [
                         'attribute' => 'location_riks_id',
                         'value' => 'locationRiks.location_name',
+                        'options' => ['width' => '50'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(frontend\models\LocationRiks::find()->asArray()->all(), 'id', 'location_name'), [
@@ -172,6 +204,7 @@ use dosamigos\datepicker\DatePicker;
                     [
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
+                        'options' => ['width' => '50'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
@@ -194,6 +227,7 @@ use dosamigos\datepicker\DatePicker;
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
+                        'options' => ['width' => '80'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(frontend\models\Type::find()->asArray()->all(), 'id', 'type_name'), [
@@ -208,17 +242,18 @@ use dosamigos\datepicker\DatePicker;
                       'class' => 'form-control', 'prompt' => ''
                       ]),
                       ], */
-                    [
-                        'attribute' => 'type_clinic_id',
-                        'value' => 'typeClinic.clinic_name',
-                        'contentOptions' => ['class' => 'text-center'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'filter' => Risk::itemsAlias2('type_clinic_id'),
-                    ],
+                    /* [
+                      'attribute' => 'type_clinic_id',
+                      'value' => 'typeClinic.clinic_name',
+                      'contentOptions' => ['class' => 'text-center'],
+                      'headerOptions' => ['class' => 'text-center'],
+                      'filter' => Risk::itemsAlias2('type_clinic_id'),
+                      ], */
                     //'level_id',
                     [
                         'attribute' => 'level_id',
                         'value' => 'level.level_e',
+                        'options' => ['width' => '20'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'level_id', ArrayHelper::map(frontend\models\Level::find()->asArray()->all(), 'id', 'level_e'), [
@@ -227,7 +262,8 @@ use dosamigos\datepicker\DatePicker;
                     ],
                     //'clear_id',
                     //'system_id',
-                    [// แสดงข้อมูลออกเป็น icon
+                    // แสดงข้อมูลออกเป็น icon       
+                    [
                         'attribute' => 'status_id',
                         'format' => 'html',
                         'contentOptions' => ['class' => 'text-center'],
@@ -240,6 +276,7 @@ use dosamigos\datepicker\DatePicker;
                     return $model->status_id == 2 ? "<i class=\"fa fa-thumbs-o-up fa-2x\"></i>" : "<i class=\"fa fa-spinner fa-pulse fa-2x\"></i>";
                 }
                     ],
+                    //'StatusName',   //Virtual Attribute เอาไว้แสดงข้อมูลใน Gridview
                     /* [
                       'class' => '\kartik\grid\BooleanColumn',
                       'attribute' => 'status_id',

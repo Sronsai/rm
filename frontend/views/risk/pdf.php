@@ -5,6 +5,7 @@
 //print_r($id);
 use dosamigos\gallery\Gallery;
 
+$time = time();
 ?>
 
 <div class="risk-pdf">
@@ -45,12 +46,12 @@ use dosamigos\gallery\Gallery;
                     <td><?= $model->locationReport->location_name; ?></td>
                 </tr>
                 <tr>
-                    <td>วัน/เวลาที่เกิดเหตุ :</td>
-                    <td><?= $model->risk_date; ?></td>
+                    <td>วันที่เกิดเหตุ/เวลา :</td>
+                    <td><?= Yii::$app->thaiFormatter->asDate($model->risk_date, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_date, 'medium') . ' น.'; ?></td>
                 </tr>
                 <tr>
-                    <td>วัน/เวลาที่รายงาน :</td>
-                    <td><?= $model->risk_date; ?></td>
+                    <td>วันที่รายงาน/เวลา :</td>
+                    <td><?= Yii::$app->thaiFormatter->asDate($model->risk_report, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_report,'medium') . ' น.'; ?></td>
                 </tr>
                 <tr>
                     <td>สรุปเหตุการณ์ :</td>
@@ -105,7 +106,7 @@ use dosamigos\gallery\Gallery;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                วันที่พิมพ์ : <?= $date; ?>
+                วันที่พิมพ์ : <?= Yii::$app->thaiFormatter->asDate($model->risk_date, 'medium'); ?>
             </p> 
         </center>
     </div>

@@ -10,6 +10,7 @@ $this->title = 'Create Referout';
 $this->params['breadcrumbs'][] = ['label' => 'Referouts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="referout-create">
 
     <h1><?= Html::encode($this->title) ?></h1>

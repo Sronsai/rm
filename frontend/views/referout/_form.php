@@ -2,8 +2,9 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Referout */
@@ -22,10 +23,24 @@ use yii\helpers\ArrayHelper;
     <br />
     <center>
         <H4>
-            <?= $form->field($model, 'status_id')->radioList($model->getItemStatus())->label('', ['class' => 'label-class']) ?>
+            <div class="col-md-6 col-md-offset-3">
+                <div class="panel-body">
+                    <?= $form->field($model, 'status_id')->radioList($model->getItemStatus())->label('', ['class' => 'label-class']) ?>
+                </div>
+            </div>
         </H4>
     </center>
     <br />
+    <H4>
+        <div class="col-md-12">
+            <div class="panel-body">
+                <?= $form->field($model, 'refer_status')->textarea(['rows' => 4]) ?>
+            </div>
+        </div>
+    </H4>
+    <br />
+
+
 
 
     <!--?= $form->field($model, 'refer_no')->textInput(['maxlength' => true]) ?>
@@ -207,7 +222,6 @@ use yii\helpers\ArrayHelper;
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'บันทึก' : 'บันทึก', ['class' => ($model->isNewRecord ? 'btn btn-success' : 'btn btn-success') . ' btn-lg btn-block']) ?>
     </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

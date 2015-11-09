@@ -57,6 +57,7 @@ class Referout extends \yii\db\ActiveRecord {
             [['warfarin_note'], 'string', 'max' => 1500],
             [['sync_memo', 'cause_referout_etc'], 'string', 'max' => 2000],
             [['status_id'], 'string', 'max' => 150],
+            [['refer_status'], 'string', 'max' => 255],
         ];
     }
 
@@ -65,7 +66,7 @@ class Referout extends \yii\db\ActiveRecord {
             'refer_no' => 'เลขที่ส่งต่อ',
             'refertype_id' => 'ประเภทการส่งต่อ',
             'refer_date' => 'วันที่ส่งต่อ',
-            'refer_time' => 'Refer Time',
+            'refer_time' => 'เวลา',
             'station_id' => 'Station ID',
             'location_id' => 'Location ID',
             'cid' => 'CID',
@@ -150,7 +151,8 @@ class Referout extends \yii\db\ActiveRecord {
             'level_acute' => 'Level Acute',
             'cause_referout_etc' => 'Cause Referout Etc',
             'is_consult' => 'Is Consult',
-            'status_id' => 'การทบทวน'
+            'status_id' => 'การทบทวน',
+            'refer_status' => 'สรุปการทบทวนเคส Refer / แนวทาง'
         ];
     }
 

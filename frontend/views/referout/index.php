@@ -17,7 +17,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="panel panel-primary">
         <div class="panel-heading"><center><H3>ทบทวนเคส Refer</H3></center></div>
         <div class="panel-body">
-
+            
+                <center>
+                    <?php echo yii\helpers\Html::img('../images/refer.jpg'); ?>
+                </center>
+            
             <?php // echo $this->render('_search', ['model' => $searchModel]);    ?>
 
             <p>
@@ -31,28 +35,45 @@ $this->params['breadcrumbs'][] = $this->title;
                 'responsive' => true,
                 'hover' => true,
                 'floatHeader' => false,
+                'pjax' => true,
+                'pjaxSettings' => [
+                    'neverTimeout' => true,
+                    'enablePushState' => false,
+                //'beforeGrid' => 'My fancy content before.',
+                //'afterGrid' => 'My fancy content after.',
+                //'options' => ['id' => 'CustomerGrid'],
+                ],
+                'panel' => [
+                    //'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
+                    //'type' => 'info',
+                    'before' => '',
+                    'after' => '',
+                //'before' => Html::a('<i class="glyphicon glyphicon-plus"></i> Create Country', ['create'], ['class' => 'btn btn-success']),
+                //'after' => Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                //'footer' => false
+                ],
                 'rowOptions' => function($model) {     //adding row gridview
                     if ($model->strength_id == '05') {
-                        return ['class' => 'default'];
+                        return ['style' => 'background-color:#F5F5F0'];  //เทา
                     }
                     if ($model->strength_id == '04') {
-                        return ['class' => 'success'];
+                        return ['style' => 'background-color:#C2F0C2'];  //เขียว
                     }
                     if ($model->strength_id == '03') {
-                        return ['class' => 'warning'];
+                        return ['style' => 'background-color:#FFFFCC'];  //เหลือง
                     }
                     if ($model->strength_id == '02') {
-                        return ['class' => 'danger'];
+                        return ['style' => 'background-color:#EAD4FF'];  //ม่วง
                     }
                     if ($model->strength_id == '01') {
-                        return ['class' => 'danger'];
+                        return ['style' => 'background-color:#FFBDA7'];  //แดง
                     }
                 },
                         'columns' => [
                             [
                                 'class' => 'yii\grid\SerialColumn',
                                 'header' => 'ลำดับ',
-                                'options' => ['width' => '1'],
+                                'options' => ['width' => '20'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                             ],
@@ -61,33 +82,40 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'refer_date',
                             [
                                 'attribute' => 'refer_date',
-                                'options' => ['width' => '100'],
+                                'options' => ['width' => '50'],
+                                'contentOptions' => ['class' => 'text-center'],
+                                'headerOptions' => ['class' => 'text-center'],
                                 'value' => 'refer_date',
                                 'format' => 'raw',
                                 'filter' => DatePicker::widget([
                                     'model' => $searchModel,
                                     'language' => 'th',
                                     'attribute' => 'refer_date',
-                                        'clientOptions' => [
-                                            'autoclose' => true,
-                                            'format' => 'yyyy-mm-dd'
-                                        ]
+                                    'clientOptions' => [
+                                        'autoclose' => true,
+                                        'format' => 'yyyy-mm-dd'
+                                    ]
                                 ]),
                             ],
-                            /*[
-                                'attribute' => 'refer_date',
-                                'options' => ['width' => '90'],
+                            /* [
+                              'attribute' => 'refer_date',
+                              'options' => ['width' => '90'],
+                              'headerOptions' => ['class' => 'text-center'],
+                              'contentOptions' => ['class' => 'text-center'],
+                              ], */
+                            [
+                                'attribute' => 'refer_time',
+                                'options' => ['width' => '20'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
-                            ],*/
-                            //'refer_time',
+                            ],
                             //'station_id',
                             // 'location_id',
                             // 'cid',
                             //'hn',
                             [
                                 'attribute' => 'hn',
-                                'options' => ['width' => '70'],
+                                'options' => ['width' => '50'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                             ],
@@ -108,7 +136,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'cause_referout_id',
                                 'value' => 'causereferout.cause_referout_name',
-                                'options' => ['width' => '130'],
+                                'options' => ['width' => '100'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'filter' => Html::activeDropDownList($searchModel, 'cause_referout_id', ArrayHelper::map(frontend\models\CauseReferout::find()->asArray()->all(), 'cause_referout_id', 'cause_referout_name'), [
@@ -129,7 +157,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             [
                                 'attribute' => 'strength_id',
                                 'value' => 'strength.strength_name',
-                                'options' => ['width' => '130'],
+                                'options' => ['width' => '100'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'filter' => Html::activeDropDownList($searchModel, 'strength_id', ArrayHelper::map(frontend\models\Strength::find()->asArray()->all(), 'strength_id', 'strength_name'), [
@@ -189,13 +217,13 @@ $this->params['breadcrumbs'][] = $this->title;
                               'hAlign' => 'center',
                               'pageSummary' => true
                               ], */
-                            [
-                                'attribute' => 'is_dead_refer',
-                                'options' => ['width' => '3'],
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => ['class' => 'text-center'],
-                                'filter' => Html::activeDropDownList($searchModel, 'is_dead_refer', ArrayHelper::map(frontend\models\Referout::find()->asArray()->all(), 'is_dead_refer', 'is_dead_refer'), ['class' => 'form-control', 'prompt' => '']),
-                            ],
+                            /* [
+                              'attribute' => 'is_dead_refer',
+                              'options' => ['width' => '3'],
+                              'headerOptions' => ['class' => 'text-center'],
+                              'contentOptions' => ['class' => 'text-center'],
+                              'filter' => Html::activeDropDownList($searchModel, 'is_dead_refer', ArrayHelper::map(frontend\models\Referout::find()->asArray()->all(), 'is_dead_refer', 'is_dead_refer'), ['class' => 'form-control', 'prompt' => '']),
+                              ], */
                             //'is_dead_er',
                             /* [
                               'attribute' => 'is_dead_er',

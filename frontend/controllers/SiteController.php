@@ -66,9 +66,8 @@ class SiteController extends Controller {
 
     public function actionIndex() {
 
-
         $sql = "SELECT r.location_riks_id,l.location_name,count(l.location_name) as total FROM rm.risk r
-                INNER JOIN rm.location_riks l ON l.id = r.location_riks_id GROUP BY r.location_riks_id";
+  INNER JOIN rm.location_riks l ON l.id = r.location_riks_id GROUP BY r.location_riks_id order by total desc limit 20";
 
         $rawData = Yii::$app->db->createCommand($sql)->queryAll();
         $main_data = [];
@@ -141,7 +140,7 @@ class SiteController extends Controller {
                     'main' => $main,
                     'sub' => $sub,
                     'sql_level' => $sql_level,
-                    'main_level' => $main_level
+                    'main_level' => $main_level,
         ]);
     }
 

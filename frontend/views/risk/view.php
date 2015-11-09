@@ -6,6 +6,7 @@ use kartik\detail\DetailView;
 use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
 
 //use kartik\social\FacebookPlugin;
 
@@ -16,9 +17,11 @@ use yii\helpers\ArrayHelper;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'บันทึกความเสี่ยง', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+
 ?>
 
-<?php $id = Yii::$app->request->get('id'); ?>
+<?php $id = Yii::$app->request->get('id'); //Get ID มาแสดง  ?>  
 
 <div align=right>
     <?= Html::a('', ['risk/pdf', 'id' => $id], ['class' => 'glyphicon glyphicon-print btn btn-success btn-lg']); ?>
@@ -55,42 +58,67 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?=
     DetailView::widget([
-        'model' => $model,
+        'model' => $model, //ค่า array ที่จะนำไปแสดงผล รับค่าเป็น array 1 มิติ
         'condensed' => true,
         'hover' => true,
         'mode' => DetailView::MODE_VIEW,
         'panel' => [
-            'heading' => 'ใบความเสี่ยงที่ : ' . $model->id,
+            'heading' => 'ใบรายงานความเสี่ยงเลขที่ : ' . $model->id,
             'type' => DetailView::TYPE_INFO,
         /* 'before' => '',
           'after' => '', */
         ],
         'attributes' => [
             //'id',
+            /* [
+              'format' => 'html',
+              'label' => 'เหตุการณ์เกิดกับ',
+              'value' => '<span style="color:green;">' . $model->person->person_type . '</span>'
+              ], */
             [
                 'attribute' => 'person_id',
-                //'value' => 'locationRiks.person_type',
                 'value' => $model->person->person_type,
             ],
             'hn',
-            'pname',
-            'fname',
-            'lname',
+            [
+                'label' => 'ชื่อ-สกุล',
+                'value' => $model->pname . $model->fname . ' ' . $model->lname,
+            ],
+            /* 'pname',
+              'fname',
+              'lname', */
             [
                 'attribute' => 'location_riks_id',
                 'value' => $model->locationRiks->location_name,
             ],
             [
-                'attribute' => 'location_report_id',
-                'value' => $model->locationReport->location_name,
-            ],
-            [
                 'attribute' => 'location_connection_id',
                 'value' => $model->locationConnection->location_name,
             ],
-            'risk_date',
-            'risk_report',
-            'risk_summary:ntext',
+            [
+                'attribute' => 'location_report_id',
+                'value' => $model->locationReport->location_name,
+            ],
+            //'risk_date',
+            [
+                'attribute' => 'risk_date',
+                //'value' => 'risk_date',
+                'value' => Yii::$app->thaiFormatter->asDate($model->risk_date, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_date, 'medium') . ' น.',
+                
+            ],
+            //'risk_report',
+            [
+                'attribute' => 'risk_report',
+                //'value' => 'risk_date',
+                'value' => Yii::$app->thaiFormatter->asDate($model->risk_report, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_report,'medium') . ' น.',
+                
+            ],
+            //'risk_summary:ntext',
+            [
+                'format' => 'html',
+                'label' => 'สรุปเหตุการณ์',
+                'value' => '<span style="color:red;">' . $model->risk_summary . '</span>'
+            ],
             [
                 'attribute' => 'type_id',
                 'value' => $model->type->type_name,
@@ -119,8 +147,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'status_id',
                 'value' => $model->status->status_name,
             ],
+            /* [
+              'attribute' => 'risk_review',
+              ], */
             [
-                'attribute' => 'risk_review',
+                'format' => 'html',
+                'label' => 'สรุปการทบทวน',
+                'value' => '<span style="color:green;">' . $model->risk_review . '</span>'
             ],
             [
                 'attribute' => 'docs',

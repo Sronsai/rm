@@ -2,9 +2,9 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+//use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-//use yii\bootstrap\ActiveForm;
+use yii\bootstrap\ActiveForm;
 use frontend\models\Type;
 use frontend\models\SubType;
 use frontend\models\TypeClinic;
@@ -12,6 +12,7 @@ use yii\bootstrap\Tabs;
 use yii\web\JsExpression;
 use kartik\widgets\DateTimePicker;
 use kartik\widgets\FileInput;
+use kartik\checkbox\CheckboxX;
 
 /* @var $this yii\web\View */
 /* @var $model frontend\models\Risk */
@@ -166,6 +167,7 @@ use kartik\widgets\FileInput;
                                                 $form->field($model, 'location_report_id')->dropDownList(
                                                         ArrayHelper::map(\frontend\models\LocationReport::find()->all(), 'id', 'location_name'), ['prompt' => ''])
                                                 ?>
+                                                <br />
                                             </div>
                                         </div>
                                     </div>
@@ -203,6 +205,7 @@ use kartik\widgets\FileInput;
                                                         //'style' => 'width:250px;'
                                                 ])
                                                 ?>
+                                                <br />
                                             </div>
                                         </div>
                                     </div>
@@ -247,7 +250,10 @@ use kartik\widgets\FileInput;
                                                 ArrayHelper::map(\frontend\models\Status::find()->all(), 'id', 'status_name'), ['prompt' => ''])
                                         ?-->
 
-                                        <?= $form->field($model, 'status_id')->radioList($model->getItemStatus())->label('การทบทวน', ['class' => 'label-class']) ?>
+                                        <?php //$model->status_id = '1';  ?>                                      
+                                        <?=
+                                        $form->field($model, 'status_id')->radioList($model->getItemStatus());
+                                        ?>
                                     </div> 
 
 
@@ -280,7 +286,7 @@ use kartik\widgets\FileInput;
                                             ?>
 
                                             <div class="form-group field-upload_files">
-                                                <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่ายที่ทบทวน </label>
+                                                <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่าย </label>
                                                 <div>
                                                     <?=
                                                     FileInput::widget([

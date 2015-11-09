@@ -4,15 +4,21 @@ return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'th_TH',
     'components' => [
+        /* 'formatter' => [
+          'dateFormat' => 'dd.MM.yyyy',
+          'decimalSeparator' => ',',
+          'thousandSeparator' => ' ',
+          'currencyCode' => 'EUR',
+          ], */
+        'thaiFormatter' => [
+            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
+        ],
         'formatter' => [
             'dateFormat' => 'dd.MM.yyyy',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
             'currencyCode' => 'EUR',
         ],
-        /*'thaiFormatter' => [
-            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
-        ],*/
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

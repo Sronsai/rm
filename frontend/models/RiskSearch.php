@@ -16,12 +16,12 @@ class RiskSearch extends Risk {
     /**
      * @inheritdoc
      */
-    public $globalSearch;
+    //public $globalSearch;
 
     public function rules() {
         return [
-            [['id', 'person_id', 'clear_id', 'system_id',], 'integer'],
-            [['hn', 'globalSearch', 'location_riks_id', 'location_connection_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review', 'type_clinic_id'], 'safe'],
+            [['id', 'person_id', 'clear_id', 'system_id'], 'integer'],
+            [['hn', /* 'globalSearch', */ 'location_riks_id', 'location_connection_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'pname', 'fname', 'lname', 'risk_date', 'risk_report', 'risk_summary', 'risk_review', 'type_clinic_id'], 'safe'],
         ];
     }
 
@@ -85,7 +85,6 @@ class RiskSearch extends Risk {
             'location_report_id' => $this->location_report_id,
             'location_connection_id' => $this->location_connection_id,
             'risk_date' => $this->risk_date,
-            'risk_summary' => $this->risk_summary,
             'risk_report' => $this->risk_report,
             'type_id' => $this->type_id,
             'type_clinic_id' => $this->type_clinic_id,
@@ -95,6 +94,8 @@ class RiskSearch extends Risk {
             'system_id' => $this->system_id,
             'status_id' => $this->status_id,
         ]);
+
+
 
         /* $query->orFilterWhere(['like', 'hn', $this->globalSearch])
           ->orFilterWhere(['like', 'pname', $this->globalSearch])
@@ -113,18 +114,18 @@ class RiskSearch extends Risk {
 
 
         // search แบบกรอกข้อมความในช่อง
-        $query->orFilterWhere(['like', 'risk_summary', $this->globalSearch]);
-        //->andFilterWhere(['like', 'pname', $this->pname])
-        //->andFilterWhere(['like', 'fname', $this->fname])
-        //->andFilterWhere(['like', 'lname', $this->lname])
-        //->andFilterWhere(['like', 'location_riks.location_name', $this->location_riks_id])
-        //->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
-        //->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
-        //->andFilterWhere(['like', 'type.type_name', $this->type_id])
-        //->andFilterWhere(['like', 'typeClinic.clinic_name', $this->type_clinic_id])
-        //->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])
-        //->andFilterWhere(['like', 'level.level_name', $this->level_id])
-        //->andFilterWhere(['like', 'status.status_name', $this->status_id])
+        $query->andFilterWhere(['like', 'risk_summary', $this->risk_summary])
+                ->andFilterWhere(['like', 'pname', $this->pname])
+                ->andFilterWhere(['like', 'fname', $this->fname])
+                ->andFilterWhere(['like', 'lname', $this->lname])
+                ->andFilterWhere(['like', 'location_riks.location_name', $this->location_riks_id])
+                ->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
+                ->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
+                ->andFilterWhere(['like', 'type.type_name', $this->type_id])
+                ->andFilterWhere(['like', 'typeClinic.clinic_name', $this->type_clinic_id])
+                ->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])
+                ->andFilterWhere(['like', 'level.level_name', $this->level_id])
+                ->andFilterWhere(['like', 'status.status_name', $this->status_id]);
         //$query->andFilterWhere(['like','risk_summary',$this->risk_summary]);
 
 

@@ -74,9 +74,9 @@ class RiskController extends Controller {
     public function actionIndex() {
         $model = new Risk();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model = new Risk(); //reset model
-        }
+        /* if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          $model = new Risk(); //reset model
+          } */
 
         $searchModel = new RiskSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -84,7 +84,7 @@ class RiskController extends Controller {
         return $this->render('index', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
-                    'model' => $model
+                    'model' => $model,
         ]);
     }
 
@@ -101,12 +101,13 @@ class RiskController extends Controller {
     }
 
     public function actionPdf($id) {
-        
+
+        $model = $this->findModel($id);
         $date = date('Y-m-d');
 
         $content = $this->renderPartial('pdf', [
             'date' => $date,
-            'model' => $this->findModel($id),
+            'model' => $model
         ]);
 
         // setup kartik\mpdf\Pdf component
@@ -182,7 +183,8 @@ class RiskController extends Controller {
      * @return mixed
      */
     public function actionCreate() {
-        $model = new Risk();
+        //$model = new Risk();
+        $model = new Risk(['status_id' => 1]);
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -451,19 +453,6 @@ class RiskController extends Controller {
 
     private function removeUploadDir($dir) {
         BaseFileHelper::removeDirectory(Risk::getUploadPath() . $dir);
-    }
-
-    public function actionMpdfprint() {
-
-        $order = \frontend\models\Risk::find()
-                ->where("risk_date between '" . $model->start_date . " ' and ' " . $model->end_date . "'")
-                ->all();
-
-        $pdf = '_report1'; // file name
-
-        return $this->renderPartial($pdf, [
-                    'order' => $order
-        ]);
     }
 
 }
