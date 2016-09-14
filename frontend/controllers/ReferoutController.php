@@ -8,14 +8,16 @@ use frontend\models\ReferoutSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use common\components\AccessRule;
+use common\models\User;
 
 /**
  * ReferoutController implements the CRUD actions for Referout model.
  */
 class ReferoutController extends Controller
 {
-    public function behaviors()
-    {
+     public function behaviors() {
         return [
             'verbs' => [
                 'class' => VerbFilter::className(),
@@ -23,6 +25,37 @@ class ReferoutController extends Controller
                     'delete' => ['post'],
                 ],
             ],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'create', 'update', 'view', 'delete'],
+                'ruleConfig' => [
+                    'class' => AccessRule::className()
+                ],
+                'rules' => [
+                    [
+                        'actions' => ['index', 'create', 'view'],
+                        'allow' => true,
+                        'roles' => [
+                            User::ROLE_USER,
+                            User::ROLE_MODERATOR,
+                            User::ROLE_ADMIN
+                        ]
+                    ],
+                    [
+                        'actions' => ['update'],
+                        'allow' => true,
+                        'roles' => [
+                            User::ROLE_MODERATOR,
+                            User::ROLE_ADMIN
+                        ]
+                    ],
+                    [
+                        'actions' => ['delete'],
+                        'allow' => true,
+                        'roles' => [User::ROLE_ADMIN]
+                    ]
+                ]
+            ]
         ];
     }
 

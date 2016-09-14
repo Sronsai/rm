@@ -7,7 +7,6 @@ use yii\helpers\BaseHtml;
 use yii\widgets\ActiveForm;
 use frontend\assets\AppAsset;   // ใช้งาน AssetBundle
 use yii\bootstrap\Tabs;
-
 ?>
 
 
@@ -25,440 +24,458 @@ use yii\bootstrap\Tabs;
 
             <div class="row">
                 <div class="panel-body">
-                    <div class="col-xs-12 col-md-3">        
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="success">
-                                    <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "ER" . '</b>' ?> :</td>
-                                    <td class="success">
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2'");
-                                        $target = $command->queryScalar();
+                    <div class="col-xs-12 col-md-3">    
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="success">
+                                            <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "ER" . '</b>' ?></td>
+                                            <td class="success">
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2'");
+                                                $target = $command->queryScalar();
 
-                                        echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND typept_id = '1'");
-                                        $target = $command->queryScalar();
+                                                echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND typept_id = '1'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Non Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND typept_id = '2'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Non Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND typept_id = '2'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="danger">
-                                    <td>Resuscitation :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '01'");
-                                        $target = $command->queryScalar();
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="danger">
+                                            <td>Resuscitation :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '01'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Emergency :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '02'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Emergency :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '02'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '03'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '03'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="info">
-                                    <td>Semi-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '04'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>Semi-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '04'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>   
-                                <tr class="active">
-                                    <td>Non-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '05'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>   
+                                        <tr class="active">
+                                            <td>Non-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '2' AND strength_id = '05'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr> 
-                            </tbody>
-                        </table>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
 
+
+
                     <div class="col-xs-12 col-md-3">
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="success">
-                                    <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "OPD" . '</b>' ?> :</td>
-                                    <td class="success">
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1'");
-                                        $target = $command->queryScalar();
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="success">
+                                            <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "OPD" . '</b>' ?></td>
+                                            <td class="success">
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1'");
+                                                $target = $command->queryScalar();
 
-                                        echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND typept_id = '1'");
-                                        $target = $command->queryScalar();
+                                                echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND typept_id = '1'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Non Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND typept_id = '2'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Non Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND typept_id = '2'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="danger">
-                                    <td>Resuscitation :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '01'");
-                                        $target = $command->queryScalar();
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="danger">
+                                            <td>Resuscitation :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '01'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Emergency :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '02'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Emergency :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '02'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '03'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '03'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="info">
-                                    <td>Semi-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '04'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>Semi-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '04'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>   
-                                <tr class="active">
-                                    <td>Non-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '05'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>   
+                                        <tr class="active">
+                                            <td>Non-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '1' AND strength_id = '05'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr> 
-                            </tbody>
-                        </table>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
 
 
                     <div class="col-xs-12 col-md-3">    
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="success">
-                                    <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "IPD" . '</b>' ?> :</td>
-                                    <td class="success">
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3'");
-                                        $target = $command->queryScalar();
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="success">
+                                            <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "IPD" . '</b>' ?></td>
+                                            <td class="success">
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3'");
+                                                $target = $command->queryScalar();
 
-                                        echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND typept_id = '1'");
-                                        $target = $command->queryScalar();
+                                                echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND typept_id = '1'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Non Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND typept_id = '2'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Non Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND typept_id = '2'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="danger">
-                                    <td>Resuscitation :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '01'");
-                                        $target = $command->queryScalar();
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="danger">
+                                            <td>Resuscitation :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '01'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Emergency :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '02'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Emergency :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '02'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '03'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '03'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="info">
-                                    <td>Semi-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '04'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>Semi-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '04'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>   
-                                <tr class="active">
-                                    <td>Non-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '05'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>   
+                                        <tr class="active">
+                                            <td>Non-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '3' AND strength_id = '05'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr> 
-                            </tbody>
-                        </table>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr> 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
 
                     <div class="col-xs-12 col-md-3">     
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="success">
-                                    <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "LR" . '</b>' ?> :</td>
-                                    <td class="success">
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4'");
-                                        $target = $command->queryScalar();
+                        <div class="panel panel-danger">
+                            <div class="panel-body">
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="success">
+                                            <td> <?= '<b>' . "จำนวนเคสที่ " . '&nbsp' . "LR" . '</b>' ?></td>
+                                            <td class="success">
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4'");
+                                                $target = $command->queryScalar();
 
-                                        echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
-                                        ?>
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND typept_id = '1'");
-                                        $target = $command->queryScalar();
+                                                echo '<b>' . $target . '&nbsp' . "ครั้ง" . '</b>';
+                                                ?>
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND typept_id = '1'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>Non Trauma :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND typept_id = '2'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="danger">
+                                            <td>Non Trauma :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND typept_id = '2'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
 
-                            </tbody>
-                        </table>
+                                    </tbody>
+                                </table>
 
-                        <table class="table table-bordered">
-                            <tbody>
-                                <tr class="danger">
-                                    <td>Resuscitation :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '01'");
-                                        $target = $command->queryScalar();
+                                <table class="table table-bordered">
+                                    <tbody>
+                                        <tr class="danger">
+                                            <td>Resuscitation :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '01'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Emergency :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '02'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Emergency :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '02'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>Urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '03'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="warning">
+                                            <td>Urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '03'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>
-                                <tr class="info">
-                                    <td>Semi-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '04'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>
+                                        <tr class="info">
+                                            <td>Semi-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '04'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>   
-                                <tr class="active">
-                                    <td>Non-urgency  :</td>
-                                    <td>
-                                        <?php
-                                        $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '05'");
-                                        $target = $command->queryScalar();
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>   
+                                        <tr class="active">
+                                            <td>Non-urgency  :</td>
+                                            <td>
+                                                <?php
+                                                $command = Yii::$app->db_refer->createCommand("SELECT COUNT(station_id) FROM referout WHERE station_id = '4' AND strength_id = '05'");
+                                                $target = $command->queryScalar();
 
-                                        echo $target;
-                                        ?>
-                                        ราย
-                                    </td>
-                                </tr>  
-                            </tbody>
-                        </table>
+                                                echo $target;
+                                                ?>
+                                                ราย
+                                            </td>
+                                        </tr>  
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
                 </div> <!-- body -->

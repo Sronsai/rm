@@ -255,8 +255,8 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 </div>
                 <?php
                 $title = "การทบทวน ตั้งแต่ ต.ค 57";
-                $type11 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='1' and type_id = '3'")->queryScalar();
-                $type12 = Yii::$app->db->createCommand("SELECT count(r.status_id) as total from risk r where r.status_id ='2' and type_id = '3'")->queryScalar();
+                $type11 = Yii::$app->db->createCommand("SELECT count(rd.status_id) as total from risk_med rd where rd.status_id ='1'")->queryScalar();
+                $type12 = Yii::$app->db->createCommand("SELECT count(rd.status_id) as total from risk_med rd where rd.status_id ='2'")->queryScalar();
 
                 $this->registerJs("$(function () {
                     $('#pie-donut').highcharts({

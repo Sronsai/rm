@@ -10,6 +10,23 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+            'mailer' => [
+                   'class' => 'yii\swiftmailer\Mailer',
+                        'viewPath' => '@frontend/mail',
+                        'useFileTransport' => false,
+                        'transport' => [
+                            'class' => 'Swift_SmtpTransport',
+                            'host' => 'smtp.gmail.com',
+                            'username' => 'username@gmail.com',
+                            'password' => 'password',
+                            'port' => '587',
+                            'encryption' => 'tls',
+                        ],
+                    ],
+        'formatter' => [   //กรณีไม่ให้แสดงผล (ไม่ได้ตั้ง) ในฐานข้อมูล
+                'class' => 'yii\i18n\Formatter',
+                'nullDisplay' => '',
+        ],
         'view' => [
             'theme' => [
                 'pathMap' => [

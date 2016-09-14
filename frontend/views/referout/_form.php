@@ -34,11 +34,19 @@ use yii\bootstrap\ActiveForm;
     <H4>
         <div class="col-md-12">
             <div class="panel-body">
-                <?= $form->field($model, 'refer_status')->textarea(['rows' => 4]) ?>
+                <?= $form->field($model, 'refer_status')->textArea(['rows' => 6]) ?>
             </div>
         </div>
     </H4>
     <br />
+    <H4>
+        <div class="col-md-12">
+            <div class="panel-body">
+                <?= $form->field($model, 'join_refer_status')->textarea(['rows' => 2]) ?>
+            </div>
+        </div>
+    </H4>
+
 
 
 

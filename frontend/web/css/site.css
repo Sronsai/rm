@@ -1,21 +1,11 @@
 
 @font-face {
-    font-family: 'THSarabunNew Bold';
-    src: url('../fonts/THSarabunNew Bold.ttf');   /* IE9  */
-    src: url('../fonts/THSarabunNew Bold.ttf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/THSarabunNew Bold.ttf') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/THSarabunNew Bold.ttf') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/THSarabunNew Bold.ttf') format('truetype');     /* IE6 safare chome firfox */
-    font-weight: bold;
-}
-
-@font-face {
     font-family: 'ThaiSansNeue-SemiBold';
     src: url('../fonts/ThaiSansNeue-SemiBold.otf');   /* IE9  */
     src: url('../fonts/ThaiSansNeue-SemiBold.otf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/ThaiSansNeue-SemiBold.otf') format('truetype');     /* IE6 safare chome firfox */
+    url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff2'),   /* IE6 safare chome firfox */
+    url('../fonts/ThaiSansNeue-SemiBold.otf') format('woff'),   /* IE6 safare chome firfox */
+    url('../fonts/ThaiSansNeue-SemiBold.otf') format('truetype');     /* IE6 safare chome firfox */
     font-weight: bold;
 }
 
@@ -23,9 +13,9 @@
     font-family: 'CSPraJad-bold';
     src: url('../fonts/CSPraJad-bold.otf');   /* IE9  */
     src: url('../fonts/CSPraJad-bold.otf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/CSPraJad-bold.otf') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/CSPraJad-bold.otf') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/CSPraJad-bold.otf') format('truetype');     /* IE6 safare chome firfox */
+    url('../fonts/CSPraJad-bold.otf') format('woff2'),   /* IE6 safare chome firfox */
+    url('../fonts/CSPraJad-bold.otf') format('woff'),   /* IE6 safare chome firfox */
+    url('../fonts/CSPraJad-bold.otf') format('truetype');     /* IE6 safare chome firfox */
     font-weight: bold;
 }
 
@@ -33,9 +23,9 @@
     font-family: 'CircularBold';
     src: url('../fonts/CircularBold.ttf');   /* IE9  */
     src: url('../fonts/CircularBold.ttf?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/CircularBold.ttf') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/CircularBold.ttf') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/CircularBold.ttf') format('truetype');     /* IE6 safare chome firfox */
+    url('../fonts/CircularBold.ttf') format('woff2'),   /* IE6 safare chome firfox */
+    url('../fonts/CircularBold.ttf') format('woff'),   /* IE6 safare chome firfox */
+    url('../fonts/CircularBold.ttf') format('truetype');     /* IE6 safare chome firfox */
     font-weight: bold;
 }
 
@@ -43,9 +33,9 @@
     font-family: 'thsarabunnew-webfont';
     src: url('../fonts/thsarabunnew-webfont.woff');   /* IE9  */
     src: url('../fonts/thsarabunnew-webfont.woff?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
     font-weight: bold;
 }
 
@@ -53,9 +43,9 @@
     font-family: 'thsarabunnew_bold-webfont';
     src: url('../fonts/thsarabunnew_bold-webfont.woff');   /* IE9  */
     src: url('../fonts/thsarabunnew_bold-webfont.woff?#iefix') format('embedded-opentype'),  /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew_bold-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
-        url('../fonts/thsarabunnew_bold-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew_bold-webfont.woff') format('woff2'),   /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew_bold-webfont.woff') format('woff'),   /* IE6 safare chome firfox */
+    url('../fonts/thsarabunnew_bold-webfont.woff') format('truetype');     /* IE6 safare chome firfox */
     font-weight: bold;
 }
 
@@ -64,6 +54,47 @@ html, body {
     height: 100%;
 }
 
+.main-header span {
+   font-family: 'CSPraJad-bold';
+   font-size: 19px;
+   color: #ffffff;
+}
+
+.navbar-custom-menu {
+   font-family: 'CSPraJad-bold';
+}
+
+.sidebar-menu .treeview  a {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+    color: #ffffff;
+}
+
+
+.sidebar-menu {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+
+.sidebar-menu u {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+    color: #ffffff;
+}
+
+
+.risk-form h3 {
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+.risk-med-form h3 {
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+
+
+
+
 .info-box-text {
     font-family: 'CSPraJad-bold';
     size: 30px;
@@ -71,7 +102,7 @@ html, body {
 
 .info-box-content span {
     font-family: 'CSPraJad-bold';
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .risk-pdf container {
@@ -79,40 +110,180 @@ html, body {
     font-size: 15px;
 }
 
+
+
+.risk-index h3{
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+.risk-med-index h3{
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+
+.referout-index h3{
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+.referout-index {
+    font-family: 'CSPraJad-bold';
+    font-size: 14px;
+}
+
+
+
+
 .risk-index {
     font-family: 'CSPraJad-bold';
-    font-size: 15px; 
+    font-size: 14px;
 }
+.risk-med-index{
+    font-family: 'CSPraJad-bold';
+    font-size: 14px;
+}
+
+
+
+.safe h1 {
+    font-family: 'CSPraJad-bold';
+    font-size: 38px;
+}
+
+
+.risk-med-index .fa-thumbs-o-up {
+    color: Green;
+}
+.risk-index .fa-thumbs-o-up {
+    color: Green;
+}
+.referout-index .fa-thumbs-o-up {
+    color: Green;
+}
+
+
+
+.risk-med-index .fa-spinner {
+    color: Green;
+}
+.risk-index .fa-spinner {
+    color: Green;
+}
+.risk-view .fa-spinner {
+    color: Green;
+}
+.risk-med-view .fa-spinner {
+    color: Green;
+}
+.referout-index .fa-spinner {
+    color: Green;
+}
+
+
+
 .risk-form {
     font-family: 'CSPraJad-bold';
-    font-size: 17px;
+    font-size: 16px;
 }
+.risk-med-form {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+
+
+.risk-form .fa-thumbs-o-up {
+    color: Green;
+}
+.risk-med-form .fa-thumbs-o-up {
+    color: Green;
+}
+.risk-view .fa-thumbs-o-up {
+    color: Green;
+}
+.risk-med-view .fa-thumbs-o-up {
+    color: Green;
+}
+
+
+
+
+.risk-form .fa-spinner {
+    color: Green;
+}
+.risk-med-form .fa-spinner {
+    color: Green;
+}
+
+
+
+
 .risk-update {
     font-family: 'CSPraJad-bold';
-    font-size: 17px;
+    font-size: 16px;
 }
+
+
+
 .risk-view {
     font-family: 'CSPraJad-bold';
-    font-size: 17px;
+    font-size: 16px;
 }
+.risk-med-view {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+
+
+.risk-view h3 {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+.risk-med-view h3 {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+
+
 .risk-create {
     font-family: 'CSPraJad-bold';
     font-size: 17px;
 }
 
 
+.event-index {
+    font-family: 'CSPraJad-bold';
+    font-size: 17px;
+}
+
+
 .report{
-    font-family: 'thsarabunnew_bold-webfont';
+    font-family: 'CSPraJad-bold';
     font-size: 13px;
 }
 .report > header {
-    font-family: 'thsarabunnew_bold-webfont';
+    font-family: 'CSPraJad-bold';
     font-size: 10px;
 }
 .report h1 {
-    font-family: 'thsarabunnew_bold-webfont';
+    font-family: 'CSPraJad-bold';
     font-size: 40px;
 }
+
+.indications-index {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+}
+
+.indications-index H2 {
+    font-family: 'CSPraJad-bold';
+    font-size: 22px;
+}
+
+.indications-index H3 {
+    font-family: 'CSPraJad-bold';
+    font-size: 16px;
+    color: red;
+}
+
 
 /* FLIP CARD */
 .flip {
@@ -166,7 +337,7 @@ html, body {
     cursor: pointer;
 }
 .flip .card .back {
-    cursor: pointer; 
+    cursor: pointer;
     transform:rotatey(-180deg);
     -ms-transform:rotatey(-180deg); /* IE 9 */
     -moz-transform:rotatey(-180deg); /* Firefox */
@@ -210,117 +381,113 @@ html, body {
     width: 80px;
     height: 100px;
     //border: solid 2px red;
-}*/
+    }*/
 
-#div6 {
-    float: left;
-    width: 175px;
-    height: 100px;
-    //border: solid 2px red;
-}
+    #div6 {
+        float: left;
+        width: 175px;
+        height: 100px;
+        //border: solid 2px red;
+    }
 
-#global1 {
-    float: left;
-    width: 270px;
-    height: 50px;
-    //border: solid 2px red;
-}
+    #global1 {
+        float: left;
+        width: 270px;
+        height: 50px;
+        //border: solid 2px red;
+    }
 
-#global2 {
-    top: 100px;
-    float: right;
-    width: 100px;
-    height: 50px;
-    //border: solid 2px red;
-}
+    #global2 {
+        top: 100px;
+        float: right;
+        width: 100px;
+        height: 50px;
+        //border: solid 2px red;
+    }
 
-.wrap {
-    min-height: 100%;
-    height: auto;
-    margin: 0 auto -60px;
-    padding: 0 0 60px;
-}
+    .wrap {
+        min-height: 100%;
+        height: auto;
+        margin: 0 auto -60px;
+        padding: 0 0 60px;
+    }
 
-.wrap > .container {
-    padding: 70px 15px 20px;
-}
+    .wrap > .container {
+        padding: 70px 15px 20px;
+    }
 
-.footer {
-    height: 60px;
-    background-color: #f5f5f5;
-    border-top: 1px solid #ddd;
-    padding-top: 20px;
-}
+    .footer {
+        height: 60px;
+        background-color: #f5f5f5;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
 
-.jumbotron {
-    text-align: center;
-    background-color: transparent;
-}
+    .jumbotron {
+        text-align: center;
+        background-color: transparent;
+    }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
+    .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+    }
 
-.not-set {
-    color: #c55;
-    font-style: italic;
-}
+    .not-set {
+        color: #c55;
+        font-style: italic;
+    }
 
-/* add sorting icons to gridview sort links */
-a.asc:after, a.desc:after {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    font-family: 'Glyphicons Halflings';
-    font-style: normal;
-    font-weight: normal;
-    line-height: 1;
-    padding-left: 5px;
-}
+    /* add sorting icons to gridview sort links */
+    a.asc:after, a.desc:after {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        font-family: 'Glyphicons Halflings';
+        font-style: normal;
+        font-weight: normal;
+        line-height: 1;
+        padding-left: 5px;
+    }
 
-a.asc:after {
-    content: /*"\e113"*/ "\e151";
-}
+    a.asc:after {
+        content: /*"\e113"*/ "\e151";
+    }
 
-a.desc:after {
-    content: /*"\e114"*/ "\e152";
-}
+    a.desc:after {
+        content: /*"\e114"*/ "\e152";
+    }
 
-.sort-numerical a.asc:after {
-    content: "\e153";
-}
+    .sort-numerical a.asc:after {
+        content: "\e153";
+    }
 
-.sort-numerical a.desc:after {
-    content: "\e154";
-}
+    .sort-numerical a.desc:after {
+        content: "\e154";
+    }
 
-.sort-ordinal a.asc:after {
-    content: "\e155";
-}
+    .sort-ordinal a.asc:after {
+        content: "\e155";
+    }
 
-.sort-ordinal a.desc:after {
-    content: "\e156";
-}
+    .sort-ordinal a.desc:after {
+        content: "\e156";
+    }
 
-.grid-view th {
-    white-space: nowrap;
-}
+    .grid-view th {
+        white-space: nowrap;
+    }
 
-.hint-block {
-    display: block;
-    margin-top: 5px;
-    color: #999;
-}
+    .hint-block {
+        display: block;
+        margin-top: 5px;
+        color: #999;
+    }
 
-.error-summary {
-    color: #a94442;
-    background: #fdf7f7;
-    border-left: 3px solid #eed3d7;
-    padding: 10px 20px;
-    margin: 0 0 15px 0;
-}
-
-
-
-
+    .error-summary {
+        color: #a94442;
+        background: #fdf7f7;
+        border-left: 3px solid #eed3d7;
+        padding: 10px 20px;
+        margin: 0 0 15px 0;
+    }

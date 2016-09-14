@@ -17,7 +17,7 @@ class ReferoutSearch extends Referout {
      */
     public function rules() {
         return [
-            [['refer_no', 'status_id', 'refertype_id', 'refer_date', 'refer_time', 'station_id', 'location_id', 'cid', 'hn', 'pname', 'fname', 'lname', 'age', 'addrpart', 'moopart', 'tmbpart', 'amppart', 'chwpart', 'pttype_id', 'pttypeno', 'hospmain', 'hospsub', 'typept_id', 'strength_id', 'doctor_id', 'refer_hospcode', 'cause_referout_id', 'expire_date', 'loads_id', 'is_coordinate_doctor', 'is_coordinate_nurse', 'coordinate_id', 'image1', 'image2', 'image3', 'image4', 'image5', 'sex', 'is_coordinate_not', 'is_coordinate_no', 'is_dead_refer', 'is_dead_er', 'is_dead_ward', 'memo', 'memodiag', 'drugallergy', 'doctor_name', 'cc', 'user_save', 'vn', 'conscious', 'e', 'v', 'm', 'evm_total', 'pupil_right', 'pupil_left', 't', 'p', 'r', 'bp', 'Send_spclty_id', 'load_time', 'spo2', 'clinicgroup', 'clinicsub', 'load_date', 'vst_date', 'station_name', 'father', 'mother', 'location_name', 'pttype_name', 'forward_flag', 'from_hospcode', 'save_date', 'save_time', 'warfarin_note', 'app_date', 'ett_no', 'ett_mark', 'sync_memo', 'refer_no_his', 'level_acute', 'cause_referout_etc', 'is_consult'], 'safe'],
+            [['refer_no', 'status_id', 'refertype_id', 'refer_date', 'refer_time', 'station_id', 'location_id', 'cid', 'hn', 'pname', 'fname', 'lname', 'age', 'addrpart', 'moopart', 'tmbpart', 'amppart', 'chwpart', 'pttype_id', 'pttypeno', 'hospmain', 'hospsub', 'typept_id', 'strength_id', 'doctor_id', 'refer_hospcode', 'cause_referout_id', 'expire_date', 'loads_id', 'is_coordinate_doctor', 'is_coordinate_nurse', 'coordinate_id', 'image1', 'image2', 'image3', 'image4', 'image5', 'sex', 'is_coordinate_not', 'is_coordinate_no', 'is_dead_refer', 'is_dead_er', 'is_dead_ward', 'memo', 'memodiag', 'drugallergy', 'doctor_name', 'cc', 'refer_status','user_save', 'vn', 'conscious', 'e', 'v', 'm', 'evm_total', 'pupil_right', 'pupil_left', 't', 'p', 'r', 'bp', 'Send_spclty_id', 'load_time', 'spo2', 'clinicgroup', 'clinicsub', 'load_date', 'vst_date', 'station_name', 'father', 'mother', 'location_name', 'pttype_name', 'forward_flag', 'from_hospcode', 'save_date', 'save_time', 'warfarin_note', 'app_date', 'ett_no', 'ett_mark', 'sync_memo', 'refer_no_his', 'level_acute', 'cause_referout_etc', 'is_consult'], 'safe'],
             [['is_upload', 'is_download', 'is_receive'], 'integer'],
         ];
     }
@@ -64,6 +64,7 @@ class ReferoutSearch extends Referout {
             'save_date' => $this->save_date,
             'app_date' => $this->app_date,
             'status_id' => $this->status_id,
+            //'refer_status' => $this->refer_status,
         ]);
 
         $query->andFilterWhere(['like', 'refer_no', $this->refer_no])
@@ -144,7 +145,8 @@ class ReferoutSearch extends Referout {
                 ->andFilterWhere(['like', 'refer_no_his', $this->refer_no_his])
                 ->andFilterWhere(['like', 'level_acute', $this->level_acute])
                 ->andFilterWhere(['like', 'cause_referout_etc', $this->cause_referout_etc])
-                ->andFilterWhere(['like', 'is_consult', $this->is_consult]);
+                ->andFilterWhere(['like', 'is_consult', $this->is_consult])
+                ->andFilterWhere(['like', 'refer_status', $this->refer_status]);
 
         return $dataProvider;
     }

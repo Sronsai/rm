@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
 ?>
 
 <div class="report">
-    <center><h1>รายการความเสี่ยงแยกตามระดับความรุนแรง</h1></center>
+    <center><h1><u>รายการความเสี่ยง แยกตามระดับความรุนแรง</u></h1></center>
 
     <div class='well'>
         <!--h4><i class="icon fa fa-bar-chart"></i> รายการความเสี่ยงทั้งหมด</h4-->
@@ -77,10 +77,17 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
 
 
 //echo yii\grid\GridView::widget([
-//echo \kartik\grid\GridView::widget([
-            echo DataTables::widget([
+            echo \kartik\grid\GridView::widget([
+                //echo DataTables::widget([
                 'dataProvider' => $dataProvider,
-                'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
+                'panel' => [
+                    'before' => ''
+                ],
+                'export' => [
+                    'showConfirmAlert' => false,
+                    'target' => GridView::TARGET_BLANK
+                ],
+                //'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
                 //'dataProvider' => $dataProvider,
                 //'responsive' => TRUE,
                 //'hover' => true,
@@ -93,7 +100,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                     [
                         'attribute' => 'location',
                         'header' => 'สถานที่เกิดเหตุ',
-                        'headerOptions' => ['width' => '30'],
+                        'headerOptions' => ['width' => '200'],
                     //'location' => ['location' => SORT_DESC],
                     ],
                     [
@@ -147,32 +154,32 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                         'headerOptions' => ['width' => '10']
                     ],
                 ],
-                'clientOptions' => [
-                    "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
-                    "info" => TRUE,
-                    "responsive" => true,
-                    "dom" => 'lfTrtip',
-                    "tableTools" => [
-                        "aButtons" => [
-                            [
-                                "sExtends" => "copy",
-                                "sButtonText" => Yii::t('app', "Copy to clipboard")
-                            ], [
-                                "sExtends" => "csv",
-                                "sButtonText" => Yii::t('app', "Save to CSV")
-                            ], [
-                                "sExtends" => "xls",
-                                "oSelectorOpts" => ["page" => 'current']
-                            ], [
-                                "sExtends" => "pdf",
-                                "sButtonText" => Yii::t('app', "Save to PDF")
-                            ], [
-                                "sExtends" => "print",
-                                "sButtonText" => Yii::t('app', "Print")
-                            ],
-                        ]
-                    ]
-                ]
+                    /* 'clientOptions' => [
+                      "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
+                      "info" => TRUE,
+                      "responsive" => true,
+                      "dom" => 'lfTrtip',
+                      "tableTools" => [
+                      "aButtons" => [
+                      [
+                      "sExtends" => "copy",
+                      "sButtonText" => Yii::t('app', "Copy to clipboard")
+                      ], [
+                      "sExtends" => "csv",
+                      "sButtonText" => Yii::t('app', "Save to CSV")
+                      ], [
+                      "sExtends" => "xls",
+                      "oSelectorOpts" => ["page" => 'current']
+                      ], [
+                      "sExtends" => "pdf",
+                      "sButtonText" => Yii::t('app', "Save to PDF")
+                      ], [
+                      "sExtends" => "print",
+                      "sButtonText" => Yii::t('app', "Print")
+                      ],
+                      ]
+                      ]
+                      ] */
             ]);
             ?>
         </div>

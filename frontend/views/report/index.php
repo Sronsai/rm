@@ -1,8 +1,10 @@
 <?php
 /* @var $this yii\web\View */
 
-use fedemotta\datatables\DataTables;
+//use fedemotta\datatables\DataTables;
 use kartik\grid\GridView;
+use frontend\models\Risk;
+use yii\helpers\Html;
 
 $this->title = 'รายงานความเสี่ยง';
 
@@ -12,7 +14,7 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
 
 
 <div class="report">
-    <center><h1>รายการความเสี่ยง เลือกช่วงวันที่</h1></center>
+    <center><h1><u>รายการความเสี่ยง เลือกช่วงวัน</u></h1></center>
 
 
 
@@ -77,10 +79,17 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
 
 
 //echo yii\grid\GridView::widget([
-//echo \kartik\grid\GridView::widget([
-            echo DataTables::widget([
+            echo \kartik\grid\GridView::widget([
+                //echo DataTables::widget([
                 'dataProvider' => $dataProvider,
-                'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
+                'panel' => [
+                    'before' => ''
+                ],
+                'export' => [
+                    'showConfirmAlert' => false,
+                    'target' => GridView::TARGET_BLANK
+                ],
+                //'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
                 //'dataProvider' => $dataProvider,
                 //'responsive' => TRUE,
                 //'hover' => true,
@@ -90,6 +99,11 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                 //'after' => 'โดย ' . $dev
                 //],
                 'columns' => [
+                    [
+                        'attribute' => 'id',
+                        'header' => 'เลขที่',
+                        'headerOptions' => ['width' => '30']
+                    ],
                     [
                         'attribute' => 'hn',
                         'header' => 'HN',
@@ -135,41 +149,41 @@ $this->params['breadcrumbs'][] = 'รายการความเสี่ย�
                         'headerOptions' => ['width' => '20']
                     ],
                     [
+                        'attribute' => 'risk_review',
+                        'header' => 'สรุปการทบทวน / แนวทาง',
+                        'headerOptions' => ['width' => '100']
+                    ],
+                    [
                         'attribute' => 'status',
                         'header' => 'ทบทวน',
                         'headerOptions' => ['width' => '70']
                     ],
-                    [
-                        'attribute' => 'risk_review',
-                        'header' => 'รายละเอียดการทบทวน',
-                        'headerOptions' => ['width' => '70']
-                    ],
-                ],
-                'clientOptions' => [
-                    "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
-                    "info" => TRUE,
-                    "responsive" => true,
-                    "dom" => 'lfTrtip',
-                    "tableTools" => [
-                        "aButtons" => [
-                            [
-                                "sExtends" => "copy",
-                                "sButtonText" => Yii::t('app', "Copy to clipboard")
-                            ], [
-                                "sExtends" => "csv",
-                                "sButtonText" => Yii::t('app', "Save to CSV")
-                            ], [
-                                "sExtends" => "xls",
-                                "oSelectorOpts" => ["page" => 'current']
-                            ], [
-                                "sExtends" => "pdf",
-                                "sButtonText" => Yii::t('app', "Save to PDF")
-                            ], [
-                                "sExtends" => "print",
-                                "sButtonText" => Yii::t('app', "Print")
-                            ],
-                        ]
-                    ]
+                /* 'clientOptions' => [
+                  "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
+                  "info" => TRUE,
+                  "responsive" => true,
+                  "dom" => 'lfTrtip',
+                  "tableTools" => [
+                  "aButtons" => [
+                  [
+                  "sExtends" => "copy",
+                  "sButtonText" => Yii::t('app', "Copy to clipboard")
+                  ], [
+                  "sExtends" => "csv",
+                  "sButtonText" => Yii::t('app', "Save to CSV")
+                  ], [
+                  "sExtends" => "xls",
+                  "oSelectorOpts" => ["page" => 'current']
+                  ], [
+                  "sExtends" => "pdf",
+                  "sButtonText" => Yii::t('app', "Save to PDF")
+                  ], [
+                  "sExtends" => "print",
+                  "sButtonText" => Yii::t('app', "Print")
+                  ],
+                  ]
+                  ]
+                  ] */
                 ]
             ]);
             ?>

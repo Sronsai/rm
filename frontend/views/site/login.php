@@ -19,7 +19,6 @@ $fieldOptions2 = [
     'options' => ['class' => 'form-group has-feedback'],
     'inputTemplate' => "{input}<span class='glyphicon glyphicon-lock form-control-feedback'></span>"
 ];
-
 ?>
 <html>
     <head>
@@ -31,12 +30,12 @@ $fieldOptions2 = [
 
     </head>
     <body>
-        <section class="intro"></br>     
+        <section class="intro">     
             <h1>ระบบบริหารจัดการความเสี่ยง</h1></br></br></br>
             <h4>Risk Management</h4>
             <div class="login-box">
                 <div class="text-center">
-                    <img src="../images/logo.png" height="150" width="150" alt="">
+                    <img src="../images/logo_MOPH.png" height="150" width="150" alt="">
                 </div></br></br>
                 <!-- /.login-logo -->
                 <div class="login-box-body">
@@ -60,10 +59,12 @@ $fieldOptions2 = [
 
                     <div class="row">
                         <div class="text-center">
-                               ========================
-                                <!--?= $form->field($model, 'rememberMe')->checkbox() ?-->
+                            ========================
+                            <!--?= $form->field($model, 'rememberMe')->checkbox() ?-->
                         </div>
                     </div></br>
+
+                    <?php $url = 'https://docs.google.com/document/d/1gvTeMiQcjiWyWsgkOzgaOhEpL17DyGJuR-Z32rTA4hs/edit#heading=h.gjdgxs'; ?>
 
                     <div class="row">
                         <div class="text-center">
@@ -72,12 +73,24 @@ $fieldOptions2 = [
                             </div>
                             </br>
                             <!--div class="col-xs-12">
-                                <!--?= Html::a('สมัครสมาชิก', ['site/signup'], ['class' => 'btn btn-primary btn-block btn-flat']) ?>
-                            </div-->
+                            <!--?= Html::a('สมัครสมาชิก', ['site/signup'], ['class' => 'btn btn-primary btn-block btn-flat']) ?>
+                        </div-->
                             </br>
                             <div class="col-xs-12">
                                 <!--?= Html::a('สำหรับผู้ดูแลระบบ', [''], ['class' => 'btn btn-danger btn-block btn-flat']) ?-->
                                 <?= Html::a('สำหรับผู้ดูแลระบบ', Yii::$app->urlManagerBackend->getBaseUrl(), ['class' => 'btn btn-danger btn-block btn-flat']) ?>
+                            </div>
+                            </br>
+                            </br>
+                            <div class="col-xs-12">
+                                <!--?= Html::a('สำหรับผู้ดูแลระบบ', [''], ['class' => 'btn btn-danger btn-block btn-flat']) ?-->
+                                <?=
+                                Html::a('คู่มือการใช้งาน', $url, $options = [
+                                    'title' => 'My Super Link',
+                                    'target' => '_blank',
+                                    'alt' => 'Link to Super Website',
+                                    'class' => 'btn btn-warning btn-block btn-flat'])
+                                ?>
                             </div>
                         </div>
                     </div>

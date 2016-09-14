@@ -3,22 +3,23 @@
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'language' => 'th_TH',
+    'timeZone' => 'Asia/Bangkok',
     'components' => [
-        /* 'formatter' => [
-          'dateFormat' => 'dd.MM.yyyy',
-          'decimalSeparator' => ',',
-          'thousandSeparator' => ' ',
-          'currencyCode' => 'EUR',
-          ], */
-        'thaiFormatter' => [
-            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
-        ],
-        'formatter' => [
+        /*'formatter' => [
             'dateFormat' => 'dd.MM.yyyy',
             'decimalSeparator' => ',',
             'thousandSeparator' => ' ',
-            'currencyCode' => 'EUR',
+            'currencyCode' => 'TH',
+        ],*/
+        'thaiFormatter' => [
+            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
         ],
+        /*'formatter' => [
+            'dateFormat' => 'dd.MM.yyyy',
+            'decimalSeparator' => ',',
+            'thousandSeparator' => ' ',
+            'currencyCode' => 'TH',
+        ],*/
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],

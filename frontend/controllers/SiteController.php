@@ -57,17 +57,33 @@ class SiteController extends Controller {
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-            //'captcha' => [
-            //    'class' => 'yii\captcha\CaptchaAction',
-            //   'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            //],
+                //'captcha' => [
+                //    'class' => 'yii\captcha\CaptchaAction',
+                //   'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+                //],
         ];
     }
 
     public function actionIndex() {
 
-        $sql = "SELECT r.location_riks_id,l.location_name,count(l.location_name) as total FROM rm.risk r
-  INNER JOIN rm.location_riks l ON l.id = r.location_riks_id GROUP BY r.location_riks_id order by total desc limit 20";
+        /* $sql = "SELECT r.location_riks_id,l.location_name,count(l.location_name) as total FROM rm.risk r
+          INNER JOIN rm.location_riks l ON l.id = r.location_riks_id GROUP BY r.location_riks_id order by total desc limit 10"; */
+
+        $sql = " SELECT location_riks_id,location_name,SUM(total) AS total
+                    FROM(
+                    SELECT r.location_riks_id,l.location_name,count(l.location_name) AS total
+                    FROM risk r
+                    INNER JOIN location_riks l ON l.id = r.location_riks_id
+                    GROUP BY r.location_riks_id
+                    UNION ALL
+                    SELECT rd.location_riks_id,l.location_name,count(l.location_name) AS total
+                    FROM risk_med rd
+                    INNER JOIN location_riks l ON l.id = rd.location_riks_id
+                    GROUP BY rd.location_riks_id
+                    ) AS tb
+                    GROUP BY location_name
+                    ORDER BY total DESC
+                    LIMIT 10 ";
 
         $rawData = Yii::$app->db->createCommand($sql)->queryAll();
         $main_data = [];
@@ -80,19 +96,49 @@ class SiteController extends Controller {
         }
         $main = json_encode($main_data);
         //echo $main;
-        $sql = "SELECT r.location_riks_id,l.location_name,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I
-                FROM rm.risk r
-                INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
-                GROUP BY r.location_riks_id";
+        /* $sql = "SELECT r.location_riks_id,l.location_name,
+          SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
+          SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
+          SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
+          SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
+          SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
+          SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
+          SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
+          SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
+          SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I
+          FROM rm.risk r
+          INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
+          GROUP BY r.location_riks_id"; */
+        $sql = " SELECT location_riks_id,location_name,SUM(A) AS A,SUM(B) AS B,SUM(C) AS C,SUM(D) AS D,SUM(E) AS E,SUM(F) AS F,SUM(G) AS G,SUM(H) AS H,SUM(I) AS I
+FROM(SELECT r.location_riks_id,l.location_name,
+                    SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
+                    SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
+                    SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
+                    SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
+                    SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
+                    SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
+                    SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
+                    SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
+                    SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I
+                    FROM rm.risk r
+                    INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
+                    GROUP BY r.location_riks_id
+                UNION ALL
+                SELECT rd.location_riks_id,l.location_name,
+                    SUM(CASE WHEN rd.level_id='1' THEN 1 ELSE 0 END)AS A,
+                    SUM(CASE WHEN rd.level_id='2' THEN 1 ELSE 0 END)AS B,
+                    SUM(CASE WHEN rd.level_id='3' THEN 1 ELSE 0 END)AS C,
+                    SUM(CASE WHEN rd.level_id='4' THEN 1 ELSE 0 END)AS D,
+                    SUM(CASE WHEN rd.level_id='5' THEN 1 ELSE 0 END)AS E,
+                    SUM(CASE WHEN rd.level_id='6' THEN 1 ELSE 0 END)AS F,
+                    SUM(CASE WHEN rd.level_id='7' THEN 1 ELSE 0 END)AS G,
+                    SUM(CASE WHEN rd.level_id='8' THEN 1 ELSE 0 END)AS H,
+                    SUM(CASE WHEN rd.level_id='9' THEN 1 ELSE 0 END)AS I
+                    FROM risk_med rd
+                    INNER JOIN rm.location_riks l ON l.id = rd.location_riks_id
+                    GROUP BY rd.location_riks_id
+) AS tb
+GROUP BY location_riks_id ";
         $rawData = Yii::$app->db->createCommand($sql)->queryAll();
         $sub_data = [];
         foreach ($rawData as $data) {
@@ -114,11 +160,18 @@ class SiteController extends Controller {
         $sub = json_encode($sub_data);
 
 
+        $sql_level = "SELECT level,SUM(total) as total
+                            FROM(
+                                                    SELECT l.level_e as level,count(l.level_name) as total FROM risk r
+                                                    LEFT OUTER JOIN level l ON l.id = r.level_id
+                                                    GROUP BY level
+                            UNION ALL
 
-
-        $sql_level = "SELECT l.level_e as level,count(l.level_name) as total FROM risk r
-                      LEFT OUTER JOIN level l ON l.id = r.level_id
-                      GROUP BY l.level_name ASC";
+                                                    SELECT l.level_e as level,count(l.level_name) as total FROM risk_med rd
+                                                    LEFT OUTER JOIN level l ON l.id = rd.level_id
+                                                    GROUP BY level
+                            ) AS tb
+                            GROUP BY level ASC";
 
         $rawData_level = Yii::$app->db->createCommand($sql_level)->queryAll();
 
@@ -127,12 +180,9 @@ class SiteController extends Controller {
             $main_data_level[] = [
                 'name' => $data_level['level'],
                 'y' => $data_level['total'] * 1,
-                    //'drilldown' => $data['location_riks_id']
             ];
         }
         $main_level = json_encode($main_data_level);
-
-
 
 
         return $this->render('index', [

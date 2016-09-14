@@ -12,8 +12,8 @@ $this->title = 'Risk Management For Administrators';
 
     <center>
         <div class="row">
-            <h1>หน้าบริหารจัดการระบบสำหรับผู้ดูแลระบบ</h1>
-            <p class="lead">( Welcome To Risk Management For Administrators )</p>
+            <h1>หน้าบริหารจัดการระบบสำหรับผู้ดูแลระบบ</h1><BR />
+            <!--p class="lead">( Welcome To Risk Management For Administrators )</p-->
 
             <p><!--a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a--></p>
         </div>
@@ -36,7 +36,7 @@ $this->title = 'Risk Management For Administrators';
                                 <div class="panel panel-info">
                                     <div class="panel-heading"><center><H4>สถานที่</h4><center></div>
                                                 <div class="panel-body">
-                                                    <a class="list-group-item" href="?r=location-riks/index"><i class="fa fa-map-marker fa-2x"></i>&nbsp;&nbsp;&nbsp; สถานที่เกิดเหตุ</a></br>
+                                                    <a class="list-group-item" href="?r=location-riks/index"><i class="fa fa-map-marker fa-2x"></i>&nbsp;&nbsp;&nbsp; หน่วยงานต้นเหตุ</a></br>
                                                     <a class="list-group-item" href="?r=location-connection/index"><i class="fa fa-sitemap fa-2x"></i>&nbsp;&nbsp;&nbsp; หน่วยงานที่เกี่ยวข้อง</a></br>
                                                     <a class="list-group-item" href="?r=location-report/index"><i class="fa fa-sitemap fa-2x"></i>&nbsp;&nbsp;&nbsp; หน่วยงานที่รายงาน</a>
                                                 </div>

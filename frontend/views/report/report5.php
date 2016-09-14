@@ -14,14 +14,14 @@ $date2 = date('Y-m-31');
 ?>
 
 <div class="report">
-    <center><h1>รายงานความเสี่ยงประจำเดือน
-            <?php
-            $command = Yii::$app->db->createCommand(" SELECT COUNT(id) FROM risk WHERE risk_date BETWEEN '$date1' and '$date2' ");
-            $target = $command->queryScalar();
-            echo $target;
-            ?>
-            รายการ
-        </h1></center>
+    <center><h1><u>รายงานความเสี่ยงประจำเดือน
+                <?php
+                $command = Yii::$app->db->createCommand(" SELECT COUNT(id) FROM risk WHERE risk_date BETWEEN '$date1' and '$date2' ");
+                $target = $command->queryScalar();
+                echo $target;
+                ?>
+                รายการ
+            </u></h1></center>
 
 
 
@@ -33,10 +33,17 @@ $date2 = date('Y-m-31');
 
 
 //echo yii\grid\GridView::widget([
-//echo \kartik\grid\GridView::widget([
-            echo DataTables::widget([
+            echo \kartik\grid\GridView::widget([
+                //echo DataTables::widget([
                 'dataProvider' => $dataProvider,
-                'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
+                'panel' => [
+                    'before' => ''
+                ],
+                'export' => [
+                    'showConfirmAlert' => false,
+                    'target' => GridView::TARGET_BLANK
+                ],
+                //'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
                 //'dataProvider' => $dataProvider,
                 //'responsive' => TRUE,
                 //'hover' => true,
@@ -52,6 +59,11 @@ $date2 = date('Y-m-31');
                       'header' => 'วันที่เกิดเหตุ',
                       'headerOptions' => ['width' => '80']
                       ], */
+                    [
+                        'attribute' => 'id',
+                        'header' => 'เลขที่',
+                        'headerOptions' => ['width' => '30']
+                    ],
                     [
                         'attribute' => 'hn',
                         'header' => 'HN'
@@ -93,37 +105,42 @@ $date2 = date('Y-m-31');
                         'headerOptions' => ['width' => '20']
                     ],
                     [
+                        'attribute' => 'risk_review',
+                        'header' => 'สรุปการทบทวน / แนวทาง',
+                        'headerOptions' => ['width' => '100']
+                    ],
+                    [
                         'attribute' => 'status',
                         'header' => 'ทบทวน',
                         'headerOptions' => ['width' => '70']
                     ],
                 ],
-                'clientOptions' => [
-                    "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
-                    "info" => TRUE,
-                    "responsive" => true,
-                    "dom" => 'lfTrtip',
-                    "tableTools" => [
-                        "aButtons" => [
-                            [
-                                "sExtends" => "copy",
-                                "sButtonText" => Yii::t('app', "Copy to clipboard")
-                            ], [
-                                "sExtends" => "csv",
-                                "sButtonText" => Yii::t('app', "Save to CSV")
-                            ], [
-                                "sExtends" => "xls",
-                                "oSelectorOpts" => ["page" => 'current']
-                            ], [
-                                "sExtends" => "pdf",
-                                "sButtonText" => Yii::t('app', "Save to PDF")
-                            ], [
-                                "sExtends" => "print",
-                                "sButtonText" => Yii::t('app', "Print")
-                            ],
-                        ]
-                    ]
-                ]
+                    /* 'clientOptions' => [
+                      "lengthMenu" => [[15, -1], [15, Yii::t('app', "All")]], //20 Rows
+                      "info" => TRUE,
+                      "responsive" => true,
+                      "dom" => 'lfTrtip',
+                      "tableTools" => [
+                      "aButtons" => [
+                      [
+                      "sExtends" => "copy",
+                      "sButtonText" => Yii::t('app', "Copy to clipboard")
+                      ], [
+                      "sExtends" => "csv",
+                      "sButtonText" => Yii::t('app', "Save to CSV")
+                      ], [
+                      "sExtends" => "xls",
+                      "oSelectorOpts" => ["page" => 'current']
+                      ], [
+                      "sExtends" => "pdf",
+                      "sButtonText" => Yii::t('app', "Save to PDF")
+                      ], [
+                      "sExtends" => "print",
+                      "sButtonText" => Yii::t('app', "Print")
+                      ],
+                      ]
+                      ]
+                      ] */
             ]);
             ?>
         </div>

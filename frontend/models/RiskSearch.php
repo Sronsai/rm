@@ -48,6 +48,7 @@ class RiskSearch extends Risk {
           $query->byLocationId();
           } */
 
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
@@ -97,6 +98,8 @@ class RiskSearch extends Risk {
 
 
 
+
+
         /* $query->orFilterWhere(['like', 'hn', $this->globalSearch])
           ->orFilterWhere(['like', 'pname', $this->globalSearch])
           ->orFilterWhere(['like', 'fname', $this->globalSearch])
@@ -112,20 +115,20 @@ class RiskSearch extends Risk {
           ->orFilterWhere(['like', 'level.level_name', $this->globalSearch])
           ->orFilterWhere(['like', 'status.status_name', $this->globalSearch]); */
 
-
         // search แบบกรอกข้อมความในช่อง
-        $query->andFilterWhere(['like', 'risk_summary', $this->risk_summary])
-                ->andFilterWhere(['like', 'pname', $this->pname])
-                ->andFilterWhere(['like', 'fname', $this->fname])
-                ->andFilterWhere(['like', 'lname', $this->lname])
-                ->andFilterWhere(['like', 'location_riks.location_name', $this->location_riks_id])
-                ->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
-                ->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
-                ->andFilterWhere(['like', 'type.type_name', $this->type_id])
-                ->andFilterWhere(['like', 'typeClinic.clinic_name', $this->type_clinic_id])
-                ->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])
-                ->andFilterWhere(['like', 'level.level_name', $this->level_id])
-                ->andFilterWhere(['like', 'status.status_name', $this->status_id]);
+        $query->andFilterWhere(['like', 'risk_summary', $this->risk_summary]);
+        /* ->andFilterWhere(['like', 'pname', $this->pname])
+          ->andFilterWhere(['like', 'fname', $this->fname])
+          ->andFilterWhere(['like', 'lname', $this->lname])
+          ->andFilterWhere(['like', 'location_riks.location_name', $this->location_riks_id])
+          ->andFilterWhere(['like', 'location_connection.location_name', $this->location_connection_id])
+          ->andFilterWhere(['like', 'location_report.location_name', $this->location_report_id])
+          ->andFilterWhere(['like', 'type.type_name', $this->type_id])
+          ->andFilterWhere(['like', 'typeClinic.clinic_name', $this->type_clinic_id])
+          ->andFilterWhere(['like', 'sub_type.sub_type_name', $this->sub_type_id])
+          ->andFilterWhere(['like', 'level.level_name', $this->level_id])
+          ->andFilterWhere(['like', 'status.status_name', $this->status_id
+          ]); */
         //$query->andFilterWhere(['like','risk_summary',$this->risk_summary]);
 
 

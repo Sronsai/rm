@@ -7,6 +7,8 @@ use kartik\export\ExportMenu;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
+use yii\helpers\Url;
+use frontend\models\Risk;
 
 //use kartik\social\FacebookPlugin;
 
@@ -17,16 +19,30 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
 $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'บันทึกความเสี่ยง', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
-
 ?>
 
-<?php $id = Yii::$app->request->get('id'); //Get ID มาแสดง  ?>  
+<!--?php $time = time(); 
+Yii::$app->formatter->locale = 'th_TH';
+echo Yii::$app->thaiFormatter->asDate($time, 'short')."<br>";
+echo Yii::$app->thaiFormatter->asDate($time, 'medium')."<br>";
+echo Yii::$app->thaiFormatter->asDate($time, 'long')."<br>";
+echo Yii::$app->thaiFormatter->asDate($time, 'full')."<br>";
+
+echo Yii::$app->thaiFormatter->asDateTime($time, 'short')."<br>";
+echo Yii::$app->thaiFormatter->asDateTime($time, 'medium')."<br>";
+echo Yii::$app->thaiFormatter->asDateTime($time, 'long')."<br>";
+echo Yii::$app->thaiFormatter->asDateTime($time, 'full')."<br>";
+
+echo Yii::$app->thaiFormatter->asDate($time, 'php:Y-m-d');
+echo Yii::$app->thaiFormatter->asDateTime($time, 'php:Y-m-d H:i:s');
+?-->
+
+<?php $id = Yii::$app->request->get('id'); //Get ID มาแสดง   ?>  
 
 <div align=right>
-    <?= Html::a('', ['risk/pdf', 'id' => $id], ['class' => 'glyphicon glyphicon-print btn btn-success btn-lg']); ?>
-    <?= Html::a('', ['risk/update', 'id' => $id], ['class' => 'glyphicon glyphicon-pencil btn btn-info btn-lg']); ?>
-    <?= Html::a('', ['risk/delete', 'id' => $id], ['class' => 'glyphicon glyphicon-trash btn btn-danger btn-lg']); ?>
+    <?= Html::a(' Print', ['risk/pdf', 'id' => $id], ['class' => 'glyphicon glyphicon-print btn btn-success btn-lg', 'target' => '_blank']); ?>
+    <!--?= Html::a('', ['risk/update', 'id' => $id], ['class' => 'glyphicon glyphicon-pencil btn btn-info btn-lg']); ?-->
+    <!--?= Html::a('', ['risk/delete', 'id' => $id], ['class' => 'glyphicon glyphicon-trash btn btn-danger btn-lg']); ?-->
     <?= '<br /><br />' ?>
 </div>
 
@@ -102,16 +118,15 @@ $this->params['breadcrumbs'][] = $this->title;
             //'risk_date',
             [
                 'attribute' => 'risk_date',
-                //'value' => 'risk_date',
-                'value' => Yii::$app->thaiFormatter->asDate($model->risk_date, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_date, 'medium') . ' น.',
-                
+            //'value' => 'risk_date',
+            /* 'value' => Yii::$app->thaiFormatter->asDate($model->risk_date, 'full') . ' เวลา ' . Yii::$app->thaiFormatter->asTime($model->risk_date, 'medium') . ' น.', */
+            /* 'value' => 'วันที่ ' . Yii::$app->thaiFormatter->asDate($model->risk_date, 'long') . ' เวลา ' . Yii::$app->thaiFormatter->asTime($model->risk_date, 'medium') . ' น.', */
             ],
             //'risk_report',
             [
                 'attribute' => 'risk_report',
                 //'value' => 'risk_date',
-                'value' => Yii::$app->thaiFormatter->asDate($model->risk_report, 'full') .' เวลา '. Yii::$app->thaiFormatter->asTime($model->risk_report,'medium') . ' น.',
-                
+                /*'value' => 'วันที่ ' . Yii::$app->thaiFormatter->asDate($model->risk_report, 'long') . ' เวลา ' . Yii::$app->thaiFormatter->asTime($model->risk_report, 'medium') . ' น.',*/
             ],
             //'risk_summary:ntext',
             [
@@ -137,15 +152,17 @@ $this->params['breadcrumbs'][] = $this->title;
               ],
               [
               'attribute' => 'system_id',
-              'value' => $model->system->system_name,
+              'value' => $model->system->system_name, 
               ], */
             [
                 'attribute' => 'type_clinic_id',
                 'value' => $model->typeClinic->clinic_name,
             ],
             [
+                'format' => 'html',
                 'attribute' => 'status_id',
-                'value' => $model->status->status_name,
+                //'value' => '<span style="color:green;">'.'<u>' .$model->status->status_name .'</u>'.'</span>'
+                'value' => $model->status_id == 2 ? "<i class=\"fa fa-thumbs-o-up fa-2x\"></i>" : "<i class=\"fa fa-spinner fa-pulse fa-2x\"></i>"
             ],
             /* [
               'attribute' => 'risk_review',
@@ -154,6 +171,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'html',
                 'label' => 'สรุปการทบทวน',
                 'value' => '<span style="color:green;">' . $model->risk_review . '</span>'
+            ],
+            [
+                'attribute' => 'join_status',
+            //'value' => $model->join_status,
             ],
             [
                 'attribute' => 'docs',

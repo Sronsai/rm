@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\Html;
+use common\models\MyActiveRecord;
 
 class Risk extends ActiveRecord {
 
@@ -64,16 +65,16 @@ class Risk extends ActiveRecord {
      */
     public function rules() {
         return [
-            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report',  'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
+            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
             [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id'], 'integer'],
-            [['pname', 'risk_summary', 'risk_review'], 'string'],
+            [['pname', 'risk_summary', 'risk_review', 'join_status'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
             [['ref'], 'string', 'max' => 50],
             [['hn'], 'string', 'max' => 45],
             [['risk_summary'], 'string', 'max' => 4500],
-            [['status_id'], 'string', 'max' => 150],
+            //[['status_id'], 'string', 'max' => 150],
             [['fname', 'lname'], 'string', 'max' => 100],
-            [['docs'], 'file', 'maxFiles' => 5, /* 'skipOnEmpty' => true, 'extensions' => 'rar,pdf,doc,docx,xls,xlsx' */]
+            [['docs'], 'file', 'maxFiles' => 5, /* 'skipOnEmpty' => true, 'extensions' => 'rar,pdf,doc,docx,xls,xlsx' */],
         ];
     }
 
@@ -102,10 +103,20 @@ class Risk extends ActiveRecord {
             'system_id' => 'สาเหตุเชิงระบบ',
             'status_id' => Yii::t('app', 'การทบทวน'),
             //'status_id' => 'การทบทวน',
-            'risk_review' => 'สรุปการทบทวน / แนวทาง',
+            'risk_review' => 'สรุปการทบทวน/แนวทาง',
             'docs' => 'ไฟล์เอกสารที่ทบทวน',
+            'join_status' => 'ผู้ร่วมทบทวน',
                 //'globalSearch' => 'ค้นหาแบบระเอียด',
         ];
+    }
+
+    public function sendEmail($email) {
+        return Yii::$app->mailer->compose()
+                        ->setTo($email)
+                        ->setFrom([$this->email => $this->name])
+                        ->setSubject($this->risk_summary)
+                        //->setTextBody($this->risk_summary)
+                        ->send();
     }
 
     /**
@@ -258,6 +269,36 @@ class Risk extends ActiveRecord {
         }
 
         return $docs_file;
+    }
+
+}
+
+class Datetimetest extends MyActiveRecord {
+
+    public static function tableName() {
+        return 'datetimetest';
+    }
+
+    public function rules() {
+        return [
+            [['datetime1', 'datetime2'], 'required'],
+            [['datetime1', 'datetime2'], 'safe'],
+        ];
+    }
+
+    public function attributeLabels() {
+        return [
+            'id' => 'ID',
+            'datetime1' => 'Datetime1',
+            'datetime2' => 'Datetime2',
+        ];
+    }
+
+    public function attributeHints() {
+        return [
+            'datetime1' => 'ตัวอยาง 13/05/2559 01:20:30',
+            'datetime2' => 'ตัวอย่าง 13/05/2559 01:20:30',
+        ];
     }
 
 }

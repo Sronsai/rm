@@ -5,19 +5,19 @@
 use kartik\grid\GridView;
 use miloschuman\highcharts\Highcharts;
 
-$this->title = 'รายการความเสี่ยงแยกตามประเภทการดูแลรักษา';
+$this->title = 'รายการความเสี่ยงประเภทการดูแลรักษา';
 
 $this->params['breadcrumbs'][] = ['label' => 'รายการความเสี่ยงทั้งหมด', 'url' => ['/report/report']];
-$this->params['breadcrumbs'][] = 'รายการความเสี่ยงแยกตามประเภทการดูแลรักษา';
+$this->params['breadcrumbs'][] = 'รายการความเสี่ยงประเภทการดูแลรักษา';
 ?>
 
 <div class="safe">
-    <center><h1>รายการความเสี่ยงแยกตามประเภทการดูแลรักษา</h1></center>
+    <center><h1><u>รายการความเสี่ยงประเภทการดูแลรักษา</u></h1></center>
 
 
     <div class="row">       
         <div class="col-md-12">
-            <div class="col-md-6">
+            <div class="col-md-12">
 
 
                 <?php

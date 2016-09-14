@@ -19,11 +19,23 @@ use yii\helpers\BaseFileHelper;
 use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use kartik\mpdf\Pdf;
+use yii\bootstrap\Modal;
+use yii\db\Expression;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * RiskController implements the CRUD actions for Risk model.
  */
 class RiskController extends Controller {
+    /* public function sendMail($email, $fullname) {
+      Yii::$app->mailer->compose('@frontend/mail/layouts/register', ['fullname' => $fullname])
+      ->setFrom(['seminar@kkh.go.th' => 'Khon Kaen Hospital'])
+      ->setTo($email)
+      ->setSubject('ยินดีต้อนรับสู่งานประชุมวิชาการโรงพยาบาลขอนแก่น 2558')
+      ->attach(Yii::getAlias('@webroot') . '/attach/' . 'brochure.pdf')
+      ->attach(Yii::getAlias('@webroot') . '/attach/' . 'Poster.pdf')
+      ->send();
+      } */
 
     public function behaviors() {
         return [
@@ -88,6 +100,27 @@ class RiskController extends Controller {
         ]);
     }
 
+    public function actionEvent() {
+
+        $events = Risk::find()->all();
+
+        $tasks = [];
+        foreach ($events as $eve) {
+            $event = new \yii2fullcalendar\models\Event();
+            $event->id = $eve->id;
+            $event->title = $eve->risk_summary;
+            $event->start = $eve->risk_date;
+            $event->backgroundColor = 'white';
+            $event->borderColor = 'red';
+            $event->textColor = 'black';
+            $tasks[] = $event;
+        }
+
+        return $this->render('events', [
+                    'events' => $tasks
+        ]);
+    }
+
     /**
      * Displays a single Risk model.
      * @param integer $id
@@ -101,13 +134,21 @@ class RiskController extends Controller {
     }
 
     public function actionPdf($id) {
-
         $model = $this->findModel($id);
         $date = date('Y-m-d');
+        
+        $datetime_risk_date = $model->risk_date;
+        $time_risk_date = explode(" ",$datetime_risk_date)[1];
+        
+        $datetime_risk_report = $model->risk_report;
+        $time_risk_report = explode(" ",$datetime_risk_report)[1];
 
         $content = $this->renderPartial('pdf', [
             'date' => $date,
-            'model' => $model
+            'model' => $model,
+            'date' => $date,
+            'time_risk_date' => $time_risk_date,
+            'time_risk_report' => $time_risk_report
         ]);
 
         // setup kartik\mpdf\Pdf component
@@ -123,45 +164,45 @@ class RiskController extends Controller {
             // your html content input
             'content' => $content,
             'marginTop' => 10,
-            'marginLeft' => 15,
+            'marginLeft' => 1,
             'marginRight' => 15,
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting
             'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css',
             // any css to be embedded if required
             'cssInline' => '
-              body{
+            body{
                 font-family:"garuda", "sans-serif";
                 font-size:14px;
-              }
-                    p{
-                    font-size:10px;
-                    line-height: 4px;
-                    }
+            }
+            p{
+                font-size:10px;
+                line-height: 4px;
+            }
                     #wrapper{
 
-                    width: 210.5mm;
-                    height: 150mm;
-                    margin: 0px;
-                }
+            width: 210.5mm;
+            height: 150mm;
+            margin: 0px;
+        }
                 #header{
-                height: 25mm;
-                }
+        height: 25mm;
+    }
                 #header p{
-                    margin-bottom: 0px;
-                }
-                .row1{
-                height: 50%
-                margin: 0px;
-                }
-                .row2{
-                height: 50%
-                margin: 0px;
-                background-color: yellow;
-                }
+    margin-bottom: 0px;
+}
+.row1{
+    height: 50%
+    margin: 0px;
+}
+.row2{
+    height: 50%
+    margin: 0px;
+    background-color: yellow;
+}
 
 
-            ',
+',
             // set mPDF properties on the fly
             'options' => [
                 'title' => '',
@@ -174,6 +215,51 @@ class RiskController extends Controller {
         ]);
 
         // return the pdf output as per the destination setting
+        return $pdf->render();
+    }
+
+    public function actionPrint($id) {
+        $model = YourModel::findOne($id);
+        //$date = date('Y-m-d');
+        //$time = time('H:i:s');
+
+        $content = $this->renderPartial('print', [
+            'model' => $model,
+                //'date' => $date,
+                //time' => $time
+        ]);
+
+// setup kartik\mpdf\Pdf component 
+        $pdf = new Pdf([
+// set to use core fonts only 
+            'mode' => Pdf::MODE_UTF8, // A4 paper format 
+            'format' => [40, 20], //Pdf::FORMAT_A4, 
+            'marginLeft' => false,
+            'marginRight' => false,
+            'marginTop' => 1,
+            'marginBottom' => false,
+            'marginHeader' => false,
+            'marginFooter' => false,
+// portrait orientation 
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+// stream to browser inline 
+            'destination' => Pdf::DEST_BROWSER,
+            // your html content input 
+            'content' => $content,
+// format content from your own css file if needed or use the 
+// enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@frontend/web/css/kv-mpdf-bootstrap.css',
+// any css to be embedded if required 
+            'cssInline' => 'body{font-size:9px}',
+// set mPDF properties on the fly 
+            'options' => ['title' => 'Print Sticker',],
+// call mPDF methods on the fly 
+            'methods' => [
+                'SetHeader' => false, //['Krajee Report Header'], 
+                'SetFooter' => false, //['{PAGENO}'], 
+            ]
+        ]);
+// return the pdf output as per the destination setting
         return $pdf->render();
     }
 
@@ -195,8 +281,9 @@ class RiskController extends Controller {
             $model->docs = $this->uploadMultipleFile($model);
 
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
+                return $this->redirect(['site/index']);
             }
         } else {
             $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
@@ -305,6 +392,10 @@ class RiskController extends Controller {
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionUploadAjax() {
+        $this->Uploads(true);
     }
 
     private function uploadMultipleFile($model, $tempFile = null) {

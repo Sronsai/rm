@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = 'แก้ไข';
         'model' => $model,
         'initialPreview'=>$initialPreview,
         'initialPreviewConfig'=>$initialPreviewConfig
-    ])
+    ]);
     ?>
 
 </div>

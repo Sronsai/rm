@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use yii\widgets\Pjax;
+//use yii\widgets\Pjax;
 use kartik\grid\DataColumn;
 use yii\grid\ActionColumn;
 use yii\bootstrap\Modal;
@@ -35,19 +35,18 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
 
 
     <div class="panel panel-primary">
-        <div class="panel-heading"><center><H3>จัดการความเสี่ยง</H3></center></div>
+        <div class="panel-heading"><center><H3><?= Html::img('./../images/mana.jpg'); ?>&nbsp;&nbsp;จัดการความเสี่ยง</H3></center></div>
         <div class="panel-body">
 
-                <center>
-                        <!--?php echo $this->render('_search', ['model' => $searchModel]); ?-->               
-                        <?php echo yii\helpers\Html::img('../images/risk_level.jpg'); ?>          
-                </center>
+            <center>
+                <!--?php echo $this->render('_search', ['model' => $searchModel]); ?-->
+                <?php echo yii\helpers\Html::img('../images/risk_level.jpg'); ?>
+            </center>
 
             <p>
                 <!--?= Html::a('Create Referout', ['create'], ['class' => 'btn btn-success']) ?-->
             </p>
 
-            <?php Pjax::begin(); ?>
             <?=
             \kartik\grid\GridView::widget([
                 //GridView::widget([
@@ -56,14 +55,21 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                 'responsive' => true,
                 'hover' => true,
                 'floatHeader' => false,
-                'pjax' => true,
-                'pjaxSettings' => [
-                    'neverTimeout' => true,
-                    'enablePushState' => false,
-                //'beforeGrid' => 'My fancy content before.',
-                //'afterGrid' => 'My fancy content after.',
-                //'options' => ['id' => 'CustomerGrid'],
-                ],
+                /* 'pjax' => true,
+                  'pjaxSettings' => [
+                  'neverTimeout' => true,
+                  'enablePushState' => false,
+                  //'beforeGrid' => 'My fancy content before.',
+                  //'afterGrid' => 'My fancy content after.',
+                  //'options' => ['id' => 'CustomerGrid'],
+                  ], */
+                /* 'pager' => [
+                  'class' => \kop\y2sp\ScrollPager::className(),
+                  'container' => '.grid-view tbody',
+                  'item' => 'tr',
+                  'paginationSelector' => '.grid-view .pagination',
+                  'triggerTemplate' => '<tr class="ias-trigger"><td colspan="100%" style="text-align: center"><a style="cursor: pointer">{text}</a></td></tr>',
+                  ], */
                 'panel' => [
                     //'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
                     //'type' => 'info',
@@ -106,20 +112,20 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     [
                         'header' => 'ลำดับ',
                         'class' => 'yii\grid\SerialColumn',
-                        'options' => ['width' => '20'],
+                        'options' => ['width' => '10'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center']
                     ],
                     [
                         'attribute' => 'id',
                         'header' => 'เลขที่',
-                        'options' => ['width' => '20'],
+                        'options' => ['width' => '100'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     [
                         'attribute' => 'risk_date',
-                        'options' => ['width' => '50'],
+                        'options' => ['width' => '40'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'format' => 'raw',
@@ -133,12 +139,12 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                                 'format' => 'yyyy-mm-dd'
                             ]
                         ]),
-                        'value' => function($model) {
-                    return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                    // Yii::$app->formatter->asDateTime(time(), 'php:F'
-                    // Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
-                    //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                }
+                    /* 'value' => function($model) {
+                      return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                      // return Yii::$app->formatter->asDateTime(time(), 'php:F'
+                      // return Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
+                      //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                      } */
                     ],
                     /*     [
                       'attribute' => 'risk_date',
@@ -186,31 +192,35 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(frontend\models\LocationRiks::find()->asArray()->all(), 'id', 'location_name'), [
-                            'class' => 'form-control', 'prompt' => ''
+                            'class' => 'form-control',
+                            'prompt' => ''
                         ]),
                     ],
                     //'location_connection_id',
-                    /*
-                     * search แบบกรอกข้อมความในช่อง แล้วไปแก้ riskSearch
-                     * [
-                      'attribute' => 'location_connection_id',
-                      'value' => 'locationConnection.location_name',
-                      'options' => ['width' => '50'],
-                      //'filter' => Html::activeDropDownList($searchModel, 'location_riks_id', ArrayHelper::map(Risk::find()->asArray()->all(), 'ID', 'location_riks_id'),['class'=>'form-control','prompt' => 'Select Category']),
-                      'headerOptions' => ['class' => 'text-center'],
-                      'contentOptions' => ['class' => 'text-center'],
-                      //'headerOptions' => ['width' => '80']
-                      ], */
+                    //search แบบกรอกข้อมความในช่อง แล้วไปแก้ riskSearch
                     [
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
                         'options' => ['width' => '50'],
-                        'contentOptions' => ['class' => 'text-center'],
-                        'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
-                            'class' => 'form-control', 'prompt' => ''
-                        ]),
+                            'class' => 'form-control',
+                            'prompt' => ''
+                                ]
+                        ),
+                        'headerOptions' => ['class' => 'text-center'],
+                        'contentOptions' => ['class' => 'text-center'],
+                    //'headerOptions' => ['width' => '80']
                     ],
+                    /* [
+                      'attribute' => 'location_connection_id',
+                      'value' => 'locationConnection.location_name',
+                      'options' => ['width' => '50'],
+                      'contentOptions' => ['class' => 'text-center'],
+                      'headerOptions' => ['class' => 'text-center'],
+                      'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
+                      'class' => 'form-control', 'prompt' => ''
+                      ]),
+                      ], */
                     //'location_report_id',
                     /* [
                       'attribute' => 'location_report_id',
@@ -220,7 +230,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
-                        'options' => ['width' => '1500'],
+                        'options' => ['width' => '1000'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',
@@ -262,7 +272,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     ],
                     //'clear_id',
                     //'system_id',
-                    // แสดงข้อมูลออกเป็น icon       
+                    // แสดงข้อมูลออกเป็น icon
                     [
                         'attribute' => 'status_id',
                         'format' => 'html',
@@ -275,6 +285,11 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                         'value' => function($model, $key, $index, $column) {
                     return $model->status_id == 2 ? "<i class=\"fa fa-thumbs-o-up fa-2x\"></i>" : "<i class=\"fa fa-spinner fa-pulse fa-2x\"></i>";
                 }
+                    ],
+                    [
+                        'attribute' => 'risk_review',
+                        'options' => ['width' => '400'],
+                        'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'StatusName',   //Virtual Attribute เอาไว้แสดงข้อมูลใน Gridview
                     /* [
@@ -291,34 +306,59 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                       ], */
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'header' => 'ทบทวน / เอกสาร / ลบ',
+                        'header' => 'ปริ้น',
+                        'options' => ['width' => '50'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                         //'options' => ['style' => 'width:200px;'],
-                        'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}{delete}</div>',
+                        'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{pdf}</div>',
                         'buttons' => [
-                            'view' => function($url, $model, $key) {
-                                return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
-                                //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
+                            'pdf' => function($url, $model, $key) {
+                                return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-success btn-lg', 'title' => 'Print', 'target' => '_blank']);
                             },
-                                    'update' => function($url, $model, $key) {
-                                return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
-                            },
-                                    'delete' => function($url, $model, $key) {
-                                return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
-                                            'title' => Yii::t('yii', 'Delete'),
-                                            'data-confirm' => Yii::t('yii', 'ยืนยันการลบข้อมูล'),
-                                            'data-method' => 'post',
-                                            'data-pjax' => '0',
-                                            'class' => 'btn btn-default'
-                                ]);
-                            }
+                                /* 'delete' => function($url, $model, $key) {
+                                  return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
+                                  'title' => Yii::t('yii', 'Delete'),
+                                  'data-confirm' => Yii::t('yii', 'ยืนยันการลบข้อมูล'),
+                                  'data-method' => 'post',
+                                  'data-pjax' => '0',
+                                  'class' => 'btn btn-default'
+                                  ]);
+                                  } */
                                 ]
                             ],
-                        ],
-                    ]);
-                    ?>
-                    <?php Pjax::end(); ?>
+                            [
+                                'class' => 'yii\grid\ActionColumn',
+                                //'header' => 'ทบทวน/เอกสาร/ลบ',
+                                'header' => 'ทบทวน/เอกสาร',
+                                'options' => ['width' => '100'],
+                                'headerOptions' => ['class' => 'text-center'],
+                                'contentOptions' => ['class' => 'text-center'],
+                                //'options' => ['style' => 'width:200px;'],
+                                //'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}{delete}</div>',
+                                'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
+                                'buttons' => [
+                                    'view' => function($url, $model, $key) {
+                                        return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
+                                        //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
+                                    },
+                                            'update' => function($url, $model, $key) {
+                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
+                                    },
+                                        /* 'delete' => function($url, $model, $key) {
+                                          return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
+                                          'title' => Yii::t('yii', 'Delete'),
+                                          'data-confirm' => Yii::t('yii', 'ยืนยันการลบข้อมูล'),
+                                          'data-method' => 'post',
+                                          'data-pjax' => '0',
+                                          'class' => 'btn btn-default'
+                                          ]);
+                                          } */
+                                        ]
+                                    ],
+                                ],
+                            ]);
+                            ?>
 
         </div>
     </div>

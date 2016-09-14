@@ -242,20 +242,19 @@ class TypesController extends controller {
 
         ////////////////////// sql ระดับความรุนแรง ///////////////////////
         $sql = "SELECT l.location_name AS location,
-                SUM(CASE WHEN r.level_id='1' THEN 1 ELSE 0 END)AS A,
-                SUM(CASE WHEN r.level_id='2' THEN 1 ELSE 0 END)AS B,
-                SUM(CASE WHEN r.level_id='3' THEN 1 ELSE 0 END)AS C,
-                SUM(CASE WHEN r.level_id='4' THEN 1 ELSE 0 END)AS D,
-                SUM(CASE WHEN r.level_id='5' THEN 1 ELSE 0 END)AS E,
-                SUM(CASE WHEN r.level_id='6' THEN 1 ELSE 0 END)AS F,
-                SUM(CASE WHEN r.level_id='7' THEN 1 ELSE 0 END)AS G,
-                SUM(CASE WHEN r.level_id='8' THEN 1 ELSE 0 END)AS H,
-                SUM(CASE WHEN r.level_id='9' THEN 1 ELSE 0 END)AS I,
-                SUM(CASE WHEN r.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
-                FROM rm.risk r
-                INNER JOIN rm.location_riks l ON l.id = r.location_riks_id
-                WHERE type_id = '3'
-                GROUP BY r.location_riks_id";
+                SUM(CASE WHEN rd.level_id='1' THEN 1 ELSE 0 END)AS A,
+                SUM(CASE WHEN rd.level_id='2' THEN 1 ELSE 0 END)AS B,
+                SUM(CASE WHEN rd.level_id='3' THEN 1 ELSE 0 END)AS C,
+                SUM(CASE WHEN rd.level_id='4' THEN 1 ELSE 0 END)AS D,
+                SUM(CASE WHEN rd.level_id='5' THEN 1 ELSE 0 END)AS E,
+                SUM(CASE WHEN rd.level_id='6' THEN 1 ELSE 0 END)AS F,
+                SUM(CASE WHEN rd.level_id='7' THEN 1 ELSE 0 END)AS G,
+                SUM(CASE WHEN rd.level_id='8' THEN 1 ELSE 0 END)AS H,
+                SUM(CASE WHEN rd.level_id='9' THEN 1 ELSE 0 END)AS I,
+                SUM(CASE WHEN rd.level_id<>'' THEN 1 ELSE 0 END)AS TOTAL
+                FROM risk_med rd
+                INNER JOIN location_riks l ON l.id = rd.location_riks_id
+                GROUP BY rd.location_riks_id";
 
         try {
             $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -272,9 +271,8 @@ class TypesController extends controller {
         ]);
 
         ///////////////////////// sql การทบทวน ////////////////////////
-        $sql1 = "SELECT s.status_name,COUNT(r.status_id) AS status_id FROM risk r
-                LEFT OUTER JOIN status s ON s.id = r.status_id
-                WHERE r.type_id = '3'
+        $sql1 = "SELECT s.status_name,COUNT(rd.status_id) AS status_id FROM risk_med rd
+                LEFT OUTER JOIN status s ON s.id = rd.status_id
                 GROUP BY s.status_name";
 
         try {
@@ -292,11 +290,10 @@ class TypesController extends controller {
         ]);
 
         ///////////////////////// sql แยกหน่วยงาน+ประเภทย่อย /////////////////
-        $sql3 = "SELECT l.location_name,t.type_name,st.sub_type_name,COUNT(st.sub_type_name) AS total FROM risk r
-                LEFT OUTER JOIN location_riks l ON l.id = r.location_riks_id
-                LEFT OUTER JOIN type t ON t.id = r.type_id
-                LEFT OUTER JOIN sub_type st ON st.id = r.sub_type_id
-                WHERE r.type_id = '3'
+        $sql3 = "SELECT l.location_name,t.type_name,st.sub_type_name,COUNT(st.sub_type_name) AS total FROM risk_med rd
+                LEFT OUTER JOIN location_riks l ON l.id = rd.location_riks_id
+                LEFT OUTER JOIN type t ON t.id = rd.type_med_id
+                LEFT OUTER JOIN sub_type st ON st.id = rd.sub_med_type_id
                 GROUP BY l.location_name,st.sub_type_name
                 ORDER BY total DESC";
 
@@ -317,9 +314,8 @@ class TypesController extends controller {
 
 
         ///////////////////////// sql แยกแผนกกราฟแท่ง /////////////////
-        $sql2 = "SELECT l.location_name,COUNT(r.type_id) AS type_id FROM risk r
-                LEFT OUTER JOIN location_riks l ON l.id = r.location_riks_id
-                WHERE r.type_id = '3'
+        $sql2 = "SELECT l.location_name,COUNT(rd.type_med_id) AS type_id FROM risk_med rd
+                LEFT OUTER JOIN location_riks l ON l.id = rd.location_riks_id
                 GROUP BY l.location_name";
 
         $rawData2 = Yii::$app->db->createCommand($sql2)->queryAll();
