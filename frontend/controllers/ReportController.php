@@ -852,4 +852,55 @@ where risk_date between '$date1' and '$date2'";
         ]);
     }
 
+    public function actionReport11() {
+
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+
+        $sql = "SELECT lr.location_name, 
+                SUM(CASE WHEN r.status_id<>'' THEN 1 ELSE 0 END) AS total,
+                SUM(CASE WHEN r.status_id=1 THEN 1 ELSE 0 END) AS status1,
+                SUM(CASE WHEN r.status_id=2 THEN 1 ELSE 0 END) AS status2
+                FROM risk r
+                LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+                WHERE risk_date between '$date1' and '$date2'
+                GROUP BY lr.location_name
+                UNION ALL
+                SELECT 'รวม', 
+                SUM(CASE WHEN r.status_id<>'' THEN 1 ELSE 0 END) AS total,
+                SUM(CASE WHEN r.status_id=1 THEN 1 ELSE 0 END) AS status1,
+                SUM(CASE WHEN r.status_id=2 THEN 1 ELSE 0 END) AS status2
+                FROM risk r
+                LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+                WHERE risk_date between '$date1' and '$date2' ORDER BY total ASC ";
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+        return $this->render('report11', [
+
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+        ]);
+    }
+
 }

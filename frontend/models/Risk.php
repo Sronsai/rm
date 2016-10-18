@@ -94,7 +94,7 @@ class Risk extends ActiveRecord {
             'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
             'risk_date' => 'วันที่เกิดเหตุ/เวลา',
             'risk_report' => 'วันที่รายงาน/เวลา',
-            'risk_summary' => 'สรุปเหตุการณ์',
+            'risk_summary' => 'สรุปเหตุการณ์  ',
             'type_id' => 'ประเภทความเสี่ยง',
             'type_clinic_id' => 'ประเภทคลินิค',
             'sub_type_id' => 'ประเภทความเสี่ยงย่อย',
@@ -273,7 +273,7 @@ class Risk extends ActiveRecord {
 
 }
 
-class Datetimetest extends MyActiveRecord {
+/*class Datetimetest extends MyActiveRecord {
 
     public static function tableName() {
         return 'datetimetest';
@@ -301,4 +301,4 @@ class Datetimetest extends MyActiveRecord {
         ];
     }
 
-}
+}*/

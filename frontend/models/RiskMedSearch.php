@@ -47,7 +47,7 @@ class RiskMedSearch extends RiskMed
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 15,],
+                'pageSize' => 20,],
                 /* 'sort' => [
                   'defaultOrder' => [
                   'risk_summary' => SORT_DESC,

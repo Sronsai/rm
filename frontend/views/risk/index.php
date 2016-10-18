@@ -15,6 +15,7 @@ use kartik\export\ExportMenu;
 use dosamigos\datepicker\DatePicker;
 use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
 
+
 //use yii\helpers\VarDumper;
 
 /* @var $this yii\web\View */
@@ -112,14 +113,14 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     [
                         'header' => 'ลำดับ',
                         'class' => 'yii\grid\SerialColumn',
-                        'options' => ['width' => '10'],
+                        'options' => ['width' => '5'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center']
                     ],
                     [
                         'attribute' => 'id',
                         'header' => 'เลขที่',
-                        'options' => ['width' => '100'],
+                        'options' => ['width' => '10'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
@@ -198,7 +199,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     ],
                     //'location_connection_id',
                     //search แบบกรอกข้อมความในช่อง แล้วไปแก้ riskSearch
-                    [
+                    /*[
                         'attribute' => 'location_connection_id',
                         'value' => 'locationConnection.location_name',
                         'options' => ['width' => '50'],
@@ -210,17 +211,17 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
                     //'headerOptions' => ['width' => '80']
-                    ],
-                    /* [
-                      'attribute' => 'location_connection_id',
-                      'value' => 'locationConnection.location_name',
+                    ],*/
+                     [
+                      'attribute' => 'location_report_id',
+                      'value' => 'locationReport.location_name',
                       'options' => ['width' => '50'],
                       'contentOptions' => ['class' => 'text-center'],
                       'headerOptions' => ['class' => 'text-center'],
-                      'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
+                      'filter' => Html::activeDropDownList($searchModel, 'location_report_id', ArrayHelper::map(frontend\models\LocationReport::find()->asArray()->all(), 'id', 'location_name'), [
                       'class' => 'form-control', 'prompt' => ''
                       ]),
-                      ], */
+                      ], 
                     //'location_report_id',
                     /* [
                       'attribute' => 'location_report_id',
@@ -230,14 +231,14 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
-                        'options' => ['width' => '1000'],
+                        'options' => ['width' => '500'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',
                     [
                         'attribute' => 'type_id',
                         'value' => 'type.type_name',
-                        'options' => ['width' => '80'],
+                        'options' => ['width' => '50'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                         'filter' => Html::activeDropDownList($searchModel, 'type_id', ArrayHelper::map(frontend\models\Type::find()->asArray()->all(), 'id', 'type_name'), [

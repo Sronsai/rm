@@ -527,7 +527,7 @@ where risk_date between '$date1' and '$date2'";
                     'date2' => $date2,
         ]);
     }
-    
+
     public function actionReport8() {
 
         $date1 = date('Y-m-d');
@@ -538,19 +538,61 @@ where risk_date between '$date1' and '$date2'";
             $date2 = $_POST['date2'];
         }
 
-        $sql = "SELECT 'OPD' as 'Department',
+        $sql = "SELECT 'DOC' as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med
+UNION ALL
+SELECT 'DENT'as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med
+UNION ALL
+SELECT 'PHAR' as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med
+UNION ALL
+SELECT 'OPD' as 'Department',
 sum(case WHEN type_med_id ='1' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
 sum(case WHEN type_med_id ='2' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
 sum(case WHEN type_med_id ='3' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
 sum(case WHEN type_med_id ='4' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
 FROM risk_med
 UNION ALL
-SELECT 'IPD',
+SELECT 'IPD'as 'Department',
 sum(case WHEN type_med_id ='1' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
 sum(case WHEN type_med_id ='2' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
 sum(case WHEN type_med_id ='3' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
 sum(case WHEN type_med_id ='4' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
-FROM risk_med ";
+FROM risk_med
+UNION ALL
+SELECT 'ER'as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med
+UNION ALL
+SELECT 'LR/OR'as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med
+UNION ALL
+SELECT 'VECH'as 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
+sum(case WHEN type_med_id ='2' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
+sum(case WHEN type_med_id ='3' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
+sum(case WHEN type_med_id ='4' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
+FROM risk_med";
 
 
         try {

@@ -42,14 +42,14 @@ use frontend\models\RiskMedSearch;
                 'responsive' => true,
                 'hover' => true,
                 'floatHeader' => false,
-                /*'pjax' => true,
-                'pjaxSettings' => [
-                    'neverTimeout' => true,
-                    'enablePushState' => false,
-                //'beforeGrid' => 'My fancy content before.',
-                //'afterGrid' => 'My fancy content after.',
-                //'options' => ['id' => 'CustomerGrid'],
-                ],*/
+                /* 'pjax' => true,
+                  'pjaxSettings' => [
+                  'neverTimeout' => true,
+                  'enablePushState' => false,
+                  //'beforeGrid' => 'My fancy content before.',
+                  //'afterGrid' => 'My fancy content after.',
+                  //'options' => ['id' => 'CustomerGrid'],
+                  ], */
                 'panel' => [
                     //'heading' => '<h3 class="panel-title"><i class="glyphicon glyphicon-globe"></i> RM</h3>',
                     //'type' => 'info',
@@ -92,14 +92,14 @@ use frontend\models\RiskMedSearch;
                     [
                         'header' => 'ลำดับ',
                         'class' => 'yii\grid\SerialColumn',
-                        'options' => ['width' => '10'],
+                        'options' => ['width' => '5'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center']
                     ],
                     [
                         'attribute' => 'id',
                         'header' => 'เลขที่',
-                        'options' => ['width' => '100'],
+                        'options' => ['width' => '10'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
@@ -198,7 +198,16 @@ use frontend\models\RiskMedSearch;
                       'class' => 'form-control', 'prompt' => ''
                       ]),
                       ], */
-                    //'location_report_id',
+                    [
+                        'attribute' => 'location_report_id',
+                        'value' => 'locationReport.location_name',
+                        'options' => ['width' => '50'],
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
+                        'filter' => Html::activeDropDownList($searchModel, 'location_report_id', ArrayHelper::map(frontend\models\LocationReport::find()->asArray()->all(), 'id', 'location_name'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
+                    ],
                     /* [
                       'attribute' => 'location_report_id',
                       'value' => 'locationReport.location_name',
@@ -207,7 +216,7 @@ use frontend\models\RiskMedSearch;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
-                        'options' => ['width' => '1000'],
+                        'options' => ['width' => '500'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',

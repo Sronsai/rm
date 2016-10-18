@@ -9,6 +9,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\helpers\Html;
+use common\models\MyActiveRecord;
 
 
 
@@ -92,9 +93,9 @@ class RiskMed extends \yii\db\ActiveRecord
         'location_riks_id' => 'หน่วยงานต้นเหตุ',
         'location_report_id' => 'หน่วยงานที่รายงาน',
         'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
-        'risk_date' => 'วันที่เกิดเหตุ/เวลา',
+        'risk_date' => 'วันที่เกิดเหตุ  ',
         'risk_report' => 'วันที่รายงาน/เวลา',
-        'risk_summary' => 'สรุปเหตุการณ์',
+        'risk_summary' => 'สรุปเหตุการณ์/แก้ไขเบื้องต้น',
         'type_med_id' => 'ประเภทความเสี่ยง (ยา)',
         'sub_med_type_id' => 'ประเภทความเสี่ยงย่อย (ยา)',
         'level_id' => 'ระดับ',
