@@ -54,15 +54,19 @@ html, body {
     height: 100%;
 }
 
-html{
-    -moz-filter: grayscale(100%);
+//html{
+    //-moz-filter: grayscale(100%);
     /* IE */
-    filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
-    filter: gray;
+    //filter: progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+    //filter: gray;
     /* Chrome, Safari */
-    -webkit-filter: grayscale(1);
+    //-webkit-filter: grayscale(1);
     /* Firefox */
-    filter: grayscale(1);
+    //filter: grayscale(1);
+//}
+.report .kv-panel-before {
+    font-size: 30px;
+    text-align: center;
 }
 
 .main-header span {

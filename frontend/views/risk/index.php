@@ -119,7 +119,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     ],
                     [
                         'attribute' => 'id',
-                        'header' => 'เลขที่',
+                        'header' => 'เลขที่ความเสี่ยง',
                         'options' => ['width' => '10'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],

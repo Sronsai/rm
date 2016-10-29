@@ -4,14 +4,14 @@
 use fedemotta\datatables\DataTables;
 use kartik\grid\GridView;
 
-$this->title = 'รายงานความเสี่ยงที่ทำให้ถึงชีวิต';
+$this->title = 'รายงานความเสี่ยง GHI';
 
-$this->params['breadcrumbs'][] = ['label' => 'รายงานความเสี่ยงที่ทำให้ถึงชีวิต', 'url' => ['/report/report4']];
-$this->params['breadcrumbs'][] = 'รายงานความเสี่ยงที่ทำให้ถึงชีวิต';
+$this->params['breadcrumbs'][] = ['label' => 'รายงานความเสี่ยง GHI', 'url' => ['/report/report4']];
+$this->params['breadcrumbs'][] = 'รายงานความเสี่ยง GHI';
 ?>
 
 <div class="report">
-    <center><h1><u>รายงานความเสี่ยงที่ทำให้ถึงพิการและเสียชีวิต
+    <center><h1><u>รายงานความเสี่ยง GHI ทั้งหมด 
                 <?php
                 $command = Yii::$app->db->createCommand(" SELECT COUNT(level_id) FROM risk WHERE level_id IN ('7','8','9') ");
                 $target = $command->queryScalar();

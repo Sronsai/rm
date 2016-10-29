@@ -495,6 +495,23 @@ where risk_date between '$date1' and '$date2'";
             $date2 = $_POST['date2'];
         }
 
+        $sql_chart = " SELECT lr.location_name,COUNT(r.location_report_id) AS total FROM risk r
+                LEFT OUTER JOIN location_report lr ON lr.id = r.location_report_id
+                WHERE r.risk_date BETWEEN '$date1' AND '$date2'
+                GROUP BY lr.location_name
+                ORDER BY total DESC LIMIT 10";
+
+        $rawData = Yii::$app->db->createCommand($sql_chart)->queryAll();
+        $main_data = [];
+        foreach ($rawData as $data) {
+            $main_data[] = [
+                'name' => $data['location_name'],
+                'y' => $data['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main = json_encode($main_data);
+
         $sql = " SELECT lr.location_name,COUNT(r.location_report_id) AS total FROM risk r
                 LEFT OUTER JOIN location_report lr ON lr.id = r.location_report_id
                 WHERE r.risk_date BETWEEN '$date1' AND '$date2'
@@ -520,8 +537,10 @@ where risk_date between '$date1' and '$date2'";
                     'dataProvider' => $dataProvider,
                     'rawData' => $rawData,
                     'sql' => $sql,
+                    'sql_chart' => $sql_chart,
                     'date1' => $date1,
                     'date2' => $date2,
+                    'main' => $main
         ]);
     }
 
@@ -898,6 +917,468 @@ where risk_date between '$date1' and '$date2'";
                     'dataProvider' => $dataProvider,
                     'rawData' => $rawData,
                     'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+        ]);
+    }
+
+    public function actionReport12() {
+
+        //$date1 = date('Y-m-d');
+        //$date2 = date('Y-m-d');
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+        $clinic = '';
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+            $clinic = $_POST['clinic'];
+        }
+
+        $sql = " select r.id,r.risk_date,r.hn,concat(r.pname,r.fname,'  ',r.lname) as fullname
+                    ,lr.location_name
+                    ,r.risk_summary
+                    ,l.level_e
+                    ,ty.type_name as type
+                    ,s.system_name as system
+                    ,r.risk_review
+                    ,st.status_name as status
+            from risk r
+            left outer join type_clinic cl on cl.id = r.type_clinic_id
+            left outer join person p on p.id = r.person_id
+            left outer join type ty on ty.id = r.type_id
+            left outer join location_riks lr on lr.id = r.location_riks_id
+            left outer join system s on s.id = r.system_id
+            left outer join status st on st.id = r.status_id
+            LEFT OUTER JOIN `level` l ON l.id = r.level_id
+            WHERE r.level_id IN (7,8,9)
+            AND risk_date between '$date1' and '$date2' ";
+
+        if ($clinic != '') {
+            $sql = "select r.id,r.risk_date,r.hn,concat(r.pname,r.fname,'  ',r.lname) as fullname
+                    ,lr.location_name
+                    ,r.risk_summary
+                    ,l.level_e
+                    ,ty.type_name as type
+                    ,s.system_name as system
+                    ,r.risk_review
+                    ,st.status_name as status
+            from risk r
+            left outer join type_clinic cl on cl.id = r.type_clinic_id
+            left outer join person p on p.id = r.person_id
+            left outer join type ty on ty.id = r.type_id
+            left outer join location_riks lr on lr.id = r.location_riks_id
+            left outer join system s on s.id = r.system_id
+            left outer join status st on st.id = r.status_id
+            LEFT OUTER JOIN `level` l ON l.id = r.level_id
+            WHERE r.level_id IN (7,8,9)
+            AND risk_date between '$date1' and '$date2' and r.type_clinic_id = $clinic ";
+        }
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+        return $this->render('report12', [
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+                    'clinic' => $clinic
+        ]);
+    }
+
+    public function actionReport13() {
+
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+
+        $sql = "select r.id,r.risk_date,r.hn,concat(r.pname,r.fname,'  ',r.lname) as fullname
+            ,lr.location_name
+            ,r.risk_summary
+            ,le.level_e
+            ,ty.type_name as type
+            ,s.system_name as system
+            ,r.risk_review
+            ,st.status_name as status
+            from risk r
+left outer join person p on p.id = r.person_id
+left outer join type ty on ty.id = r.type_id
+left outer join location_riks lr on lr.id = r.location_riks_id
+left outer join level le on le.id = r.level_id
+left outer join system s on s.id = r.system_id
+left outer join status st on st.id = r.status_id
+WHERE type_id = '8'
+AND sub_type_id = '68'
+AND risk_date between '$date1' and '$date2'";
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+
+        return $this->render('report13', [
+
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+        ]);
+    }
+
+    public function actionReport14() {
+
+        $sql = " SELECT 'A = NEAR MISS' as name,
+'ไตรมาสที่ 1' as name1,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id = '1') as 'TM1',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id = '1') as 'TM2',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id = '1') as 'TM3',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id = '1') as 'TM4'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+
+UNION ALL
+
+SELECT 'BC = LOW' as name,
+'ไตรมาสที่ 2' as name1,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (2,3)) as 'TM1',
+
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (2,3)) as 'TM2',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (2,3)) as 'TM3',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (2,3)) as 'TM4'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+UNION ALL
+SELECT 'DEF = MODERRATE' as name,
+'ไตรมาสที่ 3' as name1,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (4,5,6)) as 'TM1',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (4,5,6)) as 'TM2',
+
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (4,5,6)) as 'TM3',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (4,5,6)) as 'TM4'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+UNION ALL
+SELECT 'GHI = HIGH' as name,
+'ไตรมาสที่ 4 ' as name1,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (7,8,9)) as 'TM1',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (7,8,9)) as 'TM2',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (7,8,9)) as 'TM3',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (7,8,9)) as 'TM4'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+ ";
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+        $rawData = Yii::$app->db->createCommand($sql)->queryAll();
+
+
+
+        $sql_level = " SELECT 'ไตรมาสที่ 1' as NAME,
+
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id = '1') as 'NEAR MISS',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (2,3) ) as 'LOW',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (7,8,9) ) as 'HIGH'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+
+UNION ALL
+
+SELECT 'ไตรมาสที่ 2' as NAME,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id = '1') 
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id = '1') as 'NEAR MISS',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (2,3) ) as 'LOW',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (7,8,9) ) as 'HIGH'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+
+UNION ALL
+
+SELECT 'ไตรมาสที่ 3' as NAME,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id = '1') as 'NEAR MISS',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (2,3)) as 'LOW',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (4,5,6)) as 'MODERRATE',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (7,8,9) ) as 'HIGH'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME
+
+UNION ALL
+
+SELECT 'ไตรมาสที่ 4' as NAME,
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id = '1')
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id = '1') as 'NEAR MISS',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (2,3) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (2,3) ) as 'LOW',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (4,5,6) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (7,8,9) )
++
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (7,8,9) ) as 'HIGH'
+FROM risk r
+LEFT OUTER JOIN level le ON le.id = r.level_id
+GROUP BY NAME ";
+
+        $rawData = Yii::$app->db->createCommand($sql_level)->queryAll();
+
+        $main_data1 = [];
+        $main_data2 = [];
+        $main_data3 = [];
+        $main_data4 = [];
+
+        foreach ($rawData as $data1) {
+            $main_data1[] = [
+                'name' => $data1['NAME'],
+                'y' => $data1['NEAR MISS'] * 1,
+            ];
+        }
+        foreach ($rawData as $data2) {
+            $main_data2[] = [
+                'name' => $data2['NAME'],
+                'y' => $data2['LOW'] * 1,
+            ];
+        }
+        foreach ($rawData as $data3) {
+            $main_data3[] = [
+                'name' => $data3['NAME'],
+                'y' => $data3['MODERRATE'] * 1,
+            ];
+        }
+        foreach ($rawData as $data4) {
+            $main_data4[] = [
+                'name' => $data4['NAME'],
+                'y' => $data4['HIGH'] * 1,
+            ];
+        }
+
+        $main1 = json_encode($main_data1);
+        $main2 = json_encode($main_data2);
+        $main3 = json_encode($main_data3);
+        $main4 = json_encode($main_data4);
+
+        return $this->render('report14', [
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'sql_level' => $sql_level,
+                    'main1' => $main1,
+                    'main2' => $main2,
+                    'main3' => $main3,
+                    'main4' => $main4,
+        ]);
+    }
+
+    public function actionReport15() {
+
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+
+        $sql_clinic = " SELECT ty.sub_type_name,COUNT(r.sub_type_id) as type
+FROM risk r
+LEFT OUTER JOIN sub_type ty ON ty.id = r.sub_type_id
+LEFT OUTER JOIN type_clinic tyc ON tyc.id = r.type_clinic_id
+WHERE r.type_clinic_id = '1'
+AND r.risk_date between '$date1' and '$date2'
+GROUP BY ty.sub_type_name
+UNION ALL
+SELECT tym.sub_med_type_name,COUNT(rr.sub_med_type_id) as type
+FROM risk_med rr 
+LEFT OUTER JOIN sub_med_type tym ON tym.id = rr.sub_med_type_id
+WHERE rr.risk_date between '$date1' and '$date2'
+AND rr.type_clinic_id = '1'
+ORDER BY type DESC  LIMIT 10 ";
+
+        try {
+            $rawData1 = \Yii::$app->db->createCommand($sql_clinic)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider1 = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData1,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+
+
+        $sql_nonclinic = " SELECT ty.sub_type_name,COUNT(r.sub_type_id) as type
+FROM risk r
+LEFT OUTER JOIN sub_type ty ON ty.id = r.sub_type_id
+LEFT OUTER JOIN type_clinic tyc ON tyc.id = r.type_clinic_id
+WHERE r.type_clinic_id = '2'
+AND r.risk_date between '$date1' and '$date2'
+GROUP BY ty.sub_type_name
+UNION ALL
+SELECT tym.sub_med_type_name,COUNT(rr.sub_med_type_id) as type
+FROM risk_med rr 
+LEFT OUTER JOIN sub_med_type tym ON tym.id = rr.sub_med_type_id
+WHERE rr.risk_date between '$date1' and '$date2'
+AND rr.type_clinic_id = '2'
+GROUP BY tym.sub_med_type_name
+ORDER BY type DESC LIMIT 10  ";
+
+        try {
+            $rawData2 = \Yii::$app->db->createCommand($sql_nonclinic)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider2 = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData2,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+
+        return $this->render('report15', [
+
+                    'dataProvider1' => $dataProvider1,
+                    'dataProvider2' => $dataProvider2,
+                    'rawData1' => $rawData1,
+                    'rawData2' => $rawData2,
+                    'sql_clinic' => $sql_clinic,
+                    'sql_nonclinic' => $sql_nonclinic,
                     'date1' => $date1,
                     'date2' => $date2,
         ]);
