@@ -528,6 +528,105 @@ $this->params['breadcrumbs'][] = 'รายงานความเสี่ย�
     </div>
     <!-- end bar chart -->
 
+    <!-- donut chart -->
+    <div class="panel-body">
+        <div class="col-md-12">
+            <div style="display: none">
+                <?php
+                echo Highcharts::widget([
+                    'scripts' => [
+                        'highcharts-more', // enables supplementary chart types (gauge, arearange, columnrange, etc.)
+                        'modules/exporting', // adds Exporting button/menu to chart
+                    //'themes/grid', // applies global 'grid' theme to all charts
+                    //'highcharts-3d'
+                    //'modules/drilldown'
+                    ]
+                ]);
+                ?>
+            </div>
+            <div id="pie-donut2">
+            </div>
+
+            <?php
+            //$title = "Clinic / Non Clinic (ตั้งแต่ ตุลาคม 2557)";
+            $clinic = Yii::$app->db->createCommand("SELECT
+(SELECT COUNT(r.type_clinic_id) FROM risk r WHERE r.type_clinic_id = '1' AND risk_date between '$date1' and '$date2')
++
+(SELECT COUNT(rd.type_clinic_id) FROM risk_med rd WHERE rd.type_clinic_id = '1' AND risk_date between '$date1' and '$date2') as CLINIC")->queryScalar();
+            $non_clinic = Yii::$app->db->createCommand("SELECT
+(SELECT COUNT(type_clinic_id) FROM risk r WHERE r.type_clinic_id = '2' AND risk_date between '$date1' and '$date2')
++
+(SELECT COUNT(rd.type_clinic_id) FROM risk_med rd WHERE rd.type_clinic_id = '2' AND risk_date between '$date1' and '$date2') as NON_CLINIC")->queryScalar();
+            $this->registerJs("$(function () {
+
+                                    $('#pie-donut2').highcharts({
+                                        chart: {
+                                            plotBackgroundColor: null,
+                                            plotBorderWidth: null,
+                                            plotShadow: false,
+                                            type: 'pie'
+                                        },
+                                        title: {
+                                            text: 'Clinic / Non Clinic'
+                                        },
+                                        tooltip: {
+                                            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                                        },
+                                        plotOptions: {
+                                            pie: {
+                                                allowPointSelect: true,
+                                                cursor: 'pointer',
+                                                depth: 35,
+                                                dataLabels: {
+                                                    enabled: true,
+                                                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',    //  แสดง %
+                                                    style: {
+                                                        color:'black'      
+                                                    },
+                                                    connectorColor: 'silver'
+                                                },
+                                                startAngle: -90,
+                                                endAngle: 90,
+                                                center: ['50%', '75%']
+                                            }
+                                        },
+                                        /*plotOptions: {
+                                            pie: {
+                                                dataLabels: {
+                                                    allowPointSelect: true,
+                                                    cursor: 'pointer',
+                                                    depth: 35,
+                                                    style: {
+                                                        color:'black',                 
+                                                    },
+                                                    connectorColor: 'silver'
+                                                },
+                                                startAngle: -90,
+                                                endAngle: 90,
+                                                center: ['50%', '75%']
+                                            }
+                                        },*/
+                                        legend: {
+                                            enabled: true
+                                        },
+                                        colors: ['#FF0000', '#000000'],
+                                        series: [{
+                                            type: 'pie',
+                                            name: 'ร้อยละ',
+                                            innerSize: '50%',
+                                            data: [
+                                            ['CLINIC',   $clinic],
+                                            ['NON CLINIC',   $non_clinic],
+                                            ]
+                                        }]
+                                    });
+                                });
+                                ");
+            ?>
+        </div>
+    </div>
+    <!-- end donut -->
+
 
 
 </div>

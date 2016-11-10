@@ -6,17 +6,15 @@ use kartik\grid\GridView;
 use frontend\models\Risk;
 use yii\helpers\Html;
 
-$this->title = 'รายงานอันดับความเสี่ยงที่เกิดซ้ำ Clinic / Non Clinic';
+$this->title = 'รายงานแยกตามประเภทความเสี่ยง (ยา)';
 
-$this->params['breadcrumbs'][] = ['label' => 'รายงานอันดับความเสี่ยงที่เกิดซ้ำ Clinic / Non Clinic', 'url' => ['/report/report15']];
-$this->params['breadcrumbs'][] = 'รายงานอันดับความเสี่ยงที่เกิดซ้ำ Clinic / Non Clinic';
+$this->params['breadcrumbs'][] = ['label' => 'รายงานแยกตามประเภทความเสี่ยง (ยา)', 'url' => ['/med/report6']];
+$this->params['breadcrumbs'][] = 'รายงานแยกตามประเภทความเสี่ยง (ยา)';
 ?>
 
 
 <div class="report">
-    <center><h1><u>รายงานอันดับความเสี่ยงที่เกิดซ้ำ Clinic / Non Clinic </u></h1></center>
-
-
+    <center><h1><u>รายงานแยกตามประเภทความเสี่ยง (ยา) </u></h1></center>
 
     <div class="well">
 
@@ -73,16 +71,16 @@ $this->params['breadcrumbs'][] = 'รายงานอันดับควา�
 
 
     <div class="col-md-12">
-        <div class = "col-md-6">
+        <div class = "col-md-12">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <?php
 //echo yii\grid\GridView::widget([
                     echo \kartik\grid\GridView::widget([
                         //echo DataTables::widget([
-                        'dataProvider' => $dataProvider1,
+                        'dataProvider' => $dataProvider,
                         'panel' => [
-                            'before' => 'Clinic'
+                            'before' => 'รายงานแยกตามประเภทความเสี่ยง (ยา)'
                         ],
                         'export' => [
                             'showConfirmAlert' => false,
@@ -90,15 +88,16 @@ $this->params['breadcrumbs'][] = 'รายงานอันดับควา�
                         ],
                         'columns' => [
                             [
-                                'attribute' => 'sub_type_name',
-                                'header' => 'ประเภท',
-                                'headerOptions' => ['width' => '30'],
+                                'attribute' => 'sub_med_type_name',
+                                'header' => 'ประเภทย่อย (ยา)',
+                                'headerOptions' => ['width' => '100'],
                                 'headerOptions' => ['class' => 'text-center'],
+                                //'contentOptions' => ['class' => 'text-center'],
                             ],
                             [
-                                'attribute' => 'type',
+                                'attribute' => 'total',
                                 'header' => 'ครั้ง',
-                                'headerOptions' => ['width' => '20'],
+                                'headerOptions' => ['width' => '100'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                             ],
@@ -109,41 +108,6 @@ $this->params['breadcrumbs'][] = 'รายงานอันดับควา�
             </div>
         </div>
 
-        <div class = "col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <?php
-//echo yii\grid\GridView::widget([
-                    echo \kartik\grid\GridView::widget([
-                        //echo DataTables::widget([
-                        'dataProvider' => $dataProvider2,
-                        'panel' => [
-                            'before' => 'Non Clinic'
-                        ],
-                        'export' => [
-                            'showConfirmAlert' => false,
-                            'target' => GridView::TARGET_BLANK
-                        ],
-                        'columns' => [
-                            [
-                                'attribute' => 'sub_type_name',
-                                'header' => 'ประเภท',
-                                'headerOptions' => ['width' => '30'],
-                                'headerOptions' => ['class' => 'text-center'],
-                                                            ],
-                            [
-                                'attribute' => 'type',
-                                'header' => 'ครั้ง',
-                                'headerOptions' => ['width' => '20'],
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => ['class' => 'text-center'],
-                            ],
-                        ]
-                    ]);
-                    ?>
-                </div>
-            </div>
-        </div>
     </div>
 
 

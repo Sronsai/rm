@@ -711,4 +711,44 @@ FROM risk_med";
         ]);
     }
 
+    public function actionReport6() {
+
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+
+        $sql = " SELECT sm.sub_med_type_name,COUNT(sub_med_type_id) as total FROM risk_med r
+LEFT OUTER JOIN sub_med_type sm ON sm.id = r.sub_med_type_id
+WHERE r.risk_date between '$date1' AND '$date2'
+GROUP BY sm.sub_med_type_name
+ORDER BY total DESC ";
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+
+        return $this->render('report6', [
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+        ]);
+    }
+
 }

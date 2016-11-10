@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "da55e07a17a5418d8470e7f0e7bd15f0",
-    "content-hash": "9fc77e2262826937a6637eb8c466901d",
+    "hash": "cf143a545b174e13a069c8ebcbd6c2b5",
+    "content-hash": "7e5145b7451ef001ca84321a81695ee6",
     "packages": [
         {
             "name": "2amigos/yii2-date-picker-widget",
@@ -370,6 +370,41 @@
             "license": [
                 "Apache-2.0"
             ]
+        },
+        {
+            "name": "bower-asset/bootstrap-daterangepicker",
+            "version": "v2.1.21",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dangrossman/bootstrap-daterangepicker.git",
+                "reference": "d39abc8b91b662b8b60a75e18c2de09fd6c04299"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dangrossman/bootstrap-daterangepicker/zipball/d39abc8b91b662b8b60a75e18c2de09fd6c04299",
+                "reference": "d39abc8b91b662b8b60a75e18c2de09fd6c04299",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.10",
+                "bower-asset/moment": ">=2.9.0"
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "daterangepicker.js",
+                    "daterangepicker.css"
+                ],
+                "bower-asset-ignore": [
+                    "**/.*",
+                    "node_modules",
+                    "bower_components",
+                    "test",
+                    "tests",
+                    "moment.js",
+                    "moment.min.js"
+                ]
+            }
         },
         {
             "name": "bower-asset/datatables",
@@ -1058,12 +1093,12 @@
             "version": "4.0.23",
             "source": {
                 "type": "git",
-                "url": "https://github.com/facebook/facebook-php-sdk-v4.git",
+                "url": "https://github.com/facebook/php-graph-sdk.git",
                 "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facebook/facebook-php-sdk-v4/zipball/c82611e05596622c9bd7abfa1cea1512d885c95e",
+                "url": "https://api.github.com/repos/facebook/php-graph-sdk/zipball/c82611e05596622c9bd7abfa1cea1512d885c95e",
                 "reference": "c82611e05596622c9bd7abfa1cea1512d885c95e",
                 "shasum": ""
             },
@@ -1155,6 +1190,54 @@
                 "yii2"
             ],
             "time": "2015-06-08 16:07:23"
+        },
+        {
+            "name": "jino5577/yii2-date-range-picker",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jino5577/yii2-date-range-picker.git",
+                "reference": "3a9fdffb5edd2f6a7d73de4c5a664af1bb9c37c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jino5577/yii2-date-range-picker/zipball/3a9fdffb5edd2f6a7d73de4c5a664af1bb9c37c1",
+                "reference": "3a9fdffb5edd2f6a7d73de4c5a664af1bb9c37c1",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-daterangepicker": "@stable"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "jino5577\\daterangepicker\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Dmitrij Butko",
+                    "email": "jino5577@gmail.com"
+                }
+            ],
+            "description": "Yii 2 date range picker input based on Dan Grossman daterangepicker plugin.",
+            "homepage": "https://github.com/jino5577/yii2-date-range-picker",
+            "keywords": [
+                "bootstrap",
+                "bootstrap 3",
+                "date",
+                "date-range",
+                "extension",
+                "range",
+                "time",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-10-15 08:52:29"
         },
         {
             "name": "kartik-v/bootstrap-checkbox-x",

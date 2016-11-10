@@ -184,7 +184,7 @@ use kartik\checkbox\CheckboxX;
                                     <div class="panel panel-info">
                                         <div class="panel-heading"></div>
                                         <div class="panel-body">
-                                            <?= $form->field($model, 'risk_summary')->textarea(['rows' => 4]) ?>
+                                            <?= $form->field($model, 'risk_summary')->textarea(['rows' => 6]) ?>
                                         </div>
                                     </div>
                                 </div>
@@ -193,6 +193,37 @@ use kartik\checkbox\CheckboxX;
                             </div>
                         </div>
 
+
+
+                        <div class="col-md-12">
+                            <div class="panel panel-info">
+                                <div class="panel-heading"></div>
+                                <div class="panel-body">
+                                    <div class="form-group field-upload_files">
+                                        <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่าย </label>
+                                        <div>
+                                            <?=
+                                            FileInput::widget([
+                                                'name' => 'upload_ajax[]',
+                                                'options' => ['multiple' => true, 'accept' => 'image/*'], //'accept' => 'image/*' หากต้องเฉพาะ image
+                                                'pluginOptions' => [
+                                                    'overwriteInitial' => false,
+                                                    'initialPreviewShowDelete' => true,
+                                                    'initialPreview' => $initialPreview,
+                                                    'initialPreviewConfig' => $initialPreviewConfig,
+                                                    'uploadUrl' => Url::to(['/risk-library/upload-ajax']),
+                                                    'uploadExtraData' => [
+                                                        'ref' => $model->ref,
+                                                    ],
+                                                    'maxFileCount' => 100
+                                                ]
+                                            ]);
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
 
@@ -279,28 +310,6 @@ use kartik\checkbox\CheckboxX;
                         ]);
                         ?>
 
-                        <div class="form-group field-upload_files">
-                            <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่าย </label>
-                            <div>
-                                <?=
-                                FileInput::widget([
-                                    'name' => 'upload_ajax[]',
-                                    'options' => ['multiple' => true, 'accept' => 'image/*'], //'accept' => 'image/*' หากต้องเฉพาะ image
-                                    'pluginOptions' => [
-                                        'overwriteInitial' => false,
-                                        'initialPreviewShowDelete' => true,
-                                        'initialPreview' => $initialPreview,
-                                        'initialPreviewConfig' => $initialPreviewConfig,
-                                        'uploadUrl' => Url::to(['/risk-library/upload-ajax']),
-                                        'uploadExtraData' => [
-                                            'ref' => $model->ref,
-                                        ],
-                                        'maxFileCount' => 100
-                                    ]
-                                ]);
-                                ?>
-                            </div>
-                        </div>
 
                     </div>
 

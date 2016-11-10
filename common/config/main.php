@@ -5,24 +5,26 @@ return [
     'language' => 'th_TH',
     'timeZone' => 'Asia/Bangkok',
     'components' => [
-        /*'formatter' => [
-            'dateFormat' => 'dd.MM.yyyy',
-            'decimalSeparator' => ',',
-            'thousandSeparator' => ' ',
-            'currencyCode' => 'TH',
-        ],*/
+        /* 'formatter' => [
+          'dateFormat' => 'dd.MM.yyyy',
+          'decimalSeparator' => ',',
+          'thousandSeparator' => ' ',
+          'currencyCode' => 'TH',
+          ], */
         'thaiFormatter' => [
             'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
         ],
-        /*'formatter' => [
-            'dateFormat' => 'dd.MM.yyyy',
-            'decimalSeparator' => ',',
-            'thousandSeparator' => ' ',
-            'currencyCode' => 'TH',
-        ],*/
+        /* 'formatter' => [
+          'dateFormat' => 'dd.MM.yyyy',
+          'decimalSeparator' => ',',
+          'thousandSeparator' => ' ',
+          'currencyCode' => 'TH',
+          ], */
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'class' => 'yii\i18n\Formatter',
+        'nullDisplay' => '',
     ],
     'modules' => [
         /* 'social' => [

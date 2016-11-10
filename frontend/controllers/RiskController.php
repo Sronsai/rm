@@ -136,12 +136,12 @@ class RiskController extends Controller {
     public function actionPdf($id) {
         $model = $this->findModel($id);
         $date = date('Y-m-d');
-        
+
         $datetime_risk_date = $model->risk_date;
-        $time_risk_date = explode(" ",$datetime_risk_date)[1];
-        
+        $time_risk_date = explode(" ", $datetime_risk_date)[1];
+
         $datetime_risk_report = $model->risk_report;
-        $time_risk_report = explode(" ",$datetime_risk_report)[1];
+        $time_risk_report = explode(" ", $datetime_risk_report)[1];
 
         $content = $this->renderPartial('pdf', [
             'date' => $date,
@@ -283,7 +283,8 @@ class RiskController extends Controller {
             if ($model->save()) {
                 //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
-                return $this->redirect(['site/index']);
+                //return $this->redirect(['site/index']);
+                return $this->redirect(['risk/index']);
             }
         } else {
             $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
@@ -341,8 +342,8 @@ class RiskController extends Controller {
             //$model->covenant = $this->uploadSingleFile($model, $tempCovenant);
             $model->docs = $this->uploadMultipleFile($model, $tempDocs);
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-                //return $this->redirect(['index']);
+                //return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['risk/index']);
             }
         }
 

@@ -10,11 +10,11 @@ use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use kartik\grid\BooleanColumn;
 use frontend\models\Risk;
+use frontend\models\RiskSearch;
 use yii\bootstrap\Tabs;
 use kartik\export\ExportMenu;
 use dosamigos\datepicker\DatePicker;
 use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
-
 
 //use yii\helpers\VarDumper;
 
@@ -124,29 +124,49 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
-                    [
+                    /*[
                         'attribute' => 'risk_date',
-                        'options' => ['width' => '40'],
-                        'contentOptions' => ['class' => 'text-center'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'format' => 'raw',
-                        'value' => 'risk_date',
-                        'filter' => DatePicker::widget([
-                            'model' => $searchModel,
+                        'value' => 'risk_report',
+                        'format' => 'html',
+                        'width' => '40px',
+                        'headerOptions' => ['style' => 'text-align:center'],
+                        'filterType' => \kartik\grid\GridView::FILTER_DATE_RANGE,
+                        'filterWidgetOptions' => [
+                            'presetDropdown' => false,
                             'language' => 'th',
-                            'attribute' => 'risk_date',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
+                            'pluginOptions' => [
+                                'format' => 'dd-M-yyyy H:ii P',
+                                'separator' => ' TO ',
+                                'opens' => 'left',
+                            ],
+                            'pluginEvents' => [
+                                "apply.daterangepicker" => "function() { apply_filter('date') }",
                             ]
-                        ]),
-                    /* 'value' => function($model) {
-                      return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                        ],
+                    ],*/
+                    /* [
+                      'attribute' => 'risk_date',
+                      'options' => ['width' => '40'],
+                      'contentOptions' => ['class' => 'text-center'],
+                      'headerOptions' => ['class' => 'text-center'],
+                      'format' => 'raw',
+                      'value' => 'risk_date',
+                      'filter' => DatePicker::widget([
+                      'model' => $searchModel,
+                      'language' => 'th',
+                      'attribute' => 'risk_date',
+                      'clientOptions' => [
+                      'autoclose' => true,
+                      'format' => 'yyyy-mm-dd'
+                      ]
+                      ]),
+                      //'value' => function($model) {
+                      //return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                       // return Yii::$app->formatter->asDateTime(time(), 'php:F'
                       // return Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
                       //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                      } */
-                    ],
+                      //}
+                      ], */
                     /*     [
                       'attribute' => 'risk_date',
                       'options' => ['width' => '100'],
@@ -199,29 +219,29 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     ],
                     //'location_connection_id',
                     //search แบบกรอกข้อมความในช่อง แล้วไปแก้ riskSearch
-                    /*[
-                        'attribute' => 'location_connection_id',
-                        'value' => 'locationConnection.location_name',
-                        'options' => ['width' => '50'],
-                        'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
-                            'class' => 'form-control',
-                            'prompt' => ''
-                                ]
-                        ),
-                        'headerOptions' => ['class' => 'text-center'],
-                        'contentOptions' => ['class' => 'text-center'],
-                    //'headerOptions' => ['width' => '80']
-                    ],*/
-                     [
-                      'attribute' => 'location_report_id',
-                      'value' => 'locationReport.location_name',
+                    /* [
+                      'attribute' => 'location_connection_id',
+                      'value' => 'locationConnection.location_name',
                       'options' => ['width' => '50'],
-                      'contentOptions' => ['class' => 'text-center'],
+                      'filter' => Html::activeDropDownList($searchModel, 'location_connection_id', ArrayHelper::map(frontend\models\LocationConnection::find()->asArray()->all(), 'id', 'location_name'), [
+                      'class' => 'form-control',
+                      'prompt' => ''
+                      ]
+                      ),
                       'headerOptions' => ['class' => 'text-center'],
-                      'filter' => Html::activeDropDownList($searchModel, 'location_report_id', ArrayHelper::map(frontend\models\LocationReport::find()->asArray()->all(), 'id', 'location_name'), [
-                      'class' => 'form-control', 'prompt' => ''
-                      ]),
-                      ], 
+                      'contentOptions' => ['class' => 'text-center'],
+                      //'headerOptions' => ['width' => '80']
+                      ], */
+                    [
+                        'attribute' => 'location_report_id',
+                        'value' => 'locationReport.location_name',
+                        'options' => ['width' => '50'],
+                        'contentOptions' => ['class' => 'text-center'],
+                        'headerOptions' => ['class' => 'text-center'],
+                        'filter' => Html::activeDropDownList($searchModel, 'location_report_id', ArrayHelper::map(frontend\models\LocationReport::find()->asArray()->all(), 'id', 'location_name'), [
+                            'class' => 'form-control', 'prompt' => ''
+                        ]),
+                    ],
                     //'location_report_id',
                     /* [
                       'attribute' => 'location_report_id',
@@ -231,7 +251,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
-                        'options' => ['width' => '500'],
+                        'options' => ['width' => '3000'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',
@@ -289,7 +309,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                     ],
                     [
                         'attribute' => 'risk_review',
-                        'options' => ['width' => '400'],
+                        'options' => ['width' => '100'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'StatusName',   //Virtual Attribute เอาไว้แสดงข้อมูลใน Gridview
@@ -307,7 +327,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                       ], */
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'header' => 'ปริ้น',
+                        'header' => 'พิมพ์',
                         'options' => ['width' => '50'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
@@ -331,20 +351,22 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                             [
                                 'class' => 'yii\grid\ActionColumn',
                                 //'header' => 'ทบทวน/เอกสาร/ลบ',
-                                'header' => 'ทบทวน/เอกสาร',
+                                //'header' => 'ทบทวน/เอกสาร',
+                                'header' => 'ทบทวน',
                                 'options' => ['width' => '100'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 //'options' => ['style' => 'width:200px;'],
                                 //'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}{delete}</div>',
-                                'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
+                                //'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
+                                'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}</div>',
                                 'buttons' => [
-                                    'view' => function($url, $model, $key) {
+                                    /*'view' => function($url, $model, $key) {
                                         return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
                                         //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
-                                    },
+                                    },*/
                                             'update' => function($url, $model, $key) {
-                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
+                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default'/*, 'target' => '_blank'*/]);
                                     },
                                         /* 'delete' => function($url, $model, $key) {
                                           return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [
@@ -364,3 +386,12 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    function apply_filter() {
+
+        $('.grid-view').yiiGridView('applyFilter');
+
+    }
+</script>

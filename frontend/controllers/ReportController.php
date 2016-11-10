@@ -1322,7 +1322,8 @@ FROM risk_med rr
 LEFT OUTER JOIN sub_med_type tym ON tym.id = rr.sub_med_type_id
 WHERE rr.risk_date between '$date1' and '$date2'
 AND rr.type_clinic_id = '1'
-ORDER BY type DESC  LIMIT 10 ";
+GROUP BY tym.sub_med_type_name
+ORDER BY type DESC  LIMIT 15 ";
 
         try {
             $rawData1 = \Yii::$app->db->createCommand($sql_clinic)->queryAll();
@@ -1339,7 +1340,6 @@ ORDER BY type DESC  LIMIT 10 ";
         ]);
 
 
-
         $sql_nonclinic = " SELECT ty.sub_type_name,COUNT(r.sub_type_id) as type
 FROM risk r
 LEFT OUTER JOIN sub_type ty ON ty.id = r.sub_type_id
@@ -1354,7 +1354,7 @@ LEFT OUTER JOIN sub_med_type tym ON tym.id = rr.sub_med_type_id
 WHERE rr.risk_date between '$date1' and '$date2'
 AND rr.type_clinic_id = '2'
 GROUP BY tym.sub_med_type_name
-ORDER BY type DESC LIMIT 10  ";
+ORDER BY type DESC LIMIT 15 ";
 
         try {
             $rawData2 = \Yii::$app->db->createCommand($sql_nonclinic)->queryAll();
@@ -1372,7 +1372,6 @@ ORDER BY type DESC LIMIT 10  ";
 
 
         return $this->render('report15', [
-
                     'dataProvider1' => $dataProvider1,
                     'dataProvider2' => $dataProvider2,
                     'rawData1' => $rawData1,
@@ -1381,6 +1380,86 @@ ORDER BY type DESC LIMIT 10  ";
                     'sql_nonclinic' => $sql_nonclinic,
                     'date1' => $date1,
                     'date2' => $date2,
+        ]);
+    }
+
+    public function actionReport16() {
+
+        //$date1 = date('Y-m-d');
+        //$date2 = date('Y-m-d');
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+        $person = '';
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+            $person = $_POST['person'];
+        }
+
+        $sql = " SELECT r.id,r.risk_date,p.person_type,CONCAT(r.pname,'',r.fname,'  ',lname) as fullname,lr.location_name,
+r.risk_summary,ty.type_name,sb.sub_type_name,st.status_name,r.risk_review
+FROM risk r
+LEFT OUTER JOIN person p ON p.id = r.person_id
+LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+LEFT OUTER JOIN type ty ON ty.id = r.type_id
+LEFT OUTER JOIN sub_type sb ON sb.id = r.sub_type_id
+LEFT OUTER JOIN `status` st ON st.id = r.status_id
+WHERE risk_date BETWEEN '$date1' AND '$date2'
+UNION ALL
+SELECT r.id,r.risk_date,p.person_type,CONCAT(r.pname,'',r.fname,'  ',lname) as fullname,lr.location_name,
+r.risk_summary,ty.type_name,sb.sub_med_type_name,st.status_name,r.risk_review
+FROM risk_med r
+LEFT OUTER JOIN person p ON p.id = r.person_id
+LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+LEFT OUTER JOIN type_med ty ON ty.id = r.type_med_id
+LEFT OUTER JOIN sub_med_type sb ON sb.id = r.sub_med_type_id
+LEFT OUTER JOIN `status` st ON st.id = r.status_id
+WHERE risk_date BETWEEN '$date1' AND '$date2' ";
+
+        if ($person != '') {
+            $sql = " SELECT r.id,r.risk_date,p.person_type,CONCAT(r.pname,'',r.fname,'  ',lname) as fullname,lr.location_name,
+r.risk_summary,ty.type_name,sb.sub_type_name,st.status_name,r.risk_review
+FROM risk r
+LEFT OUTER JOIN person p ON p.id = r.person_id
+LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+LEFT OUTER JOIN type ty ON ty.id = r.type_id
+LEFT OUTER JOIN sub_type sb ON sb.id = r.sub_type_id
+LEFT OUTER JOIN `status` st ON st.id = r.status_id
+WHERE risk_date BETWEEN '$date1' AND '$date2' and r.person_id = $person
+UNION ALL
+SELECT r.id,r.risk_date,p.person_type,CONCAT(r.pname,'',r.fname,'  ',lname) as fullname,lr.location_name,
+r.risk_summary,ty.type_name,sb.sub_med_type_name,st.status_name,r.risk_review
+FROM risk_med r
+LEFT OUTER JOIN person p ON p.id = r.person_id
+LEFT OUTER JOIN location_riks lr ON lr.id = r.location_riks_id
+LEFT OUTER JOIN type_med ty ON ty.id = r.type_med_id
+LEFT OUTER JOIN sub_med_type sb ON sb.id = r.sub_med_type_id
+LEFT OUTER JOIN `status` st ON st.id = r.status_id
+WHERE risk_date BETWEEN '$date1' AND '$date2' and r.person_id = $person ";
+        }
+
+        try {
+            $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        } catch (\yii\db\Exception $e) {
+            throw new \yii\web\ConflictHttpException('sql error');
+        }
+        $dataProvider = new \yii\data\ArrayDataProvider([
+            //'key' => 'hoscode',
+            'allModels' => $rawData,
+            'pagination' => FALSE,
+                /* 'pagination' => [
+                  'pageSize' => 10,
+                  ], */
+        ]);
+
+        return $this->render('report16', [
+                    'dataProvider' => $dataProvider,
+                    'rawData' => $rawData,
+                    'sql' => $sql,
+                    'date1' => $date1,
+                    'date2' => $date2,
+                    'person' => $person
         ]);
     }
 

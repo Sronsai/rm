@@ -98,12 +98,12 @@ use frontend\models\RiskMedSearch;
                     ],
                     [
                         'attribute' => 'id',
-                        'header' => 'เลขที่',
+                        'header' => 'เลขที่ความเสี่ยง',
                         'options' => ['width' => '10'],
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
-                    [
+                    /*[
                         'attribute' => 'risk_date',
                         'options' => ['width' => '40'],
                         'contentOptions' => ['class' => 'text-center'],
@@ -119,13 +119,13 @@ use frontend\models\RiskMedSearch;
                                 'format' => 'yyyy-mm-dd'
                             ]
                         ]),
-                    /* 'value' => function($model) {
-                      return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
+                     //'value' => function($model) {
+                      //return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                       // return Yii::$app->formatter->asDateTime(time(), 'php:F'
                       // return Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
                       //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                      } */
-                    ],
+                      //} 
+                    ],*/
                     /*     [
                       'attribute' => 'risk_date',
                       'options' => ['width' => '100'],
@@ -216,7 +216,7 @@ use frontend\models\RiskMedSearch;
                     //'risk_report',
                     [
                         'attribute' => 'risk_summary',
-                        'options' => ['width' => '500'],
+                        'options' => ['width' => '3000'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'type_id',
@@ -275,7 +275,7 @@ use frontend\models\RiskMedSearch;
                     ],
                     [
                         'attribute' => 'risk_review',
-                        'options' => ['width' => '400'],
+                        'options' => ['width' => '100'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
                     //'StatusName',   //Virtual Attribute เอาไว้แสดงข้อมูลใน Gridview
@@ -293,7 +293,7 @@ use frontend\models\RiskMedSearch;
                       ], */
                     [
                         'class' => 'yii\grid\ActionColumn',
-                        'header' => 'ปริ้น',
+                        'header' => 'พิมพ์',
                         'options' => ['width' => '50'],
                         'headerOptions' => ['class' => 'text-center'],
                         'contentOptions' => ['class' => 'text-center'],
@@ -316,17 +316,19 @@ use frontend\models\RiskMedSearch;
                             ],
                             [
                                 'class' => 'yii\grid\ActionColumn',
-                                'header' => 'ทบทวน/เอกสาร',
+                                //'header' => 'ทบทวน/เอกสาร
+                                'header' => 'ทบทวน',
                                 'options' => ['width' => '100'],
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['class' => 'text-center'],
                                 //'options' => ['style' => 'width:200px;'],
-                                'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
+                                //'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
+                                'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}</div>',
                                 'buttons' => [
-                                    'view' => function($url, $model, $key) {
+                                    /*'view' => function($url, $model, $key) {
                                         return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
                                         //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
-                                    },
+                                    },*/
                                             'update' => function($url, $model, $key) {
                                         return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
                                     },

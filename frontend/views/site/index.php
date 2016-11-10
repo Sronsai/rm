@@ -641,62 +641,18 @@ $time = time();
                     </div>
                     <div id="pie-donut2">
                     </div>
+                    
                     <?php
-                    $title = "ระดับ (ตั้งแต่ ตุลาคม 2557)";
-                    $level1 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='1'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='1'
-                                                                ) AS tb")->queryScalar();
-                    $level2 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='2'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='2'
-                                                                ) AS tb")->queryScalar();
-                    $level3 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='3'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='3'
-                                                                ) AS tb")->queryScalar();
-                    $level4 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='4'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='4'
-                                                                ) AS tb")->queryScalar();
-                    $level5 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='5'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='5'
-                                                                ) AS tb")->queryScalar();
-                    $level6 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='6'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='6'
-                                                                ) AS tb")->queryScalar();
-                    $level7 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='7'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='7'
-                                                                ) AS tb")->queryScalar();
-                    $level8 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='8'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='8'
-                                                                ) AS tb")->queryScalar();
-                    $level9 = Yii::$app->db->createCommand("SELECT SUM(A) AS A
-                                                                FROM (
-                                                                SELECT count(r.level_id) as A FROM risk r WHERE r.level_id ='9'
-                                                                UNION ALL
-                                                                SELECT count(rd.level_id) as A FROM risk_med rd WHERE rd.level_id ='9'
-                                                                ) AS tb")->queryScalar();
+                    
+                    $title = "Clinic / Non Clinic (ตั้งแต่ ตุลาคม 2557)";
+                    $clinic = Yii::$app->db->createCommand("SELECT
+(SELECT COUNT(r.type_clinic_id) FROM risk r WHERE r.type_clinic_id = '1')
++
+(SELECT COUNT(rd.type_clinic_id) FROM risk_med rd WHERE rd.type_clinic_id = '1') as CLINIC")->queryScalar();
+                    $non_clinic = Yii::$app->db->createCommand("SELECT
+(SELECT COUNT(type_clinic_id) FROM risk r WHERE r.type_clinic_id = '2')
++
+(SELECT COUNT(rd.type_clinic_id) FROM risk_med rd WHERE rd.type_clinic_id = '2') as NON_CLINIC")->queryScalar();
                     $this->registerJs("$(function () {
 
                                     $('#pie-donut2').highcharts({
@@ -721,7 +677,7 @@ $time = time();
                                                     enabled: true,
                                                     format: '<b>{point.name}</b>: {point.percentage:.1f} %',    //  แสดง %
                                                     style: {
-                                                        color:'black'                     
+                                                        color:'black'      
                                                     },
                                                     connectorColor: 'silver'
                                                 },
@@ -749,20 +705,14 @@ $time = time();
                                         legend: {
                                             enabled: true
                                         },
+                                        colors: ['#FF0000', '#000000'],
                                         series: [{
                                             type: 'pie',
                                             name: 'ร้อยละ',
                                             innerSize: '50%',
                                             data: [
-                                            ['A',   $level1],
-                                            ['B',   $level2],
-                                            ['C',   $level3],
-                                            ['D',   $level4],
-                                            ['E',   $level5],
-                                            ['F',   $level6],
-                                            ['G',   $level7],
-                                            ['H',   $level8],
-                                            ['I',   $level9],
+                                            ['CLINIC',   $clinic],
+                                            ['NON CLINIC',   $non_clinic],
                                             ]
                                         }]
                                     });

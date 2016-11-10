@@ -43,7 +43,8 @@ class RiskSearch extends Risk {
     public function search($params) {
 
         $query = Risk::find()->orderBy(['id' => SORT_DESC]);
-
+        
+        
         /* if (Yii::$app->user->identity->location_id) {
           $query->byLocationId();
           } */

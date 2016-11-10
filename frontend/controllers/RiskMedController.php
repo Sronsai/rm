@@ -118,7 +118,8 @@ class RiskMedController extends Controller {
             if ($model->save()) {
                 //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
-                return $this->redirect(['site/index']);
+                //return $this->redirect(['site/index']);
+                return $this->redirect(['risk-med/index']);
             }
         } else {
             $model->ref = substr(Yii::$app->getSecurity()->generateRandomString(), 10);
@@ -270,8 +271,9 @@ class RiskMedController extends Controller {
             //$model->covenant = $this->uploadSingleFile($model, $tempCovenant);
             $model->docs = $this->uploadMultipleFile($model, $tempDocs);
             if ($model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
+                return $this->redirect(['risk-med/index']);
             }
         }
 
