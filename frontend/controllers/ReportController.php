@@ -1056,69 +1056,69 @@ AND risk_date between '$date1' and '$date2'";
 
     public function actionReport14() {
 
-        $sql = " SELECT 'A = NEAR MISS' as name,
+        $sql = " SELECT 'AB = NEAR MISS' as name,
 'ไตรมาสที่ 1' as name1,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id = '1') as 'TM1',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (1,2) ) as 'TM1',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id = '1') as 'TM2',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (1,2) ) as 'TM2',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id = '1') as 'TM3',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (1,2) ) as 'TM3',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id = '1') as 'TM4'
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (1,2) ) as 'TM4'
 FROM risk r
 LEFT OUTER JOIN level le ON le.id = r.level_id
 GROUP BY NAME
 
 UNION ALL
 
-SELECT 'BC = LOW' as name,
+SELECT 'CD = LOW' as name,
 'ไตรมาสที่ 2' as name1,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (2,3)) as 'TM1',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (3,4) ) as 'TM1',
 
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (2,3)) as 'TM2',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (3,4) ) as 'TM2',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (2,3)) as 'TM3',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (3,4) ) as 'TM3',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (2,3)) as 'TM4'
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (3,4) ) as 'TM4'
 FROM risk r
 LEFT OUTER JOIN level le ON le.id = r.level_id
 GROUP BY NAME
 UNION ALL
-SELECT 'DEF = MODERRATE' as name,
+SELECT 'EF = MODERRATE' as name,
 'ไตรมาสที่ 3' as name1,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (4,5,6)) as 'TM1',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (5,6) ) as 'TM1',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (4,5,6)) as 'TM2',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (5,6) ) as 'TM2',
 
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (4,5,6)) as 'TM3',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (5,6) ) as 'TM3',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (4,5,6)) as 'TM4'
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (5,6) ) as 'TM4'
 FROM risk r
 LEFT OUTER JOIN level le ON le.id = r.level_id
 GROUP BY NAME
@@ -1127,19 +1127,19 @@ SELECT 'GHI = HIGH' as name,
 'ไตรมาสที่ 4 ' as name1,
 (SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (7,8,9) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (7,8,9)) as 'TM1',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (7,8,9) ) as 'TM1',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (7,8,9) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (7,8,9)) as 'TM2',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (7,8,9) ) as 'TM2',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (7,8,9) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (7,8,9)) as 'TM3',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (7,8,9) ) as 'TM3',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (7,8,9) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (7,8,9)) as 'TM4'
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (7,8,9) ) as 'TM4'
 FROM risk r
 LEFT OUTER JOIN level le ON le.id = r.level_id
 GROUP BY NAME
@@ -1165,17 +1165,17 @@ GROUP BY NAME
 
         $sql_level = " SELECT 'ไตรมาสที่ 1' as NAME,
 
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id = '1') as 'NEAR MISS',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (1,2) ) as 'NEAR MISS',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (2,3) ) as 'LOW',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (3,4) ) as 'LOW',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND rr.level_id IN (5,6) ) as 'MODERRATE',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2015-10-01' AND '2015-12-31' AND r.level_id IN (7,8,9) )
 +
@@ -1187,17 +1187,17 @@ GROUP BY NAME
 UNION ALL
 
 SELECT 'ไตรมาสที่ 2' as NAME,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id = '1') 
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (1,2) ) 
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id = '1') as 'NEAR MISS',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (1,2) ) as 'NEAR MISS',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (2,3) ) as 'LOW',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (3,4) ) as 'LOW',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND rr.level_id IN (5,6) ) as 'MODERRATE',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-01-01' AND '2016-03-31' AND r.level_id IN (7,8,9) )
 +
@@ -1209,17 +1209,17 @@ GROUP BY NAME
 UNION ALL
 
 SELECT 'ไตรมาสที่ 3' as NAME,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id = '1') as 'NEAR MISS',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (1,2) ) as 'NEAR MISS',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (2,3)) as 'LOW',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (3,4)) as 'LOW',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (4,5,6)) as 'MODERRATE',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND rr.level_id IN (5,6)) as 'MODERRATE',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-04-01' AND '2016-06-31' AND r.level_id IN (7,8,9) )
 +
@@ -1231,17 +1231,17 @@ GROUP BY NAME
 UNION ALL
 
 SELECT 'ไตรมาสที่ 4' as NAME,
-(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id = '1')
+(SELECT COUNT(r.level_id) as cc FROM risk r	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (1,2) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id = '1') as 'NEAR MISS',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (1,2) ) as 'NEAR MISS',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (2,3) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (3,4) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (2,3) ) as 'LOW',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (3,4) ) as 'LOW',
 
-(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (4,5,6) )
+(SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (5,6) )
 +
-(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (4,5,6) ) as 'MODERRATE',
+(SELECT COUNT(rr.level_id) as cc FROM risk_med rr	where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND rr.level_id IN (5,6) ) as 'MODERRATE',
 
 (SELECT COUNT(r.level_id) as cc FROM risk r where risk_date BETWEEN '2016-07-01' AND '2016-09-31' AND r.level_id IN (7,8,9) )
 +

@@ -83,15 +83,15 @@ $this->params['breadcrumbs'][] = 'กราฟแสดงระดับอุ�
             borderWidth: 0
         },
         series: [{
-             name: 'A = NEAR MISS',
+             name: 'AB = NEAR MISS',
              data: $main1
         },
         {
-             name: 'BC = LOW',
+             name: 'CB = LOW',
              data: $main2
         },
         {
-             name: 'DEF = MODERRATE',
+             name: 'EF = MODERRATE',
              data: $main3
         },
         {

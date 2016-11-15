@@ -106,6 +106,7 @@ class RiskMedController extends Controller {
      */
     public function actionCreate() {
         $model = new RiskMed(['status_id' => 1]);
+        $model = new RiskMed(['often' => 1]);
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -133,12 +134,12 @@ class RiskMedController extends Controller {
     public function actionPdf($id) {
         $model = $this->findModel($id);
         $date = date('Y-m-d');
-        
+
         $datetime_risk_date = $model->risk_date;
-        $time_risk_date = explode(" ",$datetime_risk_date)[1];
-        
+        $time_risk_date = explode(" ", $datetime_risk_date)[1];
+
         $datetime_risk_report = $model->risk_report;
-        $time_risk_report = explode(" ",$datetime_risk_report)[1];
+        $time_risk_report = explode(" ", $datetime_risk_report)[1];
 
         $content = $this->renderPartial('pdf', [
             'date' => $date,
@@ -263,6 +264,7 @@ class RiskMedController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $model->RiskMedToArray();
         list($initialPreview, $initialPreviewConfig) = $this->getInitialPreview($model->ref);
         //$tempCovenant = $model->covenant;
         $tempDocs = $model->docs;

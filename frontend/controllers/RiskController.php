@@ -271,6 +271,7 @@ class RiskController extends Controller {
     public function actionCreate() {
         //$model = new Risk();
         $model = new Risk(['status_id' => 1]);
+        $model = new Risk(['often' => 1]);
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -334,6 +335,8 @@ class RiskController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
+        $model->RiskToArray();
+
         list($initialPreview, $initialPreviewConfig) = $this->getInitialPreview($model->ref);
         //$tempCovenant = $model->covenant;
         $tempDocs = $model->docs;

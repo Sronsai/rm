@@ -223,39 +223,28 @@ use yii\widgets\MaskedInput;
                                         <div class="panel-heading"></div>
                                         <div class="panel-body">
                                             <?= $form->field($model, 'risk_summary')->textarea(['rows' => 6]) ?>
+
                                         </div>
                                     </div>
-                                </div>
+                                </div>       
+
+
+
 
                                 <div class="col-md-12">
                                     <div class="panel panel-info">
                                         <div class="panel-heading"></div>
-                                        <div class="panel-body">
-                                            <div class="form-group field-upload_files">
-                                                <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่าย </label>
-                                                <div>
-                                                    <?=
-                                                    FileInput::widget([
-                                                        'name' => 'upload_ajax[]',
-                                                        'options' => ['multiple' => true, 'accept' => 'image/*'], //'accept' => 'image/*' หากต้องเฉพาะ image
-                                                        'pluginOptions' => [
-                                                            'overwriteInitial' => false,
-                                                            'initialPreviewShowDelete' => true,
-                                                            'initialPreview' => $initialPreview,
-                                                            'initialPreviewConfig' => $initialPreviewConfig,
-                                                            'uploadUrl' => Url::to(['/risk-library/upload-ajax']),
-                                                            'uploadExtraData' => [
-                                                                'ref' => $model->ref,
-                                                            ],
-                                                            'maxFileCount' => 100
-                                                        ]
-                                                    ]);
-                                                    ?>
-                                                </div>
-                                            </div>
+                                        <div class="panel-body">         
+
+                                            <?= $form->field($model, 'often')->radioList($model->getItemRiskOften()) ?>
+                                            <!--?= $form->field($model, 'often')->checkBoxList($model->getItemRiskOften()) ?><br /-->
+
+                                            <?= $form->field($model, 'often_blog')->textInput() ?>
+
                                         </div>
                                     </div>
                                 </div>
+
 
 
 
@@ -342,9 +331,32 @@ use yii\widgets\MaskedInput;
                                 ]
                             ]);
                             ?>
+                        </div>
 
 
-
+                        <div class="col-md-12">
+                            <div class="form-group field-upload_files">
+                                <label class="control-label" for="upload_files[]"> ไฟล์ภาพถ่าย </label>
+                                <div>
+                                    <?=
+                                    FileInput::widget([
+                                        'name' => 'upload_ajax[]',
+                                        'options' => ['multiple' => true, 'accept' => 'image/*'], //'accept' => 'image/*' หากต้องเฉพาะ image
+                                        'pluginOptions' => [
+                                            'overwriteInitial' => false,
+                                            'initialPreviewShowDelete' => true,
+                                            'initialPreview' => $initialPreview,
+                                            'initialPreviewConfig' => $initialPreviewConfig,
+                                            'uploadUrl' => Url::to(['/risk-library/upload-ajax']),
+                                            'uploadExtraData' => [
+                                                'ref' => $model->ref,
+                                            ],
+                                            'maxFileCount' => 100
+                                        ]
+                                    ]);
+                                    ?>
+                                </div>
+                            </div>
                         </div>
 
 
@@ -407,4 +419,31 @@ $('form#{$model->formName()}').on('beforeSubmit',function(e)
 
 JS;
     $this->registerJs($script);
+    ?>
+
+
+
+    <!-- Input ตามเงื่อนไข -->
+    <?php
+    $this->registerJs("
+        var input1 = 'input[name=\"Risk[often]\"]';
+        setHideInput(2,$(input1).val(),'.field-risk-often_blog');
+        $(input1).click(function(val){
+          setHideInput(2,$(this).val(),'.field-risk-often_blog');
+        });
+
+
+        function setHideInput(set,value,objTarget)
+        {
+          console.log(set+'='+value);
+            if(set==value)
+            {
+              $(objTarget).show(100);
+            }
+            else
+            {
+              $(objTarget).hide(100);
+            }
+        }
+      ");
     ?>

@@ -13,9 +13,13 @@ use common\models\MyActiveRecord;
 
 class Risk extends ActiveRecord {
 
+    public $often;
+
     const UPLOAD_FOLDER = 'risks';
     const STATUS_YES_ACTIVE = 1;
     const STATUS_NOT_ACTIVE = 2;
+    const OFTEN_NOLMAL = 1;
+    const OFTEN_ABNOLMAL = 2;
 
     public static function itemsAlias($key) {
 
@@ -23,14 +27,26 @@ class Risk extends ActiveRecord {
             'status_id' => [
                 self::STATUS_YES_ACTIVE => 'ต้องทบทวน',
                 self::STATUS_NOT_ACTIVE => 'ทบทวนแล้ว'
-            ]
+            ],
+            'often' => [
+                self::OFTEN_NOLMAL => 'ปกติ',
+                self::OFTEN_ABNOLMAL => 'เกิดขึ้นประจำ'
+            ],
         ];
         return ArrayHelper::getValue($items, $key, []);
         //return array_key_exists($key, $items) ? $items[$key] : [];
     }
 
+    public function riskToArray() {
+        return $this->often = explode(',', $this->often);
+    }
+
     public function getItemStatus() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
         return self::itemsAlias('status_id');
+    }
+
+    public function getItemOften() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
+        return self::itemsAlias('often');
     }
 
     public static function itemsAlias2($key) {
@@ -53,6 +69,14 @@ class Risk extends ActiveRecord {
         return ArrayHelper::getValue($this->getItemStatus(), $this->status_id);
     }
 
+    public function getItemRiskOften() {
+        return self::itemsAlias('often');
+    }
+
+    public function getOftenName() {
+        return ArrayHelper::getValue($this->getItemRiskOften(), $this->often);
+    }
+
     /**
      * @inheritdoc
      */
@@ -66,14 +90,14 @@ class Risk extends ActiveRecord {
     public function rules() {
         return [
             [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'type_id', 'sub_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
-            [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id'], 'integer'],
+            [['person_id', 'location_riks_id', 'location_report_id', 'type_id', 'sub_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id', 'often'], 'integer'],
             [['pname', 'risk_summary', 'risk_review', 'join_status'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
             [['ref'], 'string', 'max' => 50],
             [['hn'], 'string', 'max' => 45],
             [['risk_summary'], 'string', 'max' => 4500],
             //[['status_id'], 'string', 'max' => 150],
-            [['fname', 'lname'], 'string', 'max' => 100],
+            [['fname', 'lname', 'often_blog'], 'string', 'max' => 100],
             [['docs'], 'file', 'maxFiles' => 5, /* 'skipOnEmpty' => true, 'extensions' => 'rar,pdf,doc,docx,xls,xlsx' */],
         ];
     }
@@ -89,7 +113,7 @@ class Risk extends ActiveRecord {
             'pname' => 'คำนำหน้า',
             'fname' => 'ชื่อ',
             'lname' => 'นามสกุล',
-            'location_riks_id' => 'หน่วยงานต้นเหตุ',
+            'location_riks_id' => 'หน่วยงานที่เกิดเหตุ',
             'location_report_id' => 'หน่วยงานที่รายงาน',
             'location_connection_id' => 'หน่วยงานที่เกี่ยวข้อง',
             'risk_date' => 'วันที่เกิดเหตุ/เวลา',
@@ -106,6 +130,8 @@ class Risk extends ActiveRecord {
             'risk_review' => 'สรุปการทบทวน/แนวทาง',
             'docs' => 'ไฟล์เอกสารที่ทบทวน',
             'join_status' => 'ผู้ร่วมทบทวน',
+            'often' => 'ความถี่ในการเกิดอุบัติการณ์',
+            'often_blog' => 'ระบุจำนวน / ครั้ง   (***ใส่แค่จำนวนตัวเลขเท่านั้น)',
                 //'globalSearch' => 'ค้นหาแบบระเอียด',
         ];
     }
