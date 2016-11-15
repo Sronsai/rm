@@ -87,7 +87,7 @@ $this->params['breadcrumbs'][] = 'กราฟแสดงระดับอุ�
              data: $main1
         },
         {
-             name: 'CB = LOW',
+             name: 'CD = LOW',
              data: $main2
         },
         {
