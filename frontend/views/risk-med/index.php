@@ -103,29 +103,29 @@ use frontend\models\RiskMedSearch;
                         'contentOptions' => ['class' => 'text-center'],
                         'headerOptions' => ['class' => 'text-center'],
                     ],
-                    /*[
-                        'attribute' => 'risk_date',
-                        'options' => ['width' => '40'],
-                        'contentOptions' => ['class' => 'text-center'],
-                        'headerOptions' => ['class' => 'text-center'],
-                        'format' => 'raw',
-                        'value' => 'risk_date',
-                        'filter' => DatePicker::widget([
-                            'model' => $searchModel,
-                            'language' => 'th',
-                            'attribute' => 'risk_date',
-                            'clientOptions' => [
-                                'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
-                            ]
-                        ]),
-                     //'value' => function($model) {
+                    /* [
+                      'attribute' => 'risk_date',
+                      'options' => ['width' => '40'],
+                      'contentOptions' => ['class' => 'text-center'],
+                      'headerOptions' => ['class' => 'text-center'],
+                      'format' => 'raw',
+                      'value' => 'risk_date',
+                      'filter' => DatePicker::widget([
+                      'model' => $searchModel,
+                      'language' => 'th',
+                      'attribute' => 'risk_date',
+                      'clientOptions' => [
+                      'autoclose' => true,
+                      'format' => 'yyyy-mm-dd'
+                      ]
+                      ]),
+                      //'value' => function($model) {
                       //return Yii::$app->thaiFormatter->asDateTime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
                       // return Yii::$app->formatter->asDateTime(time(), 'php:F'
                       // return Yii::$app->formatter->asDateTime('2015-06-01', 'php:F'
                       //return Yii::$app->formatter->asDatetime($model->risk_date, 'medium');  //แสดงผล short,medium,long,full
-                      //} 
-                    ],*/
+                      //}
+                      ], */
                     /*     [
                       'attribute' => 'risk_date',
                       'options' => ['width' => '100'],
@@ -325,12 +325,12 @@ use frontend\models\RiskMedSearch;
                                 //'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}{view}</div>',
                                 'template' => '<div class="btn-group btn-group-sm" role="group" aria-label="...">{update}</div>',
                                 'buttons' => [
-                                    /*'view' => function($url, $model, $key) {
-                                        return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
-                                        //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
-                                    },*/
-                                            'update' => function($url, $model, $key) {
-                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default']);
+                                    /* 'view' => function($url, $model, $key) {
+                                      return Html::a('<i class="glyphicon glyphicon glyphicon-paste"></i>', $url, ['class' => 'btn btn-default']);
+                                      //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
+                                      }, */
+                                    'update' => function($url, $model, $key) {
+                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default', 'target' => '_blank']);
                                     },
                                         /* 'delete' => function($url, $model, $key) {
                                           return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [

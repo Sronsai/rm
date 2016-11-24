@@ -538,7 +538,7 @@ where risk_date between '$date1' and '$date2'";
             $date2 = $_POST['date2'];
         }
 
-        $sql = "SELECT 'DOC' as 'Department',
+        /*$sql = "SELECT 'DOC' as 'Department',
 sum(case WHEN type_med_id ='1' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error' ,
 sum(case WHEN type_med_id ='2' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
 sum(case WHEN type_med_id ='3' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
@@ -592,7 +592,197 @@ sum(case WHEN type_med_id ='1' AND location_riks_id = '9' AND risk_date between 
 sum(case WHEN type_med_id ='2' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error' ,
 sum(case WHEN type_med_id ='3' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error' ,
 sum(case WHEN type_med_id ='4' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error' 
-FROM risk_med";
+FROM risk_med";*/
+        
+        $sql = " SELECT 'DOC' AS 'Department',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '1' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'DENT',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '6' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'ER',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '2' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'PHAR',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '3' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'OPD',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '7' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'IPD',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '8' AND risk_date between '$date1' and '$date' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '8' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'VECH',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '9' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med
+
+UNION ALL
+
+SELECT 'LR/OR',
+sum(case WHEN type_med_id ='1' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='1' AND location_second_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='1' AND location_third_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='1' AND location_fourth_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Administrator Error',
+
+sum(case WHEN type_med_id ='2' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='2' AND location_second_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='2' AND location_third_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='2' AND location_fourth_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Dispensing Error',
+
+sum(case WHEN type_med_id ='3' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='3' AND location_second_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='3' AND location_third_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='3' AND location_fourth_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Proscribing Error',
+
+sum(case WHEN type_med_id ='4' AND location_riks_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_second_id ='4' AND location_second_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_third_id ='4' AND location_third_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) +
+sum(case WHEN type_med_fourth_id ='4' AND location_fourth_id = '10' AND risk_date between '$date1' and '$date2' then 1 ELSE 0 end ) as 'Processing Error'
+FROM risk_med ";
 
 
         try {

@@ -366,7 +366,7 @@ use dixonsatit\thaiYearFormatter\ThaiYearFormatter;
                                         //return Html::a('<i class="glyphicon glyphicon-print"></i>', $url, ['class' => 'btn btn-default']);
                                     },*/
                                             'update' => function($url, $model, $key) {
-                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default'/*, 'target' => '_blank'*/]);
+                                        return Html::a('<i class="glyphicon glyphicon-pencil"></i>', $url, ['class' => 'btn btn-default', 'target' => '_blank']);
                                     },
                                         /* 'delete' => function($url, $model, $key) {
                                           return Html::a('<i class="glyphicon glyphicon-trash"></i>', $url, [

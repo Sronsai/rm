@@ -69,116 +69,282 @@ use kartik\checkbox\CheckboxX;
                         </div>
 
 
+                        <div class="col-md-12">
 
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading"></div>
-                                        <div class="panel-body">
-                                            <?=
-                                            $form->field($model, 'risk_date')->widget(DateTimePicker::classname(), [
-                                                'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
-                                                'language' => 'th',
-                                                'pluginOptions' => [
-                                                    'autoclose' => true,
-                                                    'dateFormat' => 'yyyy-MM-dd',
-                                                    'class' => 'form-control',
-                                                    'changeMonth' => true,
-                                                    'changeYear' => true,
-                                                    'yearRange' => '1996:2099',
-                                                    'showOn' => 'button',
-                                                    'buttonImage' => 'images/calendar.gif',
-                                                    'buttonImageOnly' => true,
-                                                    'buttonText' => 'Select date'
-                                                ]
-                                            ]);
-                                            ?>
 
-                                            <?=
-                                            $form->field($model, 'risk_report')->widget(DateTimePicker::classname(), [
-                                                'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
-                                                'language' => 'th',
-                                                'pluginOptions' => [
-                                                    'autoclose' => true,
-                                                    'dateFormat' => 'yyyy-MM-dd',
-                                                    'class' => 'form-control',
-                                                    'changeMonth' => true,
-                                                    'changeYear' => true,
-                                                    'yearRange' => '1996:2099',
-                                                    'showOn' => 'button',
-                                                    'buttonImage' => 'images/calendar.gif',
-                                                    'buttonImageOnly' => true,
-                                                    'buttonText' => 'Select date'
-                                                ]
-                                            ]);
-                                            ?>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading"></div>
+                                            <div class="panel-body">
+                                                <br />
+                                                <?=
+                                                $form->field($model, 'risk_date')->widget(DateTimePicker::classname(), [
+                                                    'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
+                                                    'language' => 'th',
+                                                    'pluginOptions' => [
+                                                        'autoclose' => true,
+                                                        'dateFormat' => 'yyyy-MM-dd',
+                                                        'class' => 'form-control',
+                                                        'changeMonth' => true,
+                                                        'changeYear' => true,
+                                                        'yearRange' => '1996:2099',
+                                                        'showOn' => 'button',
+                                                        'buttonImage' => 'images/calendar.gif',
+                                                        'buttonImageOnly' => true,
+                                                        'buttonText' => 'Select date'
+                                                    ]
+                                                ]);
+                                                ?>
 
-                                            <?= $form->field($model, 'type_clinic_id')->inline()->radioList($model->getItemTypeClinic())->label('ประเภทคลินิค', ['class' => 'label-class']) ?>
+                                                <?=
+                                                $form->field($model, 'risk_report')->widget(DateTimePicker::classname(), [
+                                                    'options' => ['placeholder' => 'บันทึกวันที่ และเวลา...'],
+                                                    'language' => 'th',
+                                                    'pluginOptions' => [
+                                                        'autoclose' => true,
+                                                        'dateFormat' => 'yyyy-MM-dd',
+                                                        'class' => 'form-control',
+                                                        'changeMonth' => true,
+                                                        'changeYear' => true,
+                                                        'yearRange' => '1996:2099',
+                                                        'showOn' => 'button',
+                                                        'buttonImage' => 'images/calendar.gif',
+                                                        'buttonImageOnly' => true,
+                                                        'buttonText' => 'Select date'
+                                                    ]
+                                                ]);
+                                                ?>
 
+
+                                                <?= $form->field($model, 'type_clinic_id')->inline()->radioList($model->getItemTypeClinic())->label('ประเภทคลินิค', ['class' => 'label-class']) ?>
+
+
+                                                <?=
+                                                $form->field($model, 'level_id')->dropDownList(
+                                                        ArrayHelper::map(\frontend\models\Level::find()->all(), 'id', 'level_name'), [
+                                                    'prompt' => '<======  เลือกระดับความรุนแรง  =====>',
+                                                        //'style' => 'width:250px;'
+                                                ])
+                                                ?>
+
+
+                                                <?=
+                                                $form->field($model, 'location_connection_id')->dropDownList(
+                                                        ArrayHelper::map(\frontend\models\LocationConnection::find()->all(), 'id', 'location_name'), [
+                                                    'prompt' => '<======  เลือกหน่วยงานที่เกี่ยวข้อง  =====>'])
+                                                ?>
+
+                                                <?=
+                                                $form->field($model, 'location_report_id')->dropDownList(
+                                                        ArrayHelper::map(\frontend\models\LocationReport::find()->all(), 'id', 'location_name'), [
+                                                    'prompt' => '<======  เลือกหน่วยงานที่รายงาน  ======>'])
+                                                ?>
+                                                <br /><br /><br /><br /><br /><br /><br /><br /><br />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
 
-                                <div class="col-md-4">
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading"></div>
-                                        <div class="panel-body">
-                                            <?=
-                                            $form->field($model, 'location_riks_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\LocationRiks::find()->all(), 'id', 'location_name'), [
-                                                'prompt' => '<=======  เลือกหน่วยงานต้นเหตุ  =======>'])
-                                            ?>
 
-                                            <?=
-                                            $form->field($model, 'location_connection_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\LocationConnection::find()->all(), 'id', 'location_name'), [
-                                                'prompt' => '<======  เลือกหน่วยงานที่เกี่ยวข้อง  =====>'])
-                                            ?>
+                                    <div class="col-md-9 col-sm-9">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading"> <h4><center>หน่วยงานที่เกิดเหตุ (First)</center></div>
+                                            <div class="panel-body">
 
-                                            <?=
-                                            $form->field($model, 'location_report_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\LocationReport::find()->all(), 'id', 'location_name'), [
-                                                'prompt' => '<======  เลือกหน่วยงานที่รายงาน  ======>'])
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
 
-                                <div class="col-md-4">
-                                    <div class="panel panel-info">
-                                        <div class="panel-heading"></div>
-                                        <div class="panel-body">
-                                            <?=
-//Dependent DropDownlist
-                                            $form->field($model, 'type_med_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\TypeMed::find()->all(), 'id', 'type_name'), [
-                                                'prompt' => '<======  เลือกประเภทความเสี่ยง  ======>',
-                                                'onchange' => '
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'location_riks_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\LocationRiks::find()->all(), 'id', 'location_name'), [
+                                                        'prompt' => '<=======  เลือกหน่วยงานที่เกิดเหตุ  =======>'])
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    //Dependent DropDownlist
+                                                    $form->field($model, 'type_med_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\TypeMed::find()->all(), 'id', 'type_name'), [
+                                                        'prompt' => '<======  เลือกประเภทความเสี่ยง  ======>',
+                                                        'onchange' => '
                                                                                 $.post("index.php?r=sub-med-type/lists&id=' . '"+$(this).val(), function(data) {
                                                                                     $("select#riskmed-sub_med_type_id").html( data );
                                                                                 });'
-                                            ]);             //index.php?r=sub-type/lists&id    sub-med-type คือ Controller
-                                            ?> 
+                                                    ]);             //index.php?r=sub-type/lists&id    sub-med-type คือ Controller
+                                                    ?> 
+                                                </div>
 
-                                            <?=
-                                            $form->field($model, 'sub_med_type_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\SubMedType::find()->all(), 'id', 'sub_med_type_name'), [  //แล้วไปทำใน actionLists   'id', 'sub_med_type_name' ให้ตรง
-                                                'prompt' => '<====  เลือกประเภทความเสี่ยงย่อย  ====>',
-                                            ]);
-                                            ?>
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'sub_med_type_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\SubMedType::find()->all(), 'id', 'sub_med_type_name'), [  //แล้วไปทำใน actionLists   'id', 'sub_med_type_name' ให้ตรง
+                                                        'prompt' => '<====  เลือกประเภทความเสี่ยงย่อย  ====>',
+                                                    ]);
+                                                    ?>
+                                                </div>
 
-                                            <?=
-                                            $form->field($model, 'level_id')->dropDownList(
-                                                    ArrayHelper::map(\frontend\models\Level::find()->all(), 'id', 'level_name'), [
-                                                'prompt' => '<======  เลือกระดับความรุนแรง  =====>',
-                                                    //'style' => 'width:250px;'
-                                            ])
-                                            ?>
+
+                                            </div>
                                         </div>
                                     </div>
+
+
+
+
+                                    <div class="col-md-9 col-sm-9">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading"><center>หน่วยงานที่เกิดเหตุ (Second)</center></div>
+                                            <div class="panel-body">
+
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'location_second_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\LocationRiks::find()->all(), 'id', 'location_name'), [
+                                                        'prompt' => '<=======  เลือกหน่วยงานที่เกิดเหตุ  =======>'])
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    //Dependent DropDownlist
+                                                    $form->field($model, 'type_med_second_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\TypeMed::find()->all(), 'id', 'type_name'), [
+                                                        'prompt' => '<======  เลือกประเภทความเสี่ยง  ======>',
+                                                        'onchange' => '
+                                                                                $.post("index.php?r=sub-med-type/lists&id=' . '"+$(this).val(), function(data) {
+                                                                                    $("select#riskmed-sub_med_type_second_id").html( data );
+                                                                                });'
+                                                    ]);             //index.php?r=sub-type/lists&id    sub-med-type คือ Controller
+                                                    ?> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'sub_med_type_second_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\SubMedType::find()->all(), 'id', 'sub_med_type_name'), [  //แล้วไปทำใน actionLists   'id', 'sub_med_type_name' ให้ตรง
+                                                        'prompt' => '<====  เลือกประเภทความเสี่ยงย่อย  ====>',
+                                                    ]);
+                                                    ?>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-9 col-sm-9">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading"><center>หน่วยงานที่เกิดเหตุ (Third)</center></div>
+                                            <div class="panel-body">
+
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'location_third_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\LocationRiks::find()->all(), 'id', 'location_name'), [
+                                                        'prompt' => '<=======  เลือกหน่วยงานที่เกิดเหตุ  =======>'])
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'type_med_third_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\TypeMed::find()->all(), 'id', 'type_name'), [
+                                                        'prompt' => '<======  เลือกประเภทความเสี่ยง  ======>',
+                                                        'onchange' => '
+                                                                                $.post("index.php?r=sub-med-type/lists&id=' . '"+$(this).val(), function(data) {
+                                                                                    $("select#riskmed-sub_med_type_third_id").html( data );
+                                                                                });'
+                                                    ]);
+                                                    ?> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'sub_med_type_third_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\SubMedType::find()->all(), 'id', 'sub_med_type_name'), [  //แล้วไปทำใน actionLists   'id', 'sub_med_type_name' ให้ตรง
+                                                        'prompt' => '<====  เลือกประเภทความเสี่ยงย่อย  ====>',
+                                                    ]);
+                                                    ?>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-md-3">
+<br /><br /><br /><br />123
+                                            </div>                                        
+                                        </div>                                    
+                                    </div-->
+
+                                    <div class="col-md-9 col-sm-9">
+                                        <div class="panel panel-info">
+                                            <div class="panel-heading"><center>หน่วยงานที่เกิดเหตุ (Fourth)</center></div>
+                                            <div class="panel-body">
+
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'location_fourth_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\LocationRiks::find()->all(), 'id', 'location_name'), [
+                                                        'prompt' => '<=======  เลือกหน่วยงานที่เกิดเหตุ  =======>'])
+                                                    ?>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    //Dependent DropDownlist
+                                                    $form->field($model, 'type_med_fourth_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\TypeMed::find()->all(), 'id', 'type_name'), [
+                                                        'prompt' => '<======  เลือกประเภทความเสี่ยง  ======>',
+                                                        'onchange' => '
+                                                                                $.post("index.php?r=sub-med-type/lists&id=' . '"+$(this).val(), function(data) {
+                                                                                    $("select#riskmed-sub_med_type_fourth_id").html( data );
+                                                                                });'
+                                                    ]);             //index.php?r=sub-type/lists&id    sub-med-type คือ Controller
+                                                    ?> 
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="panel-heading"></div>
+                                                    <?=
+                                                    $form->field($model, 'sub_med_type_fourth_id')->dropDownList(
+                                                            ArrayHelper::map(\frontend\models\SubMedType::find()->all(), 'id', 'sub_med_type_name'), [  //แล้วไปทำใน actionLists   'id', 'sub_med_type_name' ให้ตรง
+                                                        'prompt' => '<====  เลือกประเภทความเสี่ยงย่อย  ====>',
+                                                    ]);
+                                                    ?>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
                                 </div>
+
+
 
                                 <div class="col-md-12">
                                     <div class="panel panel-info">

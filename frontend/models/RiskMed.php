@@ -85,8 +85,21 @@ class RiskMed extends \yii\db\ActiveRecord {
      */
     public function rules() {
         return [
-            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date', 'risk_report', 'risk_summary', 'type_med_id', 'sub_med_type_id', 'level_id', 'status_id', 'type_clinic_id'], 'required'],
-            [['person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'type_med_id', 'sub_med_type_id', 'level_id', 'clear_id', 'system_id', 'status_id', 'type_clinic_id', 'often'], 'integer'],
+            [
+                [ 'person_id', 'location_riks_id', 'location_report_id', 'location_connection_id', 'risk_date',
+                    'risk_report', 'risk_summary', 'type_med_id', 'sub_med_type_id', 'level_id', 'status_id',
+                    'type_clinic_id'
+                ],
+                'required'],
+            [
+                [
+                    'person_id', 'location_riks_id', 'location_report_id', 'location_connection_id',
+                    'type_med_id', 'sub_med_type_id', 'level_id', 'clear_id', 'system_id', 'status_id',
+                    'type_clinic_id', 'often', 'location_second_id', 'location_third_id', 'location_fourth_id',
+                    'type_med_second_id', 'sub_med_type_second_id','type_med_third_id','sub_med_type_third_id',
+                    'type_med_fourth_id','sub_med_type_fourth_id'
+                ],
+                'integer'],
             [['pname', 'risk_summary', 'risk_review', 'join_status', 'docs'], 'string'],
             [['risk_date', 'risk_report'], 'safe'],
             [['hn'], 'string', 'max' => 45],
@@ -126,6 +139,15 @@ class RiskMed extends \yii\db\ActiveRecord {
             'ref' => 'Ref',
             'often' => 'ความถี่ในการเกิดอุบัติการณ์',
             'often_blog' => 'ระบุจำนวน / ครั้ง   (***ใส่แค่จำนวนตัวเลขเท่านั้น)',
+            'location_second_id' => 'หน่วยงานที่เกิดเหตุ (Second)',
+            'location_third_id' => 'หน่วยงานที่เกิดเหตุ (Third)',
+            'location_fourth_id' => 'หน่วยงานที่เกิดเหตุ (Fourth)',
+            'type_med_second_id' => 'ประเภทความเสี่ยง (ยา)',
+            'sub_med_type_second_id' => 'ประเภทความเสี่ยงย่อย (ยา)',
+            'type_med_third_id' => 'ประเภทความเสี่ยง (ยา)',
+            'sub_med_type_third_id' => 'ประเภทความเสี่ยงย่อย (ยา)',
+            'type_med_fourth_id' => 'ประเภทความเสี่ยง (ยา)',
+            'sub_med_type_fourth_id' => 'ประเภทความเสี่ยงย่อย (ยา)'
         ];
     }
 
@@ -204,6 +226,34 @@ class RiskMed extends \yii\db\ActiveRecord {
         return $this->hasOne(TypeMed::className(), ['id' => 'type_med_id']);
     }
 
+    public function getSubMedType() {
+        return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_id']);
+    }
+
+    public function getTypeMedSecond() {
+        return $this->hasOne(TypeMed::className(), ['id' => 'type_med_second_id']);
+    }
+
+    public function getSubMedTypeSecond() {
+        return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_second_id']);
+    }
+    
+    public function getTypeMedThird() {
+        return $this->hasOne(TypeMed::className(), ['id' => 'type_med_third_id']);
+    }
+    
+    public function getSubMedTypeThird() {
+        return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_third_id']);
+    }
+
+    public function getTypeMedFourth() {
+        return $this->hasOne(TypeMed::className(), ['id' => 'type_med_fourth_id']);
+    }
+    
+    public function getSubMedTypeFourth() {
+        return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_fourth_id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -253,9 +303,6 @@ class RiskMed extends \yii\db\ActiveRecord {
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSubMedType() {
-        return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_id']);
-    }
 
     /**
      * @return \yii\db\ActiveQuery
