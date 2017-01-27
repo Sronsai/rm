@@ -294,12 +294,16 @@ $time = time();
                     $title = "ประเภท (ตั้งแต่ ตุลาคม 2557)";
                     $type1 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='1'")->queryScalar();
                     $type2 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='2'")->queryScalar();
+                    $type33 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='3'")->queryScalar();
                     $type3 = Yii::$app->db->createCommand("SELECT COUNT(id) FROM risk_med")->queryScalar();
                     $type4 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='4'")->queryScalar();
                     $type5 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='5'")->queryScalar();
                     $type6 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='6'")->queryScalar();
                     $type7 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='7'")->queryScalar();
                     $type8 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='8'")->queryScalar();
+                    $type9 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='9'")->queryScalar();
+                    $type10 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='10'")->queryScalar();
+                    $type11 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='11'")->queryScalar();
                     $this->registerJs("$(function () {
                                     $('#pie').highcharts({
                                         chart: {
@@ -335,12 +339,16 @@ $time = time();
                                             data: [
                                             ['การดูแลรักษา',   $type1],
                                             ['ระบบเวชระเบียน',   $type2],
-                                            ['ระบบยา/สารน้ำ/เลือด',   $type3],
+                                            ['ระบบควบคุมการติดเชื้อ',   $type33],
+                                            ['ระบบยา',   $type3],
                                             ['การคลอด',   $type4],
                                             ['เครื่องมือ/อุปกรณ์การแพทย์',   $type5],
-                                            ['ระบบสาธาณูปโภค',   $type6],
+                                            ['ระบบสาธาณูปโภค / สิ่งแวดล้อม',   $type6],
                                             ['ความปลอดภัย',   $type7],
-                                            ['อื่นๆ',   $type8],
+                                            ['ระบบเอ๊กซเรย์',   $type8],
+                                            ['ระบบ Lab',   $type9],
+                                            ['ระบบความเสี่ยงทั่วไป',   $type10],
+                                            ['เรื่องร้องเรียน / สิทธิ์ผู้ป่วย',   $type11],
                                             ]
                                         }]
                                     });
@@ -641,9 +649,8 @@ $time = time();
                     </div>
                     <div id="pie-donut2">
                     </div>
-                    
+
                     <?php
-                    
                     $title = "Clinic / Non Clinic (ตั้งแต่ ตุลาคม 2557)";
                     $clinic = Yii::$app->db->createCommand("SELECT
 (SELECT COUNT(r.type_clinic_id) FROM risk r WHERE r.type_clinic_id = '1')

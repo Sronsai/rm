@@ -300,7 +300,7 @@ left outer join level le on le.id = r.level_id
 left outer join system s on s.id = r.system_id
 left outer join status st on st.id = r.status_id
 where risk_date between '$date1' and '$date2'
-    and r.location_riks_id = $location
+and r.location_riks_id = $location
 and r.status_id = '1'";
         }
 
@@ -585,7 +585,7 @@ where risk_date between '$date1' and '$date2'";
 		where s.bdg_year="2559" and month(r.risk_date)=9 and st.id = r.sub_type_id )as "sep"
             FROM risk r
             LEFT OUTER JOIN sub_type st ON st.id = r.sub_type_id
-            WHERE r.sub_type_id = "68"
+            WHERE r.sub_type_id IN (93,94,98,99)
             GROUP BY sub_type_name ';
 
         try {
@@ -606,12 +606,12 @@ where risk_date between '$date1' and '$date2'";
         $title = "ภาพรวมอัตรา ข้อร้องเรียน/ข้อเสนอแนะ ที่ได้รับการจัดการ ปีงบ 2559";
         $total1 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2015-10-01' AND '2016-09-31'
                                                                 AND r.status_id = '1' ")->queryScalar();
         $total2 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2015-10-01' AND '2016-09-31'
                                                                 AND r.status_id = '2' ")->queryScalar();
 
@@ -664,7 +664,7 @@ where risk_date between '$date1' and '$date2'";
 		where s.bdg_year="2558" and month(r.risk_date)=9 and st.id = r.sub_type_id )as "sep"
             FROM risk r
             LEFT OUTER JOIN sub_type st ON st.id = r.sub_type_id
-            WHERE r.sub_type_id = "68"
+            WHERE r.sub_type_id = "99"
             GROUP BY sub_type_name ';
 
         try {
@@ -684,12 +684,12 @@ where risk_date between '$date1' and '$date2'";
         $title = "ภาพรวมอัตรา ข้อร้องเรียน/ข้อเสนอแนะ ที่ได้รับการจัดการ ปีงบ 2558";
         $total1 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2015-10-01' AND '2016-09-31'
                                                                 AND r.status_id = '1' ")->queryScalar();
         $total2 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2015-10-01' AND '2016-09-31'
                                                                 AND r.status_id = '2' ")->queryScalar();
 
@@ -742,7 +742,7 @@ where risk_date between '$date1' and '$date2'";
 		where s.bdg_year="2560" and month(r.risk_date)=9 and st.id = r.sub_type_id )as "sep"
             FROM risk r
             LEFT OUTER JOIN sub_type st ON st.id = r.sub_type_id
-            WHERE r.sub_type_id = "68"
+            WHERE r.sub_type_id = "99"
             GROUP BY sub_type_name ';
 
         try {
@@ -762,12 +762,12 @@ where risk_date between '$date1' and '$date2'";
         $title = "ภาพรวมอัตรา ข้อร้องเรียน/ข้อเสนอแนะ ที่ได้รับการจัดการ ปีงบ 2560";
         $total1 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2016-10-01' AND '2017-09-31'
                                                                 AND r.status_id = '1' ")->queryScalar();
         $total2 = Yii::$app->db->createCommand("SELECT COUNT(sub_type_id) AS total FROM risk r
                                                                 LEFT OUTER JOIN sub_type st ON st.id = r.type_id
-                                                                WHERE r.sub_type_id = '68'
+                                                                WHERE r.sub_type_id = '99'
                                                                 AND r.risk_date BETWEEN '2016-10-01' AND '2017-09-31'
                                                                 AND r.status_id = '2' ")->queryScalar();
 
@@ -1025,8 +1025,8 @@ left outer join location_riks lr on lr.id = r.location_riks_id
 left outer join level le on le.id = r.level_id
 left outer join system s on s.id = r.system_id
 left outer join status st on st.id = r.status_id
-WHERE type_id = '8'
-AND sub_type_id = '68'
+WHERE type_id = '11'
+AND sub_type_id IN ('93','94','98','99')
 AND risk_date between '$date1' and '$date2'";
 
         try {
@@ -1460,6 +1460,327 @@ WHERE risk_date BETWEEN '$date1' AND '$date2' and r.person_id = $person ";
                     'date1' => $date1,
                     'date2' => $date2,
                     'person' => $person
+        ]);
+    }
+
+    public function actionReport17() {
+
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
+
+        if (Yii::$app->request->isPost) {
+            $date1 = $_POST['date1'];
+            $date2 = $_POST['date2'];
+        }
+
+        $sql = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '1'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData = Yii::$app->db->createCommand($sql)->queryAll();
+        $main_data = [];
+        foreach ($rawData as $data) {
+            $main_data[] = [
+                'name' => $data['sub'],
+                'y' => $data['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main = json_encode($main_data);
+
+
+
+        $sql2 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '2'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData2 = Yii::$app->db->createCommand($sql2)->queryAll();
+        $main_data2 = [];
+        foreach ($rawData2 as $data2) {
+            $main_data2[] = [
+                'name' => $data2['sub'],
+                'y' => $data2['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main2 = json_encode($main_data2);
+
+
+
+        $sql3 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '3'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData3 = Yii::$app->db->createCommand($sql3)->queryAll();
+        $main_data3 = [];
+        foreach ($rawData3 as $data3) {
+            $main_data3[] = [
+                'name' => $data3['sub'],
+                'y' => $data3['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main3 = json_encode($main_data3);
+
+
+
+        $sql4 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '4'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData4 = Yii::$app->db->createCommand($sql4)->queryAll();
+        $main_data4 = [];
+        foreach ($rawData4 as $data4) {
+            $main_data4[] = [
+                'name' => $data4['sub'],
+                'y' => $data4['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main4 = json_encode($main_data4);
+
+
+
+        $sql5 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '5'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData5 = Yii::$app->db->createCommand($sql5)->queryAll();
+        $main_data5 = [];
+        foreach ($rawData5 as $data5) {
+            $main_data5[] = [
+                'name' => $data5['sub'],
+                'y' => $data5['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main5 = json_encode($main_data5);
+
+
+        $sql6 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '6'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData6 = Yii::$app->db->createCommand($sql6)->queryAll();
+        $main_data6 = [];
+        foreach ($rawData6 as $data6) {
+            $main_data6[] = [
+                'name' => $data6['sub'],
+                'y' => $data6['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main6 = json_encode($main_data6);
+
+
+        $sql7 = " SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '7'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData7 = Yii::$app->db->createCommand($sql7)->queryAll();
+        $main_data7 = [];
+        foreach ($rawData7 as $data7) {
+            $main_data7[] = [
+                'name' => $data7['sub'],
+                'y' => $data7['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main7 = json_encode($main_data7);
+
+
+        $sql8 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '8'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData8 = Yii::$app->db->createCommand($sql8)->queryAll();
+        $main_data8 = [];
+        foreach ($rawData8 as $data8) {
+            $main_data8[] = [
+                'name' => $data8['sub'],
+                'y' => $data8['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main8 = json_encode($main_data8);
+
+
+
+
+        $sql9 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '9'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData9 = Yii::$app->db->createCommand($sql9)->queryAll();
+        $main_data9 = [];
+        foreach ($rawData9 as $data9) {
+            $main_data9[] = [
+                'name' => $data9['sub'],
+                'y' => $data9['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main9 = json_encode($main_data9);
+
+
+        $sql10 = "  SELECT s.sub_med_type_name as sub,COUNT(r.id) AS total 
+                    FROM risk_med r
+                    LEFT OUTER JOIN sub_med_type s ON s.id = r.sub_med_type_id
+                    WHERE r.risk_date BETWEEN '$date1' AND '$date2'
+                    GROUP BY sub_med_type_name
+                    ORDER BY total DESC
+                    LIMIT 5 ";
+
+        $rawData10 = Yii::$app->db->createCommand($sql10)->queryAll();
+        $main_data10 = [];
+        foreach ($rawData10 as $data10) {
+            $main_data10[] = [
+                'name' => $data10['sub'],
+                'y' => $data10['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main10 = json_encode($main_data10);
+
+
+        $sql11 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '9'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData11 = Yii::$app->db->createCommand($sql11)->queryAll();
+        $main_data11 = [];
+        foreach ($rawData11 as $data11) {
+            $main_data11[] = [
+                'name' => $data11['sub'],
+                'y' => $data11['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main11 = json_encode($main_data11);
+
+        $sql12 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '10'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 5 ";
+
+        $rawData12 = Yii::$app->db->createCommand($sql12)->queryAll();
+        $main_data12 = [];
+        foreach ($rawData12 as $data12) {
+            $main_data12[] = [
+                'name' => $data12['sub'],
+                'y' => $data12['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main12 = json_encode($main_data12);
+
+
+        $sql13 = "  SELECT s.sub_type_name as sub,COUNT(r.id) AS total 
+                        FROM risk r
+                        LEFT OUTER JOIN sub_type s ON s.id = r.sub_type_id
+                        WHERE s.type_id = '11'
+                        AND r.risk_date BETWEEN '$date1' AND '$date2'
+                        GROUP BY sub_type_name
+                        ORDER BY total DESC
+                        LIMIT 10 ";
+
+        $rawData13 = Yii::$app->db->createCommand($sql13)->queryAll();
+        $main_data13 = [];
+        foreach ($rawData13 as $data13) {
+            $main_data13[] = [
+                'name' => $data13['sub'],
+                'y' => $data13['total'] * 1,
+                    //'drilldown' => $data['location_riks_id']
+            ];
+        }
+        $main13 = json_encode($main_data13);
+
+
+        return $this->render('report17', [
+                    /* 'dataProvider' => $dataProvider,
+                      'rawData' => $rawData, */
+                    'date1' => $date1,
+                    'date2' => $date2,
+                    'sql' => $sql,
+                    'main' => $main,
+                    'sql2' => $sql2,
+                    'main2' => $main2,
+                    'sql3' => $sql3,
+                    'main3' => $main3,
+                    'sql4' => $sql4,
+                    'main4' => $main4,
+                    'sql5' => $sql5,
+                    'main5' => $main5,
+                    'sql6' => $sql6,
+                    'main6' => $main6,
+                    'sql7' => $sql7,
+                    'main7' => $main7,
+                    'sql8' => $sql8,
+                    'main8' => $main8,
+                    'sql9' => $sql9,
+                    'main9' => $main9,
+                    'sql10' => $sql10,
+                    'main10' => $main10,
+                    'sql11' => $sql11,
+                    'main11' => $main11,
+                    'sql12' => $sql12,
+                    'main12' => $main12,
+                    'sql13' => $sql13,
+                    'main13' => $main13,
         ]);
     }
 

@@ -120,6 +120,7 @@ class RiskMedController extends Controller {
                 //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
                 //return $this->redirect(['site/index']);
+                Yii::$app->runAction('line-botmed/curl');
                 return $this->redirect(['risk-med/index']);
             }
         } else {

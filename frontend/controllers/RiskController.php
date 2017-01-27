@@ -285,6 +285,8 @@ class RiskController extends Controller {
                 //return $this->redirect(['view', 'id' => $model->id]);
                 //return $this->redirect(['index']);
                 //return $this->redirect(['site/index']);
+                //$this->send_to_line_method();
+                Yii::$app->runAction('line-bot/curl');
                 return $this->redirect(['risk/index']);
             }
         } else {
@@ -335,7 +337,7 @@ class RiskController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        $model->RiskToArray();
+        $model->riskToArray();
 
         list($initialPreview, $initialPreviewConfig) = $this->getInitialPreview($model->ref);
         //$tempCovenant = $model->covenant;

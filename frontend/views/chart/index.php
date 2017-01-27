@@ -197,12 +197,16 @@ $this->params['breadcrumbs'][] = 'รายงานความเสี่ย�
             $title = "ประเภทความเสี่ยง";
             $type1 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='1' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type2 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='2' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
+            $type33 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='3' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type3 = Yii::$app->db->createCommand("SELECT COUNT(id) FROM risk_med WHERE risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type4 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='4' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type5 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='5' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type6 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='6' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type7 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='7' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $type8 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='8' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
+            $type9 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='9' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
+            $type10 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='10' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
+            $type11 = Yii::$app->db->createCommand("SELECT COUNT(r.type_id) as total from risk r where r.type_id ='11' and risk_date BETWEEN '$date1' and '$date2'")->queryScalar();
             $this->registerJs("$(function () {
                                     $('#pie').highcharts({
                                         chart: {
@@ -238,12 +242,16 @@ $this->params['breadcrumbs'][] = 'รายงานความเสี่ย�
                                             data: [
                                             ['การดูแลรักษา',   $type1],
                                             ['ระบบเวชระเบียน',   $type2],
-                                            ['ระบบยา/สารน้ำ/เลือด',   $type3],
+                                            ['ระบบควบคุมการติดเชื้อ',   $type33],
+                                            ['ระบบยา',   $type3],
                                             ['การคลอด',   $type4],
                                             ['เครื่องมือ/อุปกรณ์การแพทย์',   $type5],
-                                            ['ระบบสาธาณูปโภค',   $type6],
+                                            ['ระบบสาธาณูปโภค / สิ่งแวดล้อม',   $type6],
                                             ['ความปลอดภัย',   $type7],
-                                            ['อื่นๆ',   $type8],
+                                            ['ระบบเอ๊กซเรย์',   $type8],
+                                            ['ระบบ Lab',   $type9],
+                                            ['ระบบความเสี่ยงทั่วไป',   $type10],
+                                            ['เรื่องร้องเรียน / สิทธิ์ผู้ป่วย',   $type11],
                                             ]
                                         }]
                                     });

@@ -96,8 +96,8 @@ class RiskMed extends \yii\db\ActiveRecord {
                     'person_id', 'location_riks_id', 'location_report_id', 'location_connection_id',
                     'type_med_id', 'sub_med_type_id', 'level_id', 'clear_id', 'system_id', 'status_id',
                     'type_clinic_id', 'often', 'location_second_id', 'location_third_id', 'location_fourth_id',
-                    'type_med_second_id', 'sub_med_type_second_id','type_med_third_id','sub_med_type_third_id',
-                    'type_med_fourth_id','sub_med_type_fourth_id'
+                    'type_med_second_id', 'sub_med_type_second_id', 'type_med_third_id', 'sub_med_type_third_id',
+                    'type_med_fourth_id', 'sub_med_type_fourth_id'
                 ],
                 'integer'],
             [['pname', 'risk_summary', 'risk_review', 'join_status', 'docs'], 'string'],
@@ -172,6 +172,19 @@ class RiskMed extends \yii\db\ActiveRecord {
         return $preview;
     }
 
+    public function getThumbnailsline($ref, $risk_review) {
+        $uploadFiles = Uploads::find()->where(['ref' => $ref])->all();
+        $preview = [];
+        foreach ($uploadFiles as $file) {
+            $preview[] = [
+                'url' => self::getUploadUrl(true) . $ref . '/' . $file->real_filename,
+                'src' => self::getUploadUrl(true) . $ref . '/' . $file->real_filename,
+                'options' => ['title' => $risk_review]
+            ];
+            return $preview;
+        }
+    }
+
     public function initialPreview($data, $field, $type = 'file') {
         $initial = [];
         $files = Json::decode($data);
@@ -237,11 +250,11 @@ class RiskMed extends \yii\db\ActiveRecord {
     public function getSubMedTypeSecond() {
         return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_second_id']);
     }
-    
+
     public function getTypeMedThird() {
         return $this->hasOne(TypeMed::className(), ['id' => 'type_med_third_id']);
     }
-    
+
     public function getSubMedTypeThird() {
         return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_third_id']);
     }
@@ -249,7 +262,7 @@ class RiskMed extends \yii\db\ActiveRecord {
     public function getTypeMedFourth() {
         return $this->hasOne(TypeMed::className(), ['id' => 'type_med_fourth_id']);
     }
-    
+
     public function getSubMedTypeFourth() {
         return $this->hasOne(SubMedType::className(), ['id' => 'sub_med_type_fourth_id']);
     }

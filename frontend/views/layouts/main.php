@@ -12,13 +12,12 @@ use frontend\widgets\Alert;
 
 AppAsset::register($this);
 ?>
-<?php
-registerCssFile("
+<?php registerCss("
 div.required label.control-label:after {
 content: \" *\";
 color: red;
 }
-")?>
+") ?>
 
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,10 +28,10 @@ color: red;
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
-<?php $this->head() ?>
+        <?php $this->head() ?>
     </head>
     <body>
-            <?php $this->beginBody() ?>
+        <?php $this->beginBody() ?>
         <div class="wrap">
             <?php
             NavBar::begin([
@@ -70,8 +69,8 @@ color: red;
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-<?= Alert::widget() ?>
-<?= $content ?>
+                <?= Alert::widget() ?>
+                <?= $content ?>
             </div>
         </div>
 
@@ -82,7 +81,7 @@ color: red;
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>

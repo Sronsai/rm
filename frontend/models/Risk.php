@@ -37,18 +37,6 @@ class Risk extends ActiveRecord {
         //return array_key_exists($key, $items) ? $items[$key] : [];
     }
 
-    public function riskToArray() {
-        return $this->often = explode(',', $this->often);
-    }
-
-    public function getItemStatus() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
-        return self::itemsAlias('status_id');
-    }
-
-    public function getItemOften() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
-        return self::itemsAlias('often');
-    }
-
     public static function itemsAlias2($key) {
 
         $items = [
@@ -59,6 +47,18 @@ class Risk extends ActiveRecord {
         ];
         return ArrayHelper::getValue($items, $key, []);
         //return array_key_exists($key, $items) ? $items[$key] : [];
+    }
+
+    public function riskToArray() {
+        return $this->often = explode(',', $this->often);
+    }
+
+    public function getItemStatus() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
+        return self::itemsAlias('status_id');
+    }
+
+    public function getItemOften() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
+        return self::itemsAlias('often');
     }
 
     public function getItemTypeClinic() {          //  สร้าง function เพื่อให้สามารถเรียกใช้งาน array item
@@ -255,6 +255,19 @@ class Risk extends ActiveRecord {
             ];
         }
         return $preview;
+    }
+
+    public function getThumbnailsline($ref, $risk_review) {
+        $uploadFiles = Uploads::find()->where(['ref' => $ref])->all();
+        $preview = [];
+        foreach ($uploadFiles as $file) {
+            $preview[] = [
+                'url' => self::getUploadUrl(true) . $ref . '/' . $file->real_filename,
+                'src' => self::getUploadUrl(true) . $ref . '/' . $file->real_filename,
+                'options' => ['title' => $risk_review]
+            ];
+            return $preview;
+        }
     }
 
     public function initialPreview($data, $field, $type = 'file') {
